@@ -1,0 +1,55 @@
+<template name="QuestionnaireSingle">
+  <h1>{{questionnaire.name}}</h1>
+
+  {{> SingleQuestionnaireNav}}
+
+  <div class="new-recipe-container">
+    {{#autoForm collection="Questionnaires" id="updateQuestionnaireId" type="update" doc=questionnaire}}
+
+    {{> afQuickField name="name" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+    {{> afQuickField name="description" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+
+    <label>Questions</label>
+
+    {{#afEachArrayItem name="questions"}}
+      {{> afQuickField name=this.current.name template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+      {{> afQuickField name=this.current.instructions template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+      {{> afQuickField name=this.current.timeout template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+      <!--
+      <label class="help">Question</label>{{> afFieldInput name=this.current.name}}
+      <label class="help">Question instruction</label>{{> afFieldInput name=this.current.instructions}}
+      <label class="help">Question timeout</label>{{> afFieldInput name=this.current.timeout}}
+       -->
+
+      {{> afQuickField name=this.current.type template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+      {{#if afFieldValueIs name=this.current.type value="Multiple Choice"}}
+        {{#afEachArrayItem name=this.current.checkboxes}}
+          {{> afQuickField name=this.current.option template="bootstrap3-horizontal" label-class="col-sm-2 col-sm-offset-3" input-col-class="col-sm-6"}}
+          <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">x</button>
+        {{/afEachArrayItem}}
+        <button class="btn btn-primary autoform-add-item col-sm-offset-5 col-sm-7" data-autoform-field="{{this.current.checkboxes}}">Add option</button>
+      {{/if}}
+      {{#if afFieldValueIs name=this.current.type value="Slider"}}
+        {{> afQuickField name=this.current.minValue template="bootstrap3-horizontal" label-class="col-sm-4 col-sm-offset-3" input-col-class="col-sm-5"}}
+        {{> afQuickField name=this.current.maxValue template="bootstrap3-horizontal" label-class="col-sm-4 col-sm-offset-3" input-col-class="col-sm-5"}}
+      {{/if}}
+
+      <br/>
+
+      <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">Remove question</button>
+
+      <hr style="border-bottom:1px solid #000;">
+    {{/afEachArrayItem}}
+
+    <button class="btn btn-primary autoform-add-item" data-autoform-field="questions">Add question</button>
+
+    <button type="submit">Submit</button>
+    {{/autoForm}}
+  </div>
+</template>

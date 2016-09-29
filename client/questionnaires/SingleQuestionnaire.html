@@ -1,0 +1,17 @@
+<template name="SingleQuestionnaire">
+  <article class="recipe">
+    <h3>{{name}}</h3>
+    <p>{{description}}</p>
+    <p class="meta">Created {{formatDate createdAt}}.</p>
+
+    {{nrQuestionnaires}}
+    <!-- <p>
+      {{#each questions}}
+        <span class="ingredient">{{name}} - {{type}}</span>
+      {{/each}}
+    </p> -->
+    <a href="/questionnaire/{{_id}}">View Details</a>
+
+    <i class="fa fa-trash"></i>
+  </article>
+</template>

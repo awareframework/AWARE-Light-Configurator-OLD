@@ -1,0 +1,51 @@
+<template name="QuestionnaireSingleSensor">
+  <h1>{{questionnaire.name}}</h1>
+
+  {{> SingleQuestionnaireNav}}
+
+  <div class="new-recipe-container">
+    <h2>Sensor magic</h2>
+
+    {{#autoForm collection="Questionnaires" type="update" doc=this id="FieldValueIsForm"}}
+
+      {{#afEachArrayItem name="sensors"}}
+          {{> afFieldInput name=this.current.sensorType}}
+          {{> afFieldInput name=this.current.sensorActive}}
+      {{/afEachArrayItem}}
+
+<!--
+
+      {{> afQuickField name="GUCCI.$.sensorActive" noselect=true }}
+
+      {{> afQuickField name="CHANEL" noselect=true }}
+
+      {{> afQuickField name="GUCCI" noselect=true }}
+
+      {{#each sensors}}
+
+        <h3>{{this.type}}</h3>
+
+
+
+        {{#if afFieldValueIs name="sensorType" value="GUCCI"}}
+           {{> afQuickField name="shotsTaken"}}
+        {{/if}}
+
+
+        {{> afQuickField name="sensors.$.sensorActive" noselect=true }}
+
+        {{#if afFieldValueIs type="CHANEL" value=true}}
+          {{> afQuickField name="sensors.$.frequency" value=this.frequency}}
+        {{/if}}
+      {{/each}}
+
+      {{#if afFieldValueIs name="sensors.$.sensorType" value="CHANEL"}}
+        {{> afQuickField name="frequency"}}
+      {{/if}}
+-->
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    {{/autoForm}}
+  </div>
+</template>

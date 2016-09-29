@@ -1,0 +1,12 @@
+<template name="Questionnaires">
+  <section class="questionnaires">
+    {{#if Template.subscriptionsReady}}
+      {{#each questionnaires}}
+        {{> SingleQuestionnaire}}
+      {{/each}}
+    {{else}}
+      <p>Loading</p>
+    {{/if}}
+  </section>
+  {{> NewQuestionnaire}}
+</template>
