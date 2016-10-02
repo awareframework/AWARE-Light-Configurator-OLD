@@ -6,6 +6,10 @@ Template.QuestionnaireSingleExport.onCreated(function() {
   });
 });
 
+Template.QuestionnaireSingleExport.onRendered(function() {
+  $('#qrcode').qrcode({text: 'http://www.google.com'});
+})
+
 Template.QuestionnaireSingleExport.helpers({
   questionnaire: ()=> {
     var id = FlowRouter.getParam('id');
