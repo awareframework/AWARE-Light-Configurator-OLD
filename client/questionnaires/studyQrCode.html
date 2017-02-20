@@ -1,0 +1,23 @@
+<template name="studyQrCode">
+    <div class="container">
+        <div class="row">
+            {{#if Template.subscriptionsReady}}
+                {{#unless study.exported}}
+                    {{> SingleQuestionnaireNav}}
+                {{/unless}}
+            {{/if}}
+
+            <div class="col-sm-9">
+                <div class="page-header">
+                    <h2>Export Questionnaire</h2>
+                </div>
+
+                <p>Test questionnaire in AWARE.</p>
+
+                <div id="qrcode"></div>
+
+                <!--<button class="btn btn-primary btn-md pull-left">Export to AWARE</button>-->
+            </div>
+        </div>
+    </div>
+</template>

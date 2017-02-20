@@ -2,7 +2,8 @@
   "name": "esm-creator",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "reset": "meteor reset"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0"

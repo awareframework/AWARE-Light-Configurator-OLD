@@ -1,14 +1,118 @@
 <template name="About">
   {{> Header}}
   <main>
-    <div class="billboard">
-      <h2>Create ESM magic</h2>
-    </div>
+      <div class="container">
+          <div class="well well-sm">
+              <dl class="row">
+                  <h3 class="text-center"><strong>Introduction</strong></h3>
+                  <p class="col-sm-3"><strong>1. Sign-in or make new account.</strong></p>
+                  <p class="col-sm-9">Press <strong>Sign in / Join</strong> from the upper left corner. Log in with existing account or create a new account.</p>
 
-    <div class="main-layout">
-      <h3>About</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan, justo vitae tristique finibus, velit nisl molestie enim, ac pretium orci eros vel elit. Proin at neque in arcu vehicula vestibulum eu et velit. Nullam quis massa sed mi aliquam aliquam eget laoreet quam. Duis vehicula in ante at dictum. Vivamus rhoncus non purus in convallis. Mauris lobortis mollis nisi, a iaculis elit. Pellentesque vel velit nec arcu cursus varius. Integer maximus molestie maximus.</p>
-    </div>
+                  <p class="col-sm-3"><strong>2. Create new study.</strong></p>
+                  <p class="col-sm-9">Create new study by pressing <strong class="text-success">Create a new study</strong>.</p>
+
+                  <p class="col-sm-3"><strong>3. Fill the new study information</strong></p>
+                  <p class="col-sm-9">Give <strong>Title, Description, Starting</strong> and <strong>Ending dates</strong> of the study.
+                      Press <strong class="text-primary">Next</strong> to continue.</p>
+
+                  <p class="col-sm-12"><strong class="text-uppercase text-danger">Ongoing studies are saved automatically and they can be accessed from the
+                      Studies-page.</strong></p>
+
+                  <p class="col-sm-3"><strong>4. Define question(s)</strong></p>
+                  <p class="col-sm-9">Give <strong>Title, Instructions, Expiration threshold</strong> and select <strong>Question type</strong>.
+                      Questions can be added by pressing <strong class="text-primary">Add Questions</strong>. Questions can be deleted by
+                      pressing <strong class="text-danger">Remove question</strong>. Press <strong class="text-primary">Next</strong> to continue.</p>
+
+                  <p class="col-sm-3"><strong>5. Scheduler questions.</strong></p>
+                  <p class="col-sm-9">Select questions which you want to schedule and specify the scheduler. Scheduler for questions can be <strong>Interval</strong>
+                      or <strong>Time</strong>. With <strong>Interval</strong> question triggers after every given minutes, and with <strong>Time</strong> question can
+                      be specified to be triggered in certain hours and weekdays. Schedules can be added by pressing <strong class="text-primary">Add Schedule</strong>,
+                      and schedules can be deleted by pressing <strong class="text-danger">Remove Schedule</strong>.
+                      <strong class="text-uppercase text-warning"> remember to schedule every questions!</strong> Press <strong class="text-primary">Next</strong> to continue.</p>
+
+                  <p class="col-sm-3"><strong>6. Enable/Disable sensors.</strong></p>
+                  <p class="col-sm-9">Enable sensors for you study by selecting <strong>Enable</strong> or disable them by pressing
+                      <strong>Disable</strong>. If sensors are enabled, enable those sensors you need in your study.
+                      Give <strong>Frequency</strong> and / or select <strong>Options</strong> for each sensor if needed.
+                      <strong>Frequency</strong> can be left to use default value. Press <strong class="text-primary">Next</strong> to continue.</p>
+
+                  <p class="col-sm-3"><strong>7. Check the overview of the study.</strong></p>
+                  <p class="col-sm-9">Check the study information, questions, schedulers and sensors.
+                      <strong class="text-uppercase">Make sure everything are correct! When the study is submitted it cannot
+                          be anymore modified.</strong> Press <strong class="text-primary">Submit</strong> to continue.</p>
+
+                  <p class="col-sm-3"><strong>8. Share QR-code</strong></p>
+                  <p class="col-sm-9">Share the QR-code for study participants, who can join scan it and join in the study. The participants need to have
+                      <strong>AWARE</strong> installed in their mobile phones.</p>
+
+                  <p class="col-sm-3"><strong>10.View exported, modify unfinished or make new studies.</strong></p>
+                  <p class="col-sm-9">Modify your unfinished studies by pressing <strong class="text-primary">View Details</strong>.
+                      View the details of your exported study by pressing <strong class="text-primary">View Overview</strong>.
+                      The exported and unfinished studies can be remove by pressing <strong class="text-danger">Remove Study</strong>.
+                      You can make new <strong class="text-success">Create a new study</strong>.</p>
+              </dl>
+          </div>
+
+          <br>
+          <div class="row">
+              <div class="well well-sm col-sm-6 col-sm-offset-3">
+                  <h3 class="text-center"><strong>Sensors</strong></h3>
+                  <p class="text-center">AWARE ESM supports multiple sensors which can be added in ESM-studies. Sensor's frequencies and options can be modified. </p>
+                  <p class="text-center">Supported sensors are:</p>
+
+                  <div class="row">
+                      <div class="col-sm-4">
+                          <p class="text-center"><strong>Accelerator</strong></p>
+                          <p class="text-center"><strong>Application</strong></p>
+                          <p class="text-center"><strong>Barometer</strong></p>
+                          <p class="text-center"><strong>Battery</strong></p>
+                          <p class="text-center"><strong>Bluetooth</strong></p>
+                          <p class="text-center"><strong>Communication</strong></p>
+                          <p class="text-center"><strong>Gravity</strong></p>
+                      </div>
+
+                      <div class="col-sm-4">
+                          <p class="text-center"><strong>Gyroscope</strong></p>
+                          <p class="text-center"><strong>Installations</strong></p>
+                          <p class="text-center"><strong>Light</strong></p>
+                          <p class="text-center"><strong>Linear Accelerometer</strong></p>
+                          <p class="text-center"><strong>Location</strong></p>
+                          <p class="text-center"><strong>Magnetometer</strong></p>
+                          <p class="text-center"><strong>Network</strong></p>
+                      </div>
+
+                      <div class="col-sm-4">
+                          <p class="text-center"><strong>Processer</strong></p>
+                          <p class="text-center"><strong>Proximity</strong></p>
+                          <p class="text-center"><strong>Rotation</strong></p>
+                          <p class="text-center"><strong>Screen</strong></p>
+                          <p class="text-center"><strong>Telephony</strong></p>
+                          <p class="text-center"><strong>Temperature</strong></p>
+                          <p class="text-center"><strong>Wi-Fi</strong></p>
+                      </div>
+                  </div>
+                  <br>
+                  <p class="text-center"><a href="http://www.awareframework.com/sensors/">More information about sensors.</a></p>
+              </div>
+
+              <br>
+              <div class="well well-sm col-sm-6 col-sm-offset-3">
+                  <h3 class="text-center"><strong>Question types</strong></h3>
+                  <p class="text-center">AWARE ESM support multiple question:</p>
+                  <div class="row ">
+                      <p class="text-center"><strong>Free text</strong></p>
+                      <p class="text-center"><strong>Radio</strong></p>
+                      <p class="text-center"><strong>Checkboxes</strong></p>
+                      <p class="text-center"><strong>Likert Scale</strong></p>
+                      <p class="text-center"><strong>Quick answer</strong></p>
+                      <p class="text-center"><strong>Scale</strong></p>
+                      <p class="text-center"><strong>Numeric</strong></p>
+                  </div>
+                  <br>
+                  <p class="text-center"><a href="http://www.awareframework.com/esm/">More information about AWARE-ESM and question types.</a></p>
+              </div>
+          </div>
+      </div>
   </main>
   {{> Footer}}
 </template>

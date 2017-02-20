@@ -1,0 +1,41 @@
+<template name="newStudy">
+   <div class="container">
+            {{> SingleQuestionnaireNav menuIdx="0"}}
+
+            <div class="col-sm-9">
+                <div class="page-header">
+                    <h2>New Study</h2>
+                </div>
+
+                {{#autoForm collection="Studies" id="insertStudy" type="insert" class="col-sm-9"}}
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h4>Study Period</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{> afQuickField name="title" placeholder="Title of the ESM study "}}
+                            {{> afQuickField name="description" placeholder="Description of the ESM study"}}
+                            {{> afQuickField name="user_id"}}
+                            {{> afQuickField name="createdAt"}}
+                        </div>
+                    </div>
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h4>Study Period</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{> afQuickField name="start_date" placeholder="Starting date of the ESM study"}}
+                            {{> afQuickField name="end_date" placeholder="Ending date of the ESM study"}}
+                        </div>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary btn-md pull-right">Next</button>
+                    </div>
+                {{/autoForm}}
+            </div>
+    </div>
+</template>
+    

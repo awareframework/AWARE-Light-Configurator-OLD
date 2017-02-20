@@ -1,45 +1,66 @@
 <template name="HomeLayout">
-  {{> Header}}
-  <main>
-    <div class="billboard">
-      <h2>Create Advanced Experience Sampling Studies. The Easy Way.</h2>
+    {{> Header}}
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Create Advanced Experience Sampling Studies.</h1>
+            <p class="text-center">The Easy Way to create ESM studies for AWARE.</p>
+        </div>
+
+        <div class="main-layout center-block">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well well-sm">
+                    <h3 class="text-center">Experience Sampling Method (ESM)</h3>
+                    <p class="text-center">The experience sampling method is a research methodology that asks participants
+                        to stop at certain times and make notes of their experience in real time.The point is that participants
+                        record temporal things like their feelings while in the moment.</p>
+                </div>
+
+                <div class="well well-sm">
+                    <h3 class="text-center">AWARE</h3>
+                    <p class="text-center">AWARE is an Android framework dedicated to instrument, infer, log and share
+                        mobile context information, for application developers, researchers and smartphone users.
+                        AWARE captures hardware-, software-, and human-based data. AWARE supports also iOS and OSX.</p>
+                    <br>
+                </div>
+
+                <div class="well well-sm">
+                    <h4 class="text-center">AWARE ESM</h4>
+                    <p class="text-center">The ESM sensor adds support for user-provided context by leveraging mobile
+                        Experience Sampling Method. The ESM questionnaires can be triggered by context, time or on-demand,
+                        locally or remotely. Although user-subjective, this sensor allows crowdsourcing information that is
+                        challenging to instrument with sensors.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 class="text-center"><i class="fa fa-magic"></i>Easy To Use</h4>
+                    <p class="text-center">You do not need any programming skills for making ESM-studies.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-center"><i class="fa fa-mobile"></i>AWARE support</h4>
+                    <p class="text-center">Web-ESM supports AWARE-application which allows you to get access sensor data.
+                        The studies are imported into AWARE which takes care of the study.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-center"><i class="fa fa-lock"></i>Secure</h4>
+                    <p class="text-center">Using Web-ESM creator is secure.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="text-center"><i class="fa fa-sliders"></i>Advanced Configuration</h4>
+                    <p class="text-center">AWARE ESM supports multiple question and sensor types which can be configured diversely.</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h4 class="text-center"><i class="fa fa-github"></i>Open Source</h4>
+                    <p class="text-center">Web-ESM is completely free to use, and its source code is <a href="https://www.github.com">publicly available</a>.</p>
+                </div>
+
+            </div>
+        </div>
     </div>
-
-    <div class="main-layout">
-      <p class="primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan, justo vitae tristique finibus, velit nisl molestie enim, ac pretium orci eros vel elit. Proin at neque in arcu vehicula vestibulum eu et velit.</p>
-
-      <div class="row">
-        <div class="col-md-4">
-          <h4><i class="fa fa-flag"></i>ESM Creator</h4>
-          <p>Create your own <em>Experience Sampling</em> studies using ESM Creator. Based on proven technology ...</p>
-        </div>
-        <div class="col-md-4">
-          <h4><i class="fa fa-magic"></i>Easy To Use</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan, justo vitae tristique finibus.</p>
-        </div>
-        <div class="col-md-4">
-          <h4><i class="fa fa-lock"></i>Secure</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan, justo vitae tristique finibus.</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4">
-          <h4><i class="fa fa-magic"></i>Advanced Configuration</h4>
-          <p>Build </p>
-        </div>
-        <div class="col-md-4">
-          <h4><i class="fa fa-flag"></i>Open Source</h4>
-          <p>ESM Creator is completely free to use, and its source code is <a href="https://www.github.com">publicly available</a>.</p>
-        </div>
-        <div class="col-md-4">
-          <h4><i class="fa fa-lock"></i>Secure</h4>
-        </div>
-      </div>
-
-      <h3>Experience Sampling</h3>
-      <p>Curabitur sit amet libero laoreet, consequat ex id, scelerisque purus. Nam fermentum purus nec ante viverra, ut placerat orci rutrum. Vestibulum accumsan odio dui, eget blandit neque auctor vitae. Integer sed dignissim nibh, vitae tristique nisi.</p>
-    </div>
-  </main>
-  {{> Footer}}
+    {{> Footer}}
 </template>

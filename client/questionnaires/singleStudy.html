@@ -1,0 +1,17 @@
+<template name="singleStudy" xmlns="http://www.w3.org/1999/html">
+    <article class="recipe">
+        <h3>{{title}}</h3>
+        <p>{{description}}</p>
+        <p class="meta">Created {{formatDate createdAt}}.</p>
+
+        {{nrStudies}}
+
+        {{#if exported}}
+            <a class="btn btn-primary" href="/study/{{_id}}/overview">View Overview</a>
+        {{else}}
+            <a class="btn btn-primary" href="/study/{{_id}}/questions">View Details</a>
+            <button class="btn btn-danger btn-md autoform-remove-item pull-right" data-autoform-field="items">Remove Study</button>
+        {{/if}}
+
+    </article>
+</template>

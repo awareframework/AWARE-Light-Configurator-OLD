@@ -1,0 +1,175 @@
+<template name="studySensor">
+    <div class="container">
+        <div class="row">
+            {{> SingleQuestionnaireNav menuIdx="3"}}
+
+            <div class="col-sm-9">
+                <div class="page-header">
+                    <h2>Sensors</h2>
+                </div>
+
+                {{#autoForm collection="Studies" id="updateStudyId" type="update" doc=study}}
+
+                    {{> afQuickField name="sensorCheck" noselect=true}}
+
+                    {{#if afFieldValueIs name="sensorCheck" value=true}}
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.0.sensorType" value="Accelerometer"}}
+                            <h3>Accelerometer</h3>
+                            {{> afQuickField name="sensor.0.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.0.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.0.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.1.sensorType" value="Application"}}
+                            <h3>Application</h3> {{> afQuickField name="sensor.1.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.1.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.1.frequency"  placeholder="default 30 seconds"}}
+                                {{> afQuickField name="sensor.1.application" template="bootstrap3-horizontal"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.2.sensorType" value="Barometer"}}
+                            <h3>Barometer</h3> {{> afQuickField name="sensor.2.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.2.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.2.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.3.sensorType" value="Battery"}}
+                            <h3>Battery</h3> {{> afQuickField name="sensor.3.sensorActive" options="allowed" noselect=true}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.4.sensorType" value="Bluetooth"}}
+                            <h3>Bluetooth</h3> {{> afQuickField name="sensor.4.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.4.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.4.frequency" placeholder="default is 60 seconds"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.5.sensorType" value="Communication"}}
+                            <h3>Communication</h3> {{> afQuickField name="sensor.5.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.5.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.5.communication" template="bootstrap3-horizontal"}}
+                            {{/if}}
+                            
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.6.sensorType" value="Gravity"}}
+                            <h3>Gravity</h3> {{> afQuickField name="sensor.6.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.6.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.6.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.7.sensorType" value="Gyroscope"}}
+                            <h3>Gyroscope</h3> {{> afQuickField name="sensor.7.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.7.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.7.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.8.sensorType" value="Installations"}}
+                            <h3>Installations</h3> {{> afQuickField name="sensor.8.sensorActive" options="allowed" noselect=true}}
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.9.sensorType" value="Light"}}
+                            <h3>Light</h3> {{> afQuickField name="sensor.9.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.9.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.9.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.10.sensorType" value="Linear Accelerometer"}}
+                            <h3>Linear Accelerometer</h3> {{> afQuickField name="sensor.10.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.10.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.10.frequency"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.11.sensorType" value="Location"}}
+                            <h3>Location</h3> {{> afQuickField name="sensor.11.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.11.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.11.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.12.sensorType" value="Magnetometer"}}
+                            <h3>Magnetometer</h3> {{> afQuickField name="sensor.12.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.12.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.12.frequency" placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.13.sensorType" value="Network"}}
+                            <h3>Network</h3> {{> afQuickField name="sensor.13.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.13.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.13.network" template="bootstrap3-horizontal"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.14.sensorType" value="Processer"}}
+                            <h3>Processer</h3> {{> afQuickField name="sensor.14.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.14.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.14.frequency"  placeholder="default is 10 seconds"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.15.sensorType" value="Proximity"}}
+                            <h3>Proximity</h3> {{> afQuickField name="sensor.15.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.15.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.15.frequency"  placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.16.sensorType" value="Rotation"}}
+                            <h3>Rotation</h3> {{> afQuickField name="sensor.16.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.16.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.16.frequency"  placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.17.sensorType" value="Screen"}}
+                            <h3>Screen</h3> {{> afQuickField name="sensor.17.sensorActive" options="allowed" noselect=true}}
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.18.sensorType" value="Telephony"}}
+                            <h3>Telephony</h3> {{> afQuickField name="sensor.18.sensorActive" options="allowed" noselect=true}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.19.sensorType" value="Temperature"}}
+                            <h3>Temperature</h3> {{> afQuickField name="sensor.19.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.19.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.19.frequency"  placeholder="200000 (normal), 0 (fastest)"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{> afQuickField name="sensor.20.sensorType" value="Wi-Fi"}}
+                            <h3>Wi-Fi</h3> {{> afQuickField name="sensor.20.sensorActive" options="allowed" noselect=true}}
+                            {{#if afFieldValueIs name="sensor.20.sensorActive" value=true}}
+                                {{> afQuickField name="sensor.20.frequency"  placeholder="default is 60 seconds"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    <button type="submit" class="btn btn-primary btn-md pull-right">Next</button>
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>

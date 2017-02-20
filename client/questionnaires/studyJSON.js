@@ -1,4 +1,5 @@
-Template.SingleQuestionnaireNav.onCreated(function() {
+try{
+Template.studyJSON.onCreated(function() {
   var self = this;
   self.autorun(function() {
     var id = FlowRouter.getParam('id');
@@ -6,12 +7,14 @@ Template.SingleQuestionnaireNav.onCreated(function() {
   });
 });
 
-Template.SingleQuestionnaireNav.helpers({
-  study: ()=> {
+Template.studyJSON.helpers({
+  response : function() {
     var id = FlowRouter.getParam('id');
+    var response = Studies.findOne({_id: id});
     return Studies.findOne({_id: id});
-  },
-  biggerOrEqual: function(a, b) {
-    return (a >= b);
   }
 });
+}
+catch(err){
+    console.log(err);
+}

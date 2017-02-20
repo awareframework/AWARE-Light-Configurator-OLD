@@ -1,0 +1,233 @@
+<template name="studyQuestion">
+    <div class="container">
+        <div class="row">
+            {{> SingleQuestionnaireNav menuIdx="1"}}
+
+            <div class="col-sm-9">
+                <div class="page-header">
+                    <h2>Questions</h2>
+                </div>
+
+                {{#autoForm collection="Studies" id="updateQuestion" type="update" doc=study}}
+
+                    {{#afEachArrayItem name="questions"}}
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4>{{this.name}}</h4>
+                            </div>
+
+                            <div class="panel panel-body">
+
+                                {{> afQuickField name=this.current.question
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-3"
+                                        input-col-class="col-sm-9"
+                                        placeholder="Title of the ESM Question"
+                                }}
+
+                                {{> afQuickField name=this.current.instructions
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-3"
+                                        input-col-class="col-sm-9"
+                                        placeholder="Instructions to answer the ESM Question"
+                                }}
+
+                                {{> afQuickField name=this.current.timeout
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-4"
+                                        input-col-class="col-sm-8"
+                                        placeholder="Time given to answer. 0 is unlimited"
+                                }}
+
+                                {{> afQuickField name=this.current.type
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-3"
+                                        input-col-class="col-sm-9"
+                                }}
+
+                                {{#if afFieldValueIs name=this.current.type value=1}}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Save button"
+                                    }}
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=7}}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Save button"
+                                    }}
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=2}}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Save button"
+                                    }}
+                                    {{#afEachArrayItem name=this.current.options}}
+                                        {{> afQuickField name=this.current.option
+                                                template="bootstrap3-horizontal"
+                                                label-class="col-sm-2 col-sm-offset-3"
+                                                input-col-class="col-sm-6"
+                                                placeholder="Options of the Radio Question"
+                                        }}
+
+                                        <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">x</button>
+
+                                    {{/afEachArrayItem}}
+                                    <button class="btn btn-primary autoform-add-item col-sm-offset-5 col-sm-7" data-autoform-field="{{this.current.options}}">Add option</button>
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=3}}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Save button"
+                                    }}
+                                    {{#afEachArrayItem name=this.current.options}}
+                                        {{> afQuickField name=this.current.option
+                                                template="bootstrap3-horizontal"
+                                                label-class="col-sm-2 col-sm-offset-3"
+                                                input-col-class="col-sm-6"
+                                                placeholder="Options of the Checkbox Question"
+                                        }}
+                                        <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">x</button>
+                                    {{/afEachArrayItem}}
+                                    <button class="btn btn-primary autoform-add-item col-sm-offset-5 col-sm-7" data-autoform-field="{{this.current.options}}">Add option</button>
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=5}}
+                                    {{#afEachArrayItem name=this.current.options}}
+                                        {{> afQuickField name=this.current.option
+                                                template="bootstrap3-horizontal"
+                                                label-class="col-sm-2 col-sm-offset-3"
+                                                input-col-class="col-sm-6"
+                                                placeholder="Options for the Ouick Answer"
+                                        }}
+                                        <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">x</button>
+                                    {{/afEachArrayItem}}
+                                    <button class="btn btn-primary autoform-add-item col-sm-offset-5 col-sm-7" data-autoform-field="{{this.current.options}}">Add option</button>
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=6}}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Save button"
+                                    }}
+                                    {{> afQuickField name=this.current.minValue
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Minimum Value of the Scale"
+                                    }}
+                                    {{> afQuickField name=this.current.maxValue
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Maximum Value of the Scale"
+                                    }}
+                                    {{> afQuickField name=this.current.minLabel
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Minimum Value"
+                                    }}
+                                    {{> afQuickField name=this.current.maxLabel
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Maximum Value"
+                                    }}
+                                    {{> afQuickField name=this.current.stepSize
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Stepsize or Increments Size"
+                                    }}
+                                    {{> afQuickField name=this.current.scaleStart
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Place where the Scale starts"
+                                    }}
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=4}}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Save button"
+                                    }}
+                                    {{> afQuickField name=this.current.minValue
+                                            type="select-radio-inline"
+                                            options=likeartMinOptions
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                    }}
+                                    {{> afQuickField name=this.current.maxValue
+                                            type="select-radio-inline"
+                                            options=likeartMaxOptions
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                    }}
+                                    {{> afQuickField name=this.current.minLabel
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Minimum Value"
+                                    }}
+                                    {{> afQuickField name=this.current.maxLabel
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                            placeholder="Label for the Maximum Value"
+                                    }}
+                                    {{> afQuickField name=this.current.stepSize
+                                            type="select-radio-inline"
+                                            options=likeartStepOptions
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                    }}
+                                    {{> afQuickField name=this.current.scaleStart
+                                            type="select-radio-inline"
+                                            options=likeartMinOptions
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-4 col-sm-offset-3"
+                                            input-col-class="col-sm-5"
+                                    }}
+                                {{/if}}
+                                <div class="btn-toolbar mb-3" role="toolbar">
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button class="btn btn-danger btn-md autoform-remove-item" data-autoform-field="items">Remove question</button>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                    {{/afEachArrayItem}}
+                    <br>
+
+                    <div>
+                        <button class="btn btn-primary btn-md autoform-add-item" data-autoform-field="questions">Add question</button>
+                        <button class="btn btn-primary btn-md pull-right" type="submit" >Next</button>
+                    </div>
+
+                {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>

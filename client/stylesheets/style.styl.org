@@ -157,8 +157,8 @@ p
 
 .new-recipe-container
     position relative
-    background light-grey
-    padding 20px
+    background white
+    padding 20px 50px 100px
     margin-bottom 20px
     margin-top 10px
     shadow-level(2)
@@ -172,14 +172,14 @@ p
 .btn, button
     display inline-block
     cursor pointer
-    background blue
-    color #FFF
+    background grey
+    border-color grey
     text-decoration none
     text-transform uppercase
     padding 5px 15px
-    border solid 3px blue
-    border-radius 2px
     font-weight 800
+    margin-top 20px
+    margin-right 50px
     shadow-level(1)
     trans()
     &:hover
@@ -187,9 +187,9 @@ p
         border-color @background
         shadow-level(2)
     &.btn-primary
-        background teal
-        border-color teal
-        color dark-blue
+        background grey
+        color black
+        shadow-level(1)
         &:hover
             background @background - 40
             border-color @background
@@ -200,7 +200,7 @@ p
             background @background - 20
             border-color @background
     &.btn-text
-        color blue
+        color black
         background transparent
         border solid 2px blue
         shadow-level(0)
@@ -260,22 +260,32 @@ input, select, textarea
         lost-column 1/2
 
 .autoform-remove-item.btn
-    background light-grey
-    box-shadow none
-    border none
-    border-radius 50%
-    font-size 1em
-    height: 25px
-    width: 25px
-    text-align: center
-    display: block
-    padding: 0
+    cursor pointer
+    background grey
+    border-color grey
+    text-decoration none
+    text-transform uppercase
+    padding 5px 15px
+    font-weight 800
+    margin-top 20px
+    margin-right 50px
+    shadow-level(1)
+    trans()
 
 .autoform-add-item.btn
-    border-radius 0
-    border none
-    box-shadow none
-    background light-grey
+    display inline-block
+    cursor pointer
+    background grey
+    border-color grey
+    color black
+    text-decoration none
+    text-transform uppercase
+    padding 5px 15px
+    font-weight 800
+    margin-top 20px
+    margin-right 50px
+    shadow-level(1)
+    trans()
 
 
 .autoform-remove-item-wrap
@@ -296,8 +306,8 @@ input, select, textarea
 
 
 .recipe
-    background light-grey
-    padding 0 20px 20px
+    background white
+    padding 20px 50px 100px
     margin-bottom 20px
     position relative
     z-index 1
@@ -317,11 +327,11 @@ input, select, textarea
     h3
         font-size: 2em;
         opacity: 0.8;
-        border-bottom: rgba(0,0,0, 0.3) solid 1px
         padding-top 10px
-        padding-bottom 10px
+        padding-bottom 20px
     button
         margin-top 20px
+        margin-right 50px
     .fa-trash
         opacity 0.5
         cursor pointer

@@ -1,0 +1,296 @@
+<template name="studyConfig">
+    <div class="container">
+        <div class="row">
+            {{#if Template.subscriptionsReady}}
+                {{#unless study.exported}}
+                    {{> SingleQuestionnaireNav menuIdx="4"}}
+                {{/unless}}
+            {{/if}}
+
+            <div class="col-sm-9">
+                <div class="page-header">
+                    <h2>Study Overview</h2>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading"><h4>Study</h4></div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>{{study.title}}</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>{{study.description}}</td>
+                            </tr>
+                            <tr>
+                                <td>Start Date</td>
+                                <td>{{study.start_date}}</td>
+                            </tr>
+                            <tr>
+                                <td>End Date</td>
+                                <td>{{study.end_date}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading"><h4>Questionnaire</h4></div>
+                    <div class="panel-body">
+                        {{#each study.questions}}
+                            <h3>Question #{{getIndexWithOffset @index}}</h3>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th>{{this.question}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Instructions</td>
+                                        <td>{{this.instructions}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Timeout</td>
+                                        <td>{{this.timeout}}</td>
+                                    </tr>
+                                    {{#unless equals this.type 5}}
+                                    <tr>
+                                        <td>Submit text</td>
+                                        <td>{{this.submit}}</td>
+                                    </tr>
+                                    {{/unless}}
+                                    <tr>
+                                        <td>Type</td>
+                                        <td>{{getQuestionType this.type}}</td>
+                                    </tr>
+                                    {{#if equals this.type 2}}
+                                        <tr>
+                                            <td>Radio options</td>
+                                            <td>
+                                                {{#each this.options}}
+                                                    {{this.option}}<br/>
+                                                {{/each}}
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                    {{#if equals this.type 3}}
+                                        <tr>
+                                            <td>Checkbox Options</td>
+                                            <td>
+                                                {{#each this.options}}
+                                                    {{this.option}}<br/>
+                                                {{/each}}
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                    {{#if equals this.type 4}}
+                                        <tr>
+                                            <td>Likeart Scale labels</td>
+                                            <td>{{this.minLabel}} - {{this.maxLabel}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Likeart Scale range</td>
+                                            <td>{{this.minValue}} - {{this.maxValue}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Likeart Scale step size</td>
+                                            <td>{{this.stepSize}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Likeart Scale default value</td>
+                                            <td>{{this.scaleStart}}
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                    {{#if equals this.type 5}}
+                                        <tr>
+                                            <td>Quick Answer Options</td>
+                                            <td>
+                                                {{#each this.options}}
+                                                    {{this.option}}<br/>
+                                                {{/each}}
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                    {{#if equals this.type 6}}
+                                        <tr>
+                                            <td>Scale labels</td>
+                                            <td>{{this.minLabel}} - {{this.maxLabel}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Scale range</td>
+                                            <td>{{this.minValue}} - {{this.maxValue}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Scale step size</td>
+                                            <td>{{this.stepSize}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Scale default value</td>
+                                            <td>{{this.scaleStart}}
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                </tbody>
+                            </table>
+                            <hr/>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading"><h4>Schedule</h4></div>
+                    <div class="panel-body">
+                        {{#each study.scheduler}}
+                            <h3>Scheduler #{{getIndexWithOffset @index}}</h3>
+                            <table class="table">
+                              <thead>
+                              <tr>
+                                <th>Type</th>
+                                <th>Value</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Questions</td>
+                                  <td>
+                                    {{#each this.questionSchedule}}
+                                      {{#let schedulerIdx=this}}
+                                        {{#each study.questions}}
+                                          {{#if equals schedulerIdx @index}}
+                                            {{this.question}}<br/>
+                                          {{/if}}
+                                        {{/each}}
+                                      {{/let}}
+                                    {{/each}}
+                                  </td>
+                                </tr>
+
+                                {{#if isIntervatTypeSchedule this.scheduleCheck}}
+                                <tr>
+                                  <td>Interval</td>
+                                  <td>
+                                    {{#if this.interval}}
+                                      {{this.interval}} (minutes)
+                                    {{else}}
+                                      N/A
+                                    {{/if}}
+                                  </td>
+                                </tr>
+                                {{/if}}
+
+                                {{#unless isIntervatTypeSchedule this.scheduleCheck}}
+                                <tr>
+                                  <td>Hours</td>
+                                  <td>
+                                    {{#if this.hours}}
+                                      {{#each this.hours}}
+                                        {{formatTimeUS this}}<br/>
+                                      {{/each}}
+                                    {{else}}
+                                      N/A
+                                    {{/if}}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Weekdays</td>
+                                  <td>
+                                    {{#if this.weekdays}}
+                                      {{#each this.weekdays}}
+                                        {{capitalize this}}<br/>
+                                      {{/each}}
+                                    {{else}}
+                                      N/A
+                                    {{/if}}
+                                  </td>
+                                </tr>
+                                {{/unless}}
+
+                              </tbody>
+                            </table>
+                            <hr/>
+                        {{/each}}
+
+                    </div>
+                </div>
+
+                <div class="panel panel-info    ">
+                    <div class="panel-heading"><h4>Sensors</h4></div>
+                    <div class="panel-body">
+                        {{#if study.sensorCheck}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Frequency (ms)</th>
+                                        <th>Optional</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each study.sensor}}
+                                        {{#if this.sensorActive}}
+                                            <tr>
+                                                <td>{{this.sensorType}}</td>
+                                                <td>
+                                                    {{#if this.frequency}}
+                                                        {{this.frequency}}
+                                                    {{else}}
+                                                        N/A
+                                                    {{/if}}
+                                                </td>
+                                                <td>
+                                                    {{#unless this.frequency}}
+                                                        {{#if this.application}}
+                                                            {{#each this.application}}
+                                                                {{this}}<br/>
+                                                            {{/each}}
+                                                        {{/if}}
+                                                        {{#if this.communication}}
+                                                            {{#each this.communication}}
+                                                                {{capitalize this}}<br/>
+                                                            {{/each}}
+                                                        {{/if}}
+                                                        {{#if this.network}}
+                                                            {{#each this.network}}
+                                                                {{capitalize this}}<br/>
+                                                            {{/each}}
+                                                        {{/if}}
+                                                  {{/unless}}
+                                                </td>
+                                            </tr>
+                                        {{/if}}
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        {{else}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sensors</th>
+                                        <th>Disabled</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{#unless study.exported}}
+                    <div>
+                        <a href="/study/{{study._id}}/export" class="btn btn-primary btn-md pull-right" type="button">Submit</a>
+                    </div>
+                {{/unless}}
+            </div>
+        </div>
+    </div>
+</template>

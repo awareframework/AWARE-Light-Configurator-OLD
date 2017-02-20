@@ -21,15 +21,12 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 kadira:flow-router
 kadira:blaze-layout
 erasaur:meteor-lodash
-stolinski:stylus-multi
 fortawesome:fontawesome
 spiderable
 fastclick
 raix:handlebar-helpers
 aldeed:collection2
 aldeed:autoform
-accounts-ui
-accounts-password
 matb33:bootstrap-glyphicons
 zimme:active-route
 gwendall:auth-client-callbacks
@@ -39,3 +36,10 @@ check
 momentjs:moment
 twbs:bootstrap
 steeve:jquery-qrcode
+stylus
+ian:accounts-ui-bootstrap-3
+accounts-password
+aldeed:autoform-bs-datepicker
+rajit:bootstrap3-datepicker
+tooit:content-types
+meteorhacks:picker
