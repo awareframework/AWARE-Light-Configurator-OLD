@@ -1,22 +1,20 @@
 <template name="Header">
   <header>
-      <nav class="navbar navbar-default">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                  <a class="navbar-brand">Web-ESM</a>
-              </div>
-
+      <nav class="navbar">
+          <div class="container">
+              <!-- <div class="navbar-header">
+                  <a class="navbar-brand">ESM Creator</a>
+              </div> -->
               <ul class="nav navbar-nav">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/about">Introduction</a></li>
+                  <li><a href="/">ESM Creator</a></li>
                   {{#if currentUser }}
-                  <li><a href="/panel">Studies</a></li>
+                  <li><a href="/panel">Study overview</a></li>
                   {{/if}}
-                  <li><a href="http://www.awareframework.com/">AWARE</a></li>
+                  <li><a href="/documentation">Documentation</a></li>
+                  <li><a href="/about">About</a></li>
               </ul>
 
               <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> </a></li>
                   {{> loginButtons}}
               </ul>
           </div>
