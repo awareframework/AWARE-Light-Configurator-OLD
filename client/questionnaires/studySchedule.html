@@ -1,12 +1,10 @@
 <template name="studySchedule">
-    <div class="container">
-        <div class="row">
+
+      <h3 id="study-title">{{study.title}}</h3>
+
             {{> SingleQuestionnaireNav menuIdx="2"}}
 
-            <div class="col-sm-9">
-                <div class="page-header">
-                    <h2>Scheduler</h2>
-                </div>
+            <div class="col-sm-9 input-form">
 
                 {{#autoForm collection="Studies" id="updateSchedule" type="update" doc=study}}
 
@@ -67,9 +65,7 @@
                         <button class="btn btn-primary btn-md pull-right" type="submit">Next</button>
                     </div>
                     <br>
-                
+
                 {{/autoForm}}
             </div>
-        </div>
-    </div>
 </template>

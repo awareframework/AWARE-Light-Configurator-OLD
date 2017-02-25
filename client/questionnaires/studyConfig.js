@@ -78,7 +78,7 @@ Template.studyConfig.helpers({
       return "Checkbox";
     }
     else if (value == 4) {
-      return "Likeart Scale";
+      return "Likert Scale";
     }
     else if (value == 5) {
       return "Quick Answer";

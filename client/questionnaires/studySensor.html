@@ -1,12 +1,10 @@
 <template name="studySensor">
-    <div class="container">
-        <div class="row">
+
+    <h3 id="study-title">{{study.title}}</h3>
+
             {{> SingleQuestionnaireNav menuIdx="3"}}
 
-            <div class="col-sm-9">
-                <div class="page-header">
-                    <h2>Sensors</h2>
-                </div>
+            <div class="col-sm-9 input-form">
 
                 {{#autoForm collection="Studies" id="updateStudyId" type="update" doc=study}}
 
@@ -56,7 +54,7 @@
                             {{#if afFieldValueIs name="sensor.5.sensorActive" value=true}}
                                 {{> afQuickField name="sensor.5.communication" template="bootstrap3-horizontal"}}
                             {{/if}}
-                            
+
                         </div>
                     </div>
                     <div class="row container">
@@ -169,7 +167,5 @@
 
                     <button type="submit" class="btn btn-primary btn-md pull-right">Next</button>
                 {{/autoForm}}
-            </div>
-        </div>
     </div>
 </template>

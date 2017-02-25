@@ -1,16 +1,14 @@
 <template name="studyConfig">
-    <div class="container">
-        <div class="row">
+  <h3 id="study-title">{{study.title}}</h3>
+
+
             {{#if Template.subscriptionsReady}}
                 {{#unless study.exported}}
                     {{> SingleQuestionnaireNav menuIdx="4"}}
                 {{/unless}}
             {{/if}}
 
-            <div class="col-sm-9">
-                <div class="page-header">
-                    <h2>Study Overview</h2>
-                </div>
+            <div class="col-sm-9 input-form">
 
                 <div class="panel panel-info">
                     <div class="panel-heading"><h4>Study</h4></div>
@@ -89,22 +87,22 @@
                                     {{/if}}
                                     {{#if equals this.type 4}}
                                         <tr>
-                                            <td>Likeart Scale labels</td>
+                                            <td>Likert Scale labels</td>
                                             <td>{{this.minLabel}} - {{this.maxLabel}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Likeart Scale range</td>
+                                            <td>Likert Scale range</td>
                                             <td>{{this.minValue}} - {{this.maxValue}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Likeart Scale step size</td>
+                                            <td>Likert Scale step size</td>
                                             <td>{{this.stepSize}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Likeart Scale default value</td>
+                                            <td>Likert Scale default value</td>
                                             <td>{{this.scaleStart}}
                                             </td>
                                         </tr>
@@ -290,7 +288,5 @@
                         <a href="/study/{{study._id}}/export" class="btn btn-primary btn-md pull-right" type="button">Submit</a>
                     </div>
                 {{/unless}}
-            </div>
-        </div>
     </div>
 </template>

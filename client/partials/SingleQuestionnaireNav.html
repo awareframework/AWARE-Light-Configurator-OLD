@@ -1,31 +1,33 @@
 <template name="SingleQuestionnaireNav">
-    <div class="col-sm-3">
-        <nav class="navbar navbar-default">
-            <ul class="nav nav-list">
+    <div class="col-sm-3 sidenav">
+        <nav>
+          <ol type="1">
+                <li><a class="active" href="/study/{{study._id}}/title">Study Information</a></li>
 
-                <li><a class="active" href="/study/{{study._id}}/title"><h3>Title</h3></a></li>
                 {{#if biggerOrEqual menuIdx 1}}
-                    <li><a href="/study/{{study._id}}/questions"><h3>Questions</h3></a></li>
+                    <li><a href="/study/{{study._id}}/questions">Questions</a></li>
                 {{else}}
-                    <li class="disabled"><a><h3>Questions</h3></a></li>
-                {{/if}}
-                {{#if biggerOrEqual menuIdx 2}}
-                    <li><a href="/study/{{study._id}}/schedule"><h3>Scheduler</h3></a></li>
-                    {{else}}
-                    <li class="disabled"><a><h3>Scheduler</h3></a></li>
-                {{/if}}
-                {{#if biggerOrEqual menuIdx 3}}
-                    <li><a href="/study/{{study._id}}/sensor"><h3>Sensors</h3></a></li>
-                {{else}}
-                    <li class="disabled"><a><h3>Sensors</h3></a></li>
-                {{/if}}
-                {{#if biggerOrEqual menuIdx 4}}
-                    <li><a href="/study/{{study._id}}/configuration"><h3>Overview</h3></a></li>
-                {{else}}
-                    <li class="disabled"><a><h3>Overview</h3></a></li>
+                    <li class="disabled"><a>Questions</a></li>
                 {{/if}}
 
-            </ul>
+                {{#if biggerOrEqual menuIdx 2}}
+                    <li><a href="/study/{{study._id}}/schedule">Schedule configuration</a></li>
+                    {{else}}
+                    <li class="disabled"><a>Schedule configuration</a></li>
+                {{/if}}
+
+                {{#if biggerOrEqual menuIdx 3}}
+                    <li><a href="/study/{{study._id}}/sensor">Sensor data</a></li>
+                {{else}}
+                    <li class="disabled"><a>Sensor data</a></li>
+                {{/if}}
+
+                {{#if biggerOrEqual menuIdx 4}}
+                    <li><a href="/study/{{study._id}}/configuration">Overview</a></li>
+                {{else}}
+                    <li class="disabled"><a>Overview</a></li>
+                {{/if}}
+            </ol>
         </nav>
     </div>
 </template>

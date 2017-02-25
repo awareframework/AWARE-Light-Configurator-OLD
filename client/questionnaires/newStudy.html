@@ -1,41 +1,29 @@
 <template name="newStudy">
-   <div class="container">
-            {{> SingleQuestionnaireNav menuIdx="0"}}
 
-            <div class="col-sm-9">
-                <div class="page-header">
-                    <h2>New Study</h2>
-                </div>
+  <h3 id="study-title">New study</h3> {{> SingleQuestionnaireNav menuIdx="0"}}
 
-                {{#autoForm collection="Studies" id="insertStudy" type="insert" class="col-sm-9"}}
+  <div class="col-sm-9 input-form">
 
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h4>Study Period</h4>
-                        </div>
-                        <div class="panel-body">
-                            {{> afQuickField name="title" placeholder="Title of the ESM study "}}
-                            {{> afQuickField name="description" placeholder="Description of the ESM study"}}
-                            {{> afQuickField name="user_id"}}
-                            {{> afQuickField name="createdAt"}}
-                        </div>
-                    </div>
+    {{#autoForm collection="Studies" id="insertStudy" type="insert"}}
 
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h4>Study Period</h4>
-                        </div>
-                        <div class="panel-body">
-                            {{> afQuickField name="start_date" placeholder="Starting date of the ESM study"}}
-                            {{> afQuickField name="end_date" placeholder="Ending date of the ESM study"}}
-                        </div>
-                    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h4>Study Information</h4>
+      </div>
+      <div class="panel-body">
+        <p class="instruction">Instructions</p>
 
-                    <div>
-                        <button class="btn btn-primary btn-md pull-right">Next</button>
-                    </div>
-                {{/autoForm}}
-            </div>
+        {{> afQuickField name="title" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="The title of your study "}}
+        {{> afQuickField name="description" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="A short description of your study"}}
+        {{> afQuickField name="user_id"}}
+        {{> afQuickField name="createdAt"}}
+
+      </div>
     </div>
+
+    <div>
+      <button class="btn btn-primary btn-md pull-right">Next</button>
+    </div>
+    {{/autoForm}}
+  </div>
 </template>
-    

@@ -27,7 +27,7 @@ Studies.allow({
 Option = new SimpleSchema({
   option: {
     type: String,
-    label: "Option",
+    label: "Answer option",
     optional: true
   }
 });
@@ -40,12 +40,12 @@ Question = new SimpleSchema({
 
 	instructions: {
 		type: String,
-		label: "Instructions"	
+		label: "Instructions"
 	},
 
 	timeout: {
     	type: Number,
-    	label: "Expiration threshold",
+    	label: "Expiration",
     	defaultValue: 0,
     	min: 0
     },
@@ -53,7 +53,7 @@ Question = new SimpleSchema({
   type: {
     type: Number,
     label: "Question type",
-    optional: true,
+    //optional: true,
     autoform: {
       type: "select",
       options: function () {
@@ -61,7 +61,7 @@ Question = new SimpleSchema({
           {label: "Free Text", value: 1},
           {label: "Radio", value: 2},
           {label: "Checkbox", value: 3},
-          {label: "Likeart Scale", value: 4},
+          {label: "Likert Scale", value: 4},
           {label: "Quick Answer", value: 5},
           {label: "Scale", value: 6},
           {label: "Numeric", value: 7}
@@ -72,7 +72,7 @@ Question = new SimpleSchema({
 
   submit: {
   	type: String,
-  	label: "Submit Label",
+  	label: "Submit label",
   	optional: true
   },
 
@@ -95,7 +95,7 @@ Question = new SimpleSchema({
     label: "Minimum value"
   },
 
-  // Likeart Scale can also use same Max Value and Step Size
+  // Likert Scale can also use same Max Value and Step Size
   maxLabel: {
   	type: String,
     optional: true,
@@ -294,7 +294,7 @@ Studies.attachSchema(new SimpleSchema({
 
   title: {
   	type: String,
-  	label: "Title"
+  	label: "Study title"
   },
 
   description: {
@@ -316,6 +316,7 @@ Studies.attachSchema(new SimpleSchema({
 
   questions : {
   	type: [Question],
+    label: "TEST",
     optional: true
   },
 

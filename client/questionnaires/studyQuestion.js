@@ -15,25 +15,25 @@ AutoForm.addHooks("updateQuestion",{
     }
 });
 
-Template.registerHelper("likeartMinOptions", function() {
-    return {
-      0: "0"
-    };
-});
+// Template.registerHelper("likertMinOptions", function() {
+//     return {
+//       0: "0"
+//     };
+// });
 
-Template.registerHelper("likeartMaxOptions", function() {
+Template.registerHelper("likertMaxOptions", function() {
     return {
       5: "5",
       7: "7"
     };
 });
 
-Template.registerHelper("likeartStepOptions", function() {
-    return {
-      0.5: "0.5",
-      1: "1"
-    };
-});
+// Template.registerHelper("likertStepOptions", function() {
+//     return {
+//       0.5: "0.5",
+//       1: "1"
+//     };
+// });
 
 Template.studyQuestion.helpers({
   study: ()=> {
