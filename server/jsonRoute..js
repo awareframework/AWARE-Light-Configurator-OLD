@@ -1,4 +1,4 @@
-Picker.route('/study/:id/json', function(params, req, res, next) { 
+Picker.route('/study/:id/json', function(params, req, res, next) {
     var response = Studies.findOne({_id: params.id});
 
 		// Check that study configuration has been already exported
@@ -106,7 +106,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 					finalARRAY[2] = scheduler;
 			}
 
-			if (response.sensorCheck) {
+			// if (response.sensorCheck) {
 				var sensors = [];
 				var count = 0;
 				for(j = 0; j< response.sensor.length;j++){
@@ -203,9 +203,9 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 								break;
 							case "Network":
 								break;
-							case "Processer":
-								sensor_Data.setting = "status_processer";
-								sensor_Freq.setting = "frequency_processer";
+							case "Processor":
+								sensor_Data.setting = "status_processor";
+								sensor_Freq.setting = "frequency_processor";
 								break;
 							case "Proximity":
 								sensor_Data.setting = "status_proximity";
@@ -246,7 +246,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 				var finalSensorJSON ={};
 				finalSensorJSON.sensors = sensors;
 				finalARRAY[3] = finalSensorJSON;
-			}
+			// }
 
 			var finalJSON = {AWARE: finalARRAY};
 

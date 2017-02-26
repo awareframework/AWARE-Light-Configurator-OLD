@@ -133,7 +133,7 @@ Sensor = new SimpleSchema({
     type: String,
     allowedValues: [
         "Accelerometer", "Application", "Barometer", "Battery", "Bluetooth", "Communication", "Gravity", "Gyroscope",
-        "Installations", "Light", "Linear Accelerometer", "Location", "Magnetometer", "Network", "Processer",
+        "Installations", "Light", "Linear Accelerometer", "Location", "Magnetometer", "Network", "Processor",
         "Proximity","Rotation", "Screen", "Telephony", "Temperature", "Wi-Fi"
     ],
     autoform: {
@@ -143,20 +143,19 @@ Sensor = new SimpleSchema({
 
   sensorActive: {
     type: Boolean,
+    label: " ",
+    optional: true,
     autoform:{
-      type: "boolean-radios",
-      trueLabel: "Enabled",
-      falseLabel: "Disabled",
-      defaultValue: false,
-      label: false
+      type: "boolean-checkbox",
+      defaultValue: false
     }
   },
 
-  frequency: {
-    type: String,
-    label: "Frequency (in microsends)",
-    optional: true
-  },
+  // frequency: {
+  //   type: String,
+  //   label: "Frequency (in microseconds)",
+  //   optional: true
+  // },
 
   application: {
     type: [String],
