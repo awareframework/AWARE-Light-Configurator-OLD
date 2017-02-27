@@ -46,9 +46,10 @@ pink = #CF256D
 orange = #E8846B
 
 primary-text = #62676e
-accent-color = #a0d5da
-accent-color-dark = #81afb4
-accent-color-light = #e0f4f6
+accent-color = #1fb3df
+accent-color-text = #393d44
+accent-color-dark = #1b9abf
+accent-color-light = #c6f0fc
 color-disabled = #adadad
 
 z = {
@@ -71,7 +72,7 @@ html
     box-sizing: inherit
 
 body
-    background: rgb(249, 249, 249)
+    background: #ffffff
     overflow-y: scroll
     font-size: 1.5em
     color: primary-text
@@ -83,6 +84,12 @@ a
 
 a:hover
     color: accent-color
+
+a i
+    margin-right: 12px
+
+h1, h2, h3, h4, h5, h6
+    color: accent-color-text
 
 hr
     border-color: accent-color
@@ -105,18 +112,18 @@ footer
 
 .navbar
     // border-bottom: 1px rgb(207, 207, 207) solid
-    background: accent-color
+    // background: accent-color
+    background: #282b32
     border-radius: 0
     .nav li a
         font-size: 1.1em
         padding: 20px
-        padding-left: 0
-        padding-right: 60px
+        margin-right: 60px
         // color: rgb(106, 107, 106)
         font-weight: 500
         color: white
     .nav li a:hover
-        text-decoration: underline
+        text-decoration: none
         background-color: accent-color
     .nav .open > a
         background-color: accent-color
@@ -154,13 +161,26 @@ footer
     text-transform: uppercase
     border-radius: 0
 
-.btn-success
+.btn-primary
     background-color: accent-color
     border-color: accent-color-dark
 
-.btn-success:hover, .btn-success:active, .btn-success:active:hover, .btn-success:active:focus, .btn-success:focus
+.btn-primary:hover, .btn-primary:active, .btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:focus
+    text-decoration: none
     background-color: accent-color-dark
     border-color: accent-color-dark
+
+.btn-default
+    outline: 1px solid accent-color
+    outline-offset: -1px
+    margin-left: 18px
+
+.btn-default:hover, .btn-default:active, .btn-default:active:hover, .btn-default:active:focus, .btn-default:focus
+    color: accent-color-text
+    outline: 1px solid accent-color-text
+    outline-offset: -1px
+    text-decoration: none
+    background: none
 
 .promise
     text-align: center
