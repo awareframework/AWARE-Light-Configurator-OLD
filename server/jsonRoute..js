@@ -19,8 +19,12 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 			var questions ={};
 			questions.esms =[];
 			for (i = 0; i < response.questions.length; i++) {
-			var data ={esm_type : response.questions[i].type, esm_title :response.questions[i].question,
-					esm_instructions:response.questions[i].instructions, esm_expiration_threshold :response.questions[i].timeout, esm_trigger : "AWARE_TEST"};
+			var data ={esm_type : response.questions[i].type,
+                esm_title :response.questions[i].question,
+				esm_instructions:response.questions[i].instructions,
+                esm_expiration_threshold :response.questions[i].expiration_threshold,
+                esm_notification_timeout :response.questions[i].notification_timeout,
+                esm_trigger : "AWARE_TEST"};
 					switch(response.questions[i].type){
 							case 1:
 									data.esm_submit = response.questions[i].submit;

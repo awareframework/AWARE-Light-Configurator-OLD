@@ -27,7 +27,14 @@ SingleQuestion = new SimpleSchema({
     label: "Instructions",
     optional: true
   },
-  timeout: {
+  expiration_threshold: {
+    type: Number,
+    label: "Expiration",
+    defaultValue: 0,
+    optional: true,
+    min: 0
+  },
+  notification_timeout: {
     type: Number,
     label: "Expiration",
     defaultValue: 0,

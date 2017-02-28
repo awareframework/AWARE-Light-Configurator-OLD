@@ -43,11 +43,20 @@ Question = new SimpleSchema({
 		label: "Instructions"
 	},
 
-	timeout: {
+	expiration_threshold: {
     	type: Number,
     	label: "Expiration",
+        optional: true,
     	defaultValue: 0,
     	min: 0
+    },
+
+    notification_timeout: {
+    	type: Number,
+    	label: "Notification timeout",
+    	optional: true,
+    	defaultValue: 0,
+        min: 0
     },
 
   type: {
@@ -70,18 +79,11 @@ Question = new SimpleSchema({
     }
   },
 
-  submit: {
-  	type: String,
-  	label: "Submit label",
-  	optional: true
-  },
-
-  notiTimeout: {
-  	type: Number,
-  	label: "Notification Timeout",
-  	optional: true,
-  	defaultValue: 0
-  },
+    submit: {
+  	     type: String,
+  	     label: "Submit label",
+  	     optional: true
+    },
 
   options: {
   	type: [Option],

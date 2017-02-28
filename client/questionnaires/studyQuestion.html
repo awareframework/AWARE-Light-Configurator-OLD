@@ -34,18 +34,6 @@
                                         placeholder="Any instructions for the participant(s)"
                                 }}
 
-                                {{> afQuickField name=this.current.timeout
-                                        template="bootstrap3-horizontal"
-                                        label-class="col-sm-3"
-                                        input-col-class="col-sm-9"
-                                        value="0"
-                                        placeholder="Question expiration time"
-                                }}
-
-                                <div class="col-sm-9 col-sm-offset-3">
-                                    <p class="instruction">Expiry time (in seconds?) allows you to automatically dismiss a question after a set amount of time. Use 0 for unlimited answer time.</p>
-                                </div>
-
                                 {{> afQuickField name=this.current.type
                                         template="bootstrap3-horizontal"
                                         label-class="col-sm-3"
@@ -227,6 +215,28 @@
                                             value="Submit"
                                     }}
                                 {{/if}}
+
+                                {{> afQuickField name=this.current.expiration_threshold
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-3"
+                                        input-col-class="col-sm-9"
+                                        value="0"
+                                        placeholder="Question expiration time"
+                                }}
+
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <p class="instruction">Automatically dismiss a question after it has been openend for a set amount of time (in seconds). Use 0 for unlimited answer time. If value is above 0, the questionnaire will be presented immediately as opposed displaying a (regular) notification.</p>
+                                </div>
+
+                                {{> afQuickField name=this.current.notification_timeout
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-3"
+                                        input-col-class="col-sm-9"
+                                }}
+
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <p class="instruction">Dismiss a notification if it has not been opened by the user after the specified time (in seconds).</p>
+                                </div>
 
                                 <div class="btn-toolbar mb-3" role="toolbar">
                         </div>
