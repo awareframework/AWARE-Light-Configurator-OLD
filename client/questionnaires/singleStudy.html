@@ -1,17 +1,18 @@
 <template name="singleStudy" xmlns="http://www.w3.org/1999/html">
-    <article class="recipe">
-        <h3>{{title}}</h3>
-        <p>{{description}}</p>
-        <p class="meta">Created {{formatDate createdAt}}.</p>
+    <article class="questionnaire-overview">
+      <div class="clearfix">
+          <h4>{{title}}</h4>
+      </div>
 
-        {{nrStudies}}
+        <p class="instructions">{{description}}. Created {{formatDate createdAt}}.</p>
+
+        <!-- {{nrStudies}} -->
 
         {{#if exported}}
-            <a class="btn btn-primary" href="/study/{{_id}}/overview">View Overview</a>
+            <a class="btn btn-primary" href="/study/{{_id}}/overview">View overview</a>
         {{else}}
-            <a class="btn btn-primary" href="/study/{{_id}}/questions">View Details</a>
-            <button class="btn btn-danger btn-md autoform-remove-item pull-right" data-autoform-field="items">Remove Study</button>
+            <a class="btn btn-primary" href="/study/{{_id}}/title">Edit study</a>
         {{/if}}
-
+            <button class="btn btn-danger btn-md autoform-remove-item" data-autoform-field="items">Remove study</button>
     </article>
 </template>

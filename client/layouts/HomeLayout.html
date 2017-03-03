@@ -7,7 +7,12 @@
               based on the power of AWARE.</p>
 
             <div class="cta">
+              {{#if currentUser}}
                 <a href="/study" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design study</a>
+              {{else}}
+                <a href="/register" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design study</a>
+              {{/if}}
+
                 <a href="/register" class="btn-lg btn-default" role="button">Create account</a>
             </div>
         </div>

@@ -250,11 +250,11 @@ Schedule = new SimpleSchema({
   },
 
   questionSchedule: {
-    type: [Number],
-    label: "Select schedule for Questions",
+    type: Boolean,
     optional: true,
     autoform: {
-      label: false
+      type: "boolean-checkbox",
+      defaultValue: true
     }
   },
 
@@ -389,7 +389,7 @@ Meteor.methods({
       study = Studies.findOne({_id: id});
 
       // Check that author matches with login
-      if (study.user_id == this.userId && !study.exported) {
+      if (study.user_id == this.userId) {
         Studies.remove(id);
       }
       else {

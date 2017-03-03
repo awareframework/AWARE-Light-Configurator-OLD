@@ -29,22 +29,6 @@ $med = 700px
 $large = 960px
 $wide = 1200px
 
-// Colors
-black = #222
-grey = #D8D8D8
-light-grey = #EEE
-blue = #176694
-dark-blue = #082B50
-red = #E54B4B
-teal = #82D8D8
-dark-teal = #66A6A6
-green = #CBE56C
-bright-blue = #0082C8
-maroon = #6A2140
-light-red = #CA5765
-pink = #CF256D
-orange = #E8846B
-
 primary-text = #62676e
 accent-color = #1fb3df
 accent-color-text = #393d44
@@ -118,7 +102,6 @@ footer
     .nav li a
         font-size: 1.1em
         padding: 20px
-        margin-right: 60px
         // color: rgb(106, 107, 106)
         font-weight: 500
         color: white
@@ -130,15 +113,19 @@ footer
     #login-dropdown-list .dropdown-menu a
         background-color: none
         color: accent-color
+        padding-top: 5px
+        padding-bottom: 0
     #login-dropdown-list .dropdown-menu a:hover
         background-color: transparent
         color: accent-color-dark
+    #forgot-password-link, #signup-link
+      padding-right: 0
+    #login-buttons-open-change-password, #login-buttons-cancel-change-password, #back-to-login-link
+      margin-left: 0
+
 
 .navbar-right
-    margin-right: 0
-
-.dropdown a
-    padding-right: 0 !important
+  margin-right: 0
 
 .jumbotron
     align: left
@@ -193,13 +180,20 @@ footer
 .sidenav, .input-form
   margin-top: 40px
 
+// questionnaire listing
+
+.questionnaire-overview:not(:last-child)
+  margin-bottom 15px
+  padding-bottom: 25px
+  border-bottom: 1px solid color-disabled
+
 // form
-.panel-info
+.panel-info, .panel-warning, .panel-success
   border: none
   border-radius: 0
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15)
 
-.panel-info > .panel-heading
+.panel-info > .panel-heading, .panel-warning > .panel-heading, .panel-success > .panel-heading
   padding-left: 25px
   padding-top: 20px
   padding-bottom: 0
@@ -255,328 +249,22 @@ select.form-control
 ::selection
   background: accent-color-light
 
-// header
-//     color #FFF
-//     background blue
-//     fixed top left
-//     height 70px
-//     width 100%
-//     z-index: z.header
-//     shadow-level(2)
-//     clearfix()
-//     h1
-//         margin 0
-//         font-size 1.6em
-//         float left
-//     .login-buttons-dropdown-align-
-//         float right
-//         a
-//             color #FFF
-//             text-decoration none
-//
-// #wrap {
-//   min-height: 100%;
-// }
-//
-//
-// footer
-//     height 140px
-//     margin-top 40px
-//     position relative
-//     width 80%
-//     margin-left auto
-//     margin-right auto
-//
-// br
-//     border-bottom 1px dark-blue
-//     display block
-//
-// p
-//     color #333
-//
-// .page-title
-//     text-transform uppercase
-//     text-align center
-//     margin-bottom 30px
-//
-// .billboard
-//     background dark-blue
-//     color #FFF
-//     font-size 2em
-//     text-align center
-//     padding 60px
-//     h2
-//         margin 0
-//
-// .main-layout
-//     lost-center 90%
-//     margin-top 20px
-//     +above($med)
-//         lost-center 90%
-//     +above($large)
-//         lost-center 80%
-//         margin-top 40px
-//     .fa
-//       font-size 1.7em
-//       display inline-block
-//       margin-right 10px
-//     h4
-//       color dark-blue
-//
-// .primary
-//     font-size 1.5em
-//     padding-top 10px
-//     padding-bottom 26px
-//
-//
-//
-// .new-recipe
-//     margin-bottom 20px
-//
-// .new-recipe-container
-//     position relative
-//     background white
-//     padding 20px 50px 100px
-//     margin-bottom 20px
-//     margin-top 10px
-//     shadow-level(2)
-//     .fa-close
-//         position absolute
-//         top 0
-//         right 0
-//         padding 20px
-//
-//
-// .btn, button
-//     display inline-block
-//     cursor pointer
-//     background grey
-//     border-color grey
-//     text-decoration none
-//     text-transform uppercase
-//     padding 5px 15px
-//     font-weight 800
-//     margin-top 20px
-//     margin-right 50px
-//     shadow-level(1)
-//     trans()
-//     &:hover
-//         background @background - 20
-//         border-color @background
-//         shadow-level(2)
-//     &.btn-primary
-//         background grey
-//         color black
-//         shadow-level(1)
-//         &:hover
-//             background @background - 40
-//             border-color @background
-//     &.btn-deny
-//         background red
-//         border solid 3px @background
-//         &:hover
-//             background @background - 20
-//             border-color @background
-//     &.btn-text
-//         color black
-//         background transparent
-//         border solid 2px blue
-//         shadow-level(0)
-//         &:hover
-//             background teal
-//             border-color @background
-//             shadow-level(1)
-//     &.btn-text-dark
-//         color #FFF
-//         background transparent
-//         border solid 2px #FFF
-//         shadow-level(0)
-//         &:hover
-//             background #FFF
-//             color dark-blue
-//             border-color @background
-//             shadow-level(1)
-//     &.btn-confirmation
-//         color black
-//         background green
-//         border solid 2px @background
-//         &:hover
-//             background @background - 20
-//             border-color dark-blue
-//     &.btn-cancel
-//         color #FFF
-//         background transparent
-//         border solid 2px #FFF
-//         opacity 0.4
-//         shadow-level(-1)
-//         &:hover
-//             background red
-//             color #FFF
-//             opacity 1
-//             shadow-level(2)
-//             border-color @background
-//
-// input, select, textarea
-//     color blue
-//     background #FFF
-//     border solid 2px light-grey
-//     border-radius 2px
-//     font-weight 800
-//     width 100%
-//     padding 6px 10px
-//     margin-bottom 10px
-//     &.static-input
-//         border none
-//         background transparent
-//
-// .list-group
-//     list-style none
-//     padding 0
-//
-// .panel-body
-//     .form-group
-//         lost-column 1/2
-//
-// .autoform-remove-item.btn
-//     cursor pointer
-//     background grey
-//     border-color grey
-//     text-decoration none
-//     text-transform uppercase
-//     padding 5px 15px
-//     font-weight 800
-//     margin-top 20px
-//     margin-right 50px
-//     shadow-level(1)
-//     trans()
-//
-// .autoform-add-item.btn
-//     display inline-block
-//     cursor pointer
-//     background grey
-//     border-color grey
-//     color black
-//     text-decoration none
-//     text-transform uppercase
-//     padding 5px 15px
-//     font-weight 800
-//     margin-top 20px
-//     margin-right 50px
-//     shadow-level(1)
-//     trans()
-//
-//
-// .autoform-remove-item-wrap
-//     vertical-align middle
-//
-// .help
-//     float left
-//
-// .main-nav
-//     width 80%
-//     margin-left auto
-//     margin-right auto
-//     a
-//         color #FFF
-//         text-decoration none
-//         margin 20px 20px
-//         display block
-//
-//
-// .recipe
-//     background white
-//     padding 20px 50px 100px
-//     margin-bottom 20px
-//     position relative
-//     z-index 1
-//     shadow-level(1)
-//     trans()
-//     .remove-from-menu
-//         display none
-//     &.in-menu
-//         background teal
-//         color #FFF
-//         h3
-//             border-bottom: rgba(255,255,255, 0.6) solid 3px
-//         .add-to-menu
-//             display none
-//         .remove-from-menu
-//             display block
-//     h3
-//         font-size: 2em;
-//         opacity: 0.8;
-//         padding-top 10px
-//         padding-bottom 20px
-//     button
-//         margin-top 20px
-//         margin-right 50px
-//     .fa-trash
-//         opacity 0.5
-//         cursor pointer
-//         position absolute
-//         top 0
-//         right 0
-//         font-size 1.6em
-//         display block
-//         padding 20px
-//         color black
-//         trans()
-//         &:hover
-//             color red
-//             opacity 0.8
-//     .ingredient
-//         display inline-block
-//         margin-right 10px
-//         font-size 1.2em
-//     &:hover
-//         shadow-level(3)
-//         // animation card 0.6s ease 1 forwards
-//
-// @keyframes card
-//     0%
-//         transform translate3d(0, 0, 0)
-//     50%
-//         transform translate3d(0, -135px, 0)
-//     51%
-//         z-index 10
-//         transform translate3d(0, -135px, 0)
-//     100%
-//         z-index 10
-//         transform translate3d(0, 0, 0)
-//
-// .questionnaire-nav
-//     li
-//         display inline
-//         list-style-type: none
-//         padding-right 20px
-//     li:last-child
-//         float right
-//
-// .menu-item
-//     @extend .recipe
-//
-// .shopping-list
-//     @extend .recipe
-//     padding 50px 5%
-//     list-style none
-//     li
-//         font-size 2em
-//         padding 20px
-//         border-bottom 1px solid light-grey
-//         border-top 1px solid light-grey
-//         & + li
-//             border-top none
-//
-// .login-buttons-dropdown-align-
-//     #login-dropdown-list
-//         right 0
-//         left auto
-//         a
-//             color dark-blue
-//
-// .meta
-//     opacity 0.7
-//     float right
-//     font-size 0.8em
-//     margin-bottom 10px
-//     padding-bottom 10px
+
+// Login
+
+#forgot-password-link {
+  padding-left: 0
+}
+
+
+@keyframes card
+    0%
+        transform translate3d(0, 0, 0)
+    50%
+        transform translate3d(0, -135px, 0)
+    51%
+        z-index 10
+        transform translate3d(0, -135px, 0)
+    100%
+        z-index 10
+        transform translate3d(0, 0, 0)

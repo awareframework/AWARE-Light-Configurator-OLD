@@ -15,15 +15,16 @@
                             </div>
 
                             <div class="panel-body">
-                                <h3>Select Questions for this Schedule</h3>
-                                {{> afQuickField name=this.current.questionSchedule
-                                        type ="select-checkbox-inline"
-                                        template="bootstrap3-horizontal"
-                                        input-col-class="col-sm-12"
-                                        options=questionsCheckbox
-                                }}
+                                <p class="instructions">It is possible to create different schedules and to assign different questions to each schedule. By default, all questions are assigned to the schedule.</p>
+                                <h4>Questions included in current schedule</h4>
+                                  {{> afQuickField name=this.current.questionSchedule
+                                          type ="select-checkbox"
+                                          input-col-class="col-sm-12"
+                                          options=questionsCheckbox
+                                          value=questionsCheckbox
+                                  }}
 
-                                <h3>Select schedule method</h3>
+                                <h4>Schedule method</h4>
                                 {{> afQuickField name=this.current.scheduleCheck}}
 
                                 {{#if afFieldValueIs name=this.current.scheduleCheck value="time"}}

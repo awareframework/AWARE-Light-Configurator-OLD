@@ -15,7 +15,7 @@ AutoForm.addHooks("updateSchedule",{
 
 Template.registerHelper("questionsCheckbox", function() {
     var id = FlowRouter.getParam('id');
-    study =Studies.findOne({_id: id});
+    study = Studies.findOne({_id: id});
     var options =[];
     if(typeof study != "undefined"){
       for(i=0; i< study.questions.length;i++){
