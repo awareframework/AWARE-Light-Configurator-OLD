@@ -6,6 +6,7 @@
     "reset": "meteor reset"
   },
   "dependencies": {
+    "babel-runtime": "^6.23.0",
     "meteor-node-stubs": "~0.2.0"
   }
 }

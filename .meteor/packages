@@ -23,7 +23,6 @@ kadira:blaze-layout
 erasaur:meteor-lodash
 fortawesome:fontawesome
 spiderable@1.0.13
-fastclick@1.0.12
 raix:handlebar-helpers
 aldeed:collection2-core
 aldeed:autoform

@@ -15,17 +15,16 @@ AutoForm.addHooks("updateQuestion",{
     }
 });
 
-// Template.registerHelper("likertMinOptions", function() {
-//     return {
-//       0: "0"
-//     };
-// });
-
 Template.registerHelper("likertMaxOptions", function() {
     return {
       5: "5",
       7: "7"
     };
+});
+
+Template.registerHelper('incremented', function (index) {
+    index++;
+    return index;
 });
 
 // Template.registerHelper("likertStepOptions", function() {
@@ -45,7 +44,22 @@ Template.studyQuestion.helpers({
     return Studies.findOne({_id: id});
   }
 });
+
 }
 catch(err){
   console.log(err);
 }
+
+AutoForm.addHooks(null, {
+  before: {
+    update: function(doc) {
+      _.each(doc.$set, function(value, setter) {
+        if (_.isArray(value)) {
+          var newValue = _.compact(value);
+          doc.$set[setter] = newValue;
+        }
+      });
+      return doc;
+    }
+  }
+});

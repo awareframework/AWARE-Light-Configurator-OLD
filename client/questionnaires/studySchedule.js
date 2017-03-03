@@ -28,6 +28,11 @@ Template.registerHelper("questionsCheckbox", function() {
   }
 });
 
+Template.registerHelper('incremented', function (index) {
+    index++;
+    return index;
+});
+
 Template.studySchedule.helpers({
   study: ()=> {
     var id = FlowRouter.getParam('id');
@@ -42,3 +47,17 @@ Template.studySchedule.helpers({
 catch (err){
   console.log(err);
 }
+
+AutoForm.addHooks(null, {
+  before: {
+    update: function(doc) {
+      _.each(doc.$set, function(value, setter) {
+        if (_.isArray(value)) {
+          var newValue = _.compact(value);
+          doc.$set[setter] = newValue;
+        }
+      });
+      return doc;
+    }
+  }
+});
