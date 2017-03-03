@@ -6,15 +6,15 @@ Accounts.ui.config({
     extraSignupFields: [{
         fieldName: 'email_updates',
         fieldLabel: 'Keep me up to date on updates.',
-        defaultValue: true,
         inputType: 'checkbox',
         visible: true,
+        optional: true,
         saveToProfile: true,
         validate: function(value, errorFunction) {
             if (value) {
                 return true;
             } else {
-                return false;
+                return true;
             }
         }
     }]
