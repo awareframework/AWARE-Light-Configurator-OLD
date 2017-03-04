@@ -20,7 +20,7 @@ Template.registerHelper("questionsCheckbox", function() {
     if(typeof study != "undefined"){
       for(i=0; i< study.questions.length;i++){
         var json = {};
-        json["label"] = "Question " + (i+1);
+        json["label"] = "Question " + (i+1) + " - " + study.questions[i].question;
         json["value"] = i;
         options[i] = json;
   }

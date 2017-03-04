@@ -250,9 +250,10 @@ Schedule = new SimpleSchema({
   },
 
   questionSchedule: {
-    type: Boolean,
+    type: [Number],
     optional: true,
     autoform: {
+      label: false,
       type: "boolean-checkbox",
       defaultValue: true
     }

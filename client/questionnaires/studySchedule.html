@@ -16,7 +16,8 @@
 
                             <div class="panel-body">
                                 <p class="instructions">It is possible to create different schedules and to assign different questions to each schedule. By default, all questions are assigned to the schedule.</p>
-                                <h4>Questions included in current schedule</h4>
+
+                                <h5>Questions included in current schedule</h5>
                                   {{> afQuickField name=this.current.questionSchedule
                                           type ="select-checkbox"
                                           input-col-class="col-sm-12"
@@ -24,14 +25,14 @@
                                           value=questionsCheckbox
                                   }}
 
-                                <h4>Schedule method</h4>
+                                <h5>Schedule method</h5>
                                 {{> afQuickField name=this.current.scheduleCheck}}
 
                                 {{#if afFieldValueIs name=this.current.scheduleCheck value="time"}}
                                     <h3>Hour</h3>
                                     {{> afQuickField name=this.current.hours
                                             template="bootstrap3-horizontal"
-                                            input-col-class="col-sm-11"
+                                            input-col-class="col-sm-12"
                                     }}
 
                                     <h3>Weekday</h3>

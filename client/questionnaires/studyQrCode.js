@@ -6,16 +6,20 @@ Template.studyQrCode.onCreated(function() {
   });
 });
 
-Template.studyQrCode.onRendered(function() {
-  var host = 'http://192.168.173.1:3000';
-  var id = FlowRouter.getParam('id');
-  var route = '/study/'+ id + '/json';
-  $('#qrcode').qrcode({text: host+route});
-})
-
 Template.studyQrCode.helpers({
   study: ()=> {
     var id = FlowRouter.getParam('id');
     return Studies.findOne({_id: id});
+  },
+
+  studyQrCode() {
+    var host =  Meteor.absoluteUrl();
+    var id = FlowRouter.getParam('id');
+    var route = 'study/'+ id + '/json';
+    return {
+        text: host+route,
+        crisp: true,
+        size: 120
+    };
   }
 });
