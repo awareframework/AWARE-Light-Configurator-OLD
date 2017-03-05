@@ -42,7 +42,7 @@
 
                                 {{#if afFieldValueIs name=this.current.type value=1}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Text entry using keyboard. Use when question answers are unable to be captured in a small set of choices.</p>
+                                        <p class="instruction">Allows participants to enter text using the keyboard. Use when question answers are unable to be captured in a small set of choices.</p>
                                     </div>
 
                                     {{> afQuickField name=this.current.submit
@@ -56,7 +56,20 @@
 
                                 {{#if afFieldValueIs name=this.current.type value=2}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Instructions radio.</p>
+                                        <p class="instruction">Allows participants to select only one option out of the presented possibilities.</p>
+                                    </div>
+
+                                    {{#afEachArrayItem name=this.current.options}}
+                                        {{> afQuickField name=this.current.option
+                                                template="bootstrap3-horizontal"
+                                                label-class="col-sm-3 col-sm-offset-3"
+                                                input-col-class="col-sm-5"
+                                        }}
+                                      <button class="btn btn-danger autoform-remove-item align-right" data-autoform-field="items">x</button>
+                                    {{/afEachArrayItem}}
+
+                                    <div class="col-sm-offset-6">
+                                      <button class="btn btn-primary autoform-add-item" data-autoform-field="{{this.current.options}}">Add option</button>
                                     </div>
 
                                     {{> afQuickField name=this.current.submit
@@ -66,46 +79,24 @@
                                             placeholder="Alternative submit button text"
                                             value="Submit"
                                     }}
-                                    {{#afEachArrayItem name=this.current.options}}
-                                        {{> afQuickField name=this.current.option
-                                                template="bootstrap3-horizontal"
-                                                label-class="col-sm-3 col-sm-offset-3"
-                                                input-col-class="col-sm-5"
-                                        }}
-
-                                        <button class="btn autoform-remove-item" data-autoform-field="items">x</button>
-
-                                    {{/afEachArrayItem}}
-                                    <button class="btn btn-primary autoform-add-item col-sm-offset-6 col-sm-5" data-autoform-field="{{this.current.options}}">Add option</button>
                                 {{/if}}
 
                                 {{#if afFieldValueIs name=this.current.type value=3}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Instructions checkbox.</p>
+                                        <p class="instruction">Allows participants to select multiple options out of the presented possibilities.</p>
                                     </div>
 
-                                    {{> afQuickField name=this.current.submit
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Alternative submit button text"
-                                            value="Submit"
-                                    }}
                                     {{#afEachArrayItem name=this.current.options}}
                                         {{> afQuickField name=this.current.option
                                                 template="bootstrap3-horizontal"
                                                 label-class="col-sm-3 col-sm-offset-3"
                                                 input-col-class="col-sm-5"
                                         }}
-                                        <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">x</button>
+                                      <button class="btn btn-danger autoform-remove-item align-right" data-autoform-field="items">x</button>
                                     {{/afEachArrayItem}}
 
-                                    <button class="btn btn-primary autoform-add-item col-sm-offset-6 col-sm-5" data-autoform-field="{{this.current.options}}">Add option</button>
-                                {{/if}}
-
-                                {{#if afFieldValueIs name=this.current.type value=4}}
-                                    <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Instructions Likert scale</p>
+                                    <div class="col-sm-offset-6">
+                                      <button class="btn btn-primary autoform-add-item" data-autoform-field="{{this.current.options}}">Add option</button>
                                     </div>
 
                                     {{> afQuickField name=this.current.submit
@@ -115,6 +106,13 @@
                                             placeholder="Alternative submit button text"
                                             value="Submit"
                                     }}
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.type value=4}}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Allows participants to indicate level of (dis)agreement with the question.</p>
+                                    </div>
+
                                     {{> afQuickField name=this.current.maxValue
                                             type="select-radio-inline"
                                             options=likertMaxOptions
@@ -126,19 +124,26 @@
                                             template="bootstrap3-horizontal"
                                             label-class="col-sm-3 col-sm-offset-3"
                                             input-col-class="col-sm-6"
-                                            placeholder="Label for the Minimum Value"
+                                            placeholder="(e.g., completely disagree)"
                                     }}
                                     {{> afQuickField name=this.current.maxLabel
                                             template="bootstrap3-horizontal"
                                             label-class="col-sm-3 col-sm-offset-3"
                                             input-col-class="col-sm-6"
-                                            placeholder="Label for the Maximum Value"
+                                            placeholder="(e.g., completely agree)"
+                                    }}
+                                    {{> afQuickField name=this.current.submit
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="Alternative submit button text"
+                                            value="Submit"
                                     }}
                                 {{/if}}
 
                                 {{#if afFieldValueIs name=this.current.type value=5}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Instructions quick answer.</p>
+                                        <p class="instruction">Allows participants to quickly select one of the presented options.</p>
                                     </div>
 
                                     {{#afEachArrayItem name=this.current.options}}
@@ -147,16 +152,55 @@
                                                 label-class="col-sm-3 col-sm-offset-3"
                                                 input-col-class="col-sm-5"
                                         }}
-                                        <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">x</button>
+                                        <button class="btn btn-danger autoform-remove-item align-right" data-autoform-field="items">x</button>
                                     {{/afEachArrayItem}}
-                                    <button class="btn btn-primary autoform-add-item col-sm-offset-6 col-sm-5" data-autoform-field="{{this.current.options}}">Add option</button>
+
+                                    <div class="col-sm-offset-6">
+                                      <button class="btn btn-primary autoform-add-item" data-autoform-field="{{this.current.options}}">Add option</button>
+                                    </div>
                                 {{/if}}
 
                                 {{#if afFieldValueIs name=this.current.type value=6}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Instructions scale.</p>
+                                        <p class="instruction">Allows participants to select any value between a set minimum and maximum.</p>
                                     </div>
 
+                                    {{> afQuickField name=this.current.minValue
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="Minimum value of the scale"
+                                    }}
+                                    {{> afQuickField name=this.current.maxValue
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="Maximum value of the scale"
+                                    }}
+                                    {{> afQuickField name=this.current.minLabel
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="(e.g., completely disagree)"
+                                    }}
+                                    {{> afQuickField name=this.current.maxLabel
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="(e.g., completely agree)"
+                                    }}
+                                    {{> afQuickField name=this.current.stepSize
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="Steps of increment while dragging the slider"
+                                    }}
+                                    {{> afQuickField name=this.current.scaleStart
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3 col-sm-offset-3"
+                                            input-col-class="col-sm-6"
+                                            placeholder="Intial scale value"
+                                    }}
                                     {{> afQuickField name=this.current.submit
                                             template="bootstrap3-horizontal"
                                             label-class="col-sm-3 col-sm-offset-3"
@@ -164,47 +208,11 @@
                                             placeholder="Alternative submit button text"
                                             value="Submit"
                                     }}
-                                    {{> afQuickField name=this.current.minValue
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Minimum Value of the Scale"
-                                    }}
-                                    {{> afQuickField name=this.current.maxValue
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Maximum Value of the Scale"
-                                    }}
-                                    {{> afQuickField name=this.current.minLabel
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Label for the Minimum Value"
-                                    }}
-                                    {{> afQuickField name=this.current.maxLabel
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Label for the Maximum Value"
-                                    }}
-                                    {{> afQuickField name=this.current.stepSize
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Stepsize or Increments Size"
-                                    }}
-                                    {{> afQuickField name=this.current.scaleStart
-                                            template="bootstrap3-horizontal"
-                                            label-class="col-sm-3 col-sm-offset-3"
-                                            input-col-class="col-sm-6"
-                                            placeholder="Place where the Scale starts"
-                                    }}
                                 {{/if}}
 
                                 {{#if afFieldValueIs name=this.current.type value=7}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Instructions numeric.</p>
+                                        <p class="instruction">Allows participants to enter numeric only text.</p>
                                     </div>
 
                                     {{> afQuickField name=this.current.submit
@@ -225,7 +233,7 @@
                                 }}
 
                                 <div class="col-sm-9 col-sm-offset-3">
-                                    <p class="instruction">Automatically dismiss a question after it has been openend for a set amount of time (in seconds). Use 0 for unlimited answer time. If value is above 0, the questionnaire will be presented immediately as opposed displaying a (regular) notification.</p>
+                                    <p class="instruction">Close a question window after it has been open for a set amount of time (in seconds). Use 0 for unlimited answer time. If expiration time is higher than zero seconds, the questionnaire will be presented immediately as opposed to displaying a notification.</p>
                                 </div>
 
                                 {{> afQuickField name=this.current.notification_timeout
@@ -235,7 +243,7 @@
                                 }}
 
                                 <div class="col-sm-9 col-sm-offset-3">
-                                    <p class="instruction">Dismiss a notification if it has not been opened by the user after the specified time (in seconds).</p>
+                                    <p class="instruction">Dismiss the ESM notification after the specified time (in seconds).</p>
                                 </div>
 
                                 <div class="btn-toolbar mb-3" role="toolbar">

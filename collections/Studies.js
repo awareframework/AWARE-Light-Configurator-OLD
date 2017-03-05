@@ -101,13 +101,13 @@ Question = new SimpleSchema({
   maxLabel: {
   	type: String,
     optional: true,
-    label: "Maximum Label"
+    label: "Maximum label"
   },
 
   minLabel: {
   	type: String,
     optional: true,
-    label: "Minimum Label"
+    label: "Minimum label"
   },
 
   maxValue: {
@@ -119,13 +119,13 @@ Question = new SimpleSchema({
   stepSize: {
   	type: Number,
     optional: true,
-  	label: "Step Size"
+  	label: "Step size"
   },
 
   scaleStart: {
     type: Number,
     optional: true,
-    label: "Scale Start"
+    label: "Scale start"
   }
 
 });
