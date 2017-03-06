@@ -56,7 +56,7 @@ Question = new SimpleSchema({
     	label: "Notification timeout",
     	optional: true,
     	defaultValue: 0,
-        min: 0
+      min: 0
     },
 
   type: {
@@ -208,13 +208,31 @@ Sensor = new SimpleSchema({
 
 
 Schedule = new SimpleSchema({
-  hours: {
-    type: [Number],
+  firsthour: {
+    type: Number,
     optional: true,
-    label: "Hour",
+    label: "First hour",
     autoform: {
-      type: "select-checkbox-inline",
-      label:false,
+      type: "select",
+      options: function () {
+        return [
+          {label: "00:00", value: 0},{label: "01:00", value: 1},{label: "02:00", value: 2},{label: "04:00", value: 4},
+          {label: "05:00", value: 5},{label: "06:00", value: 6},{label: "07:00", value: 7},{label: "08:00", value: 8},
+          {label: "09:00", value: 9},{label: "10:00", value: 10},{label: "11:00", value: 11},{label: "12:00", value: 12},
+          {label: "13:00", value: 13},{label: "14:00", value: 14},{label: "15:00", value: 15},{label: "16:00", value: 16},
+          {label: "17:00", value: 17},{label: "18:00", value: 18},{label: "19:00", value: 19},{label: "20:00", value: 20},
+          {label: "21:00", value: 21},{label: "22:00", value: 22},{label: "23:00", value: 23}
+        ];
+      }
+    }
+  },
+
+  lasthour: {
+    type: Number,
+    optional: true,
+    label: "Last hour",
+    autoform: {
+      type: "select",
       options: function () {
         return [
           {label: "00:00", value: 0},{label: "01:00", value: 1},{label: "02:00", value: 2},{label: "04:00", value: 4},
@@ -249,17 +267,32 @@ Schedule = new SimpleSchema({
     }
   },
 
+  nrRandoms: {
+    type: Number,
+    optional: true,
+    label: "Number of triggers",
+    defaultValue: 1,
+    min: 1
+  },
+
+  interNotifTime: {
+    type: Number,
+    optional: true,
+    label: "Inter-notification time",
+    defaultValue: 0,
+    min: 0
+  },
+
   questionSchedule: {
     type: [Number],
     optional: true,
     autoform: {
       label: false,
-      type: "boolean-checkbox",
-      defaultValue: true
+      type: "boolean-checkbox"
     }
   },
 
-  scheduleCheck: {
+  scheduleType: {
     type: String,
     optional: true,
     autoform:{
@@ -267,7 +300,8 @@ Schedule = new SimpleSchema({
       label: false,
       options: function () {
         return [
-          {label: "Interval", value: "interval"},
+          {label: "Interval (interval contingent)", value: "interval"},
+          {label: "Random (signal contingent)", value: "random"},
           {label: "Time", value: "time"}
         ];
       }
@@ -279,7 +313,6 @@ Schedule = new SimpleSchema({
     label: "Interval",
     optional: true
   }
-
 });
 
 Studies.attachSchema(new SimpleSchema({

@@ -12,12 +12,13 @@
                         <div class="panel panel-info">
                             <div class="panel-heading clearfix">
                               <h4>Schedule {{incremented index}}</h4>
+                              <button class="btn btn-danger btn-md autoform-remove-item align-right" data-autoform-field="items">Remove schedule</button>
                             </div>
 
                             <div class="panel-body">
-                                <p class="instructions">It is possible to create different schedules and to assign different questions to each schedule. By default, all questions are assigned to the schedule.</p>
+                                <p class="instructions">It is possible to create different schedules and to assign different questions to each schedule.</p>
 
-                                <h5>Questions included in current schedule</h5>
+                                <h5>Questions included in schedule {{incremented index}}</h5>
                                   {{> afQuickField name=this.current.questionSchedule
                                           type ="select-checkbox"
                                           input-col-class="col-sm-12"
@@ -26,9 +27,11 @@
                                   }}
 
                                 <h5>Schedule method</h5>
-                                {{> afQuickField name=this.current.scheduleCheck}}
+                                {{> afQuickField name=this.current.scheduleType}}
 
-                                {{#if afFieldValueIs name=this.current.scheduleCheck value="time"}}
+                                <hr>
+
+                                {{#if afFieldValueIs name=this.current.scheduleType value="time"}}
                                     <h3>Hour</h3>
                                     {{> afQuickField name=this.current.hours
                                             template="bootstrap3-horizontal"
@@ -42,7 +45,43 @@
                                     }}
                                 {{/if}}
 
-                                {{#if afFieldValueIs name=this.current.scheduleCheck value="interval"}}
+                                {{#if afFieldValueIs name=this.current.scheduleType value="random"}}
+                                    {{> afQuickField name=this.current.firsthour
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3"
+                                            input-col-class="col-sm-9"
+                                            value=8
+                                    }}
+
+                                    {{> afQuickField name=this.current.lasthour
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3"
+                                            input-col-class="col-sm-9"
+                                            value=20
+                                    }}
+
+                                    {{> afQuickField name=this.current.nrRandoms
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3"
+                                            value="6"
+                                            input-col-class="col-sm-9"
+                                    }}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Number of notifications across the scheduled hour(s).</p>
+                                    </div>
+
+                                    {{> afQuickField name=this.current.interNotifTime
+                                            template="bootstrap3-horizontal"
+                                            label-class="col-sm-3"
+                                            input-col-class="col-sm-9"
+                                            value="15"
+                                    }}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Minimum time in-between two notifications (in minutes).</p>
+                                    </div>
+                                {{/if}}
+
+                                {{#if afFieldValueIs name=this.current.scheduleType value="interval"}}
                                     <h3>Interval</h3>
                                     {{> afQuickField name=this.current.interval
                                             template="bootstrap3-horizontal"
@@ -51,13 +90,6 @@
                                             placeholder="Triggered every X minutes"
                                     }}
                                 {{/if}}
-
-                                <div class="btn-group mr-2" role="group" aria-label="First group">
-                                    <button class="btn btn-danger btn-md autoform-remove-item" data-autoform-field="items">Remove Schedule</button>
-                                </div>
-
-                                <br>
-
                             </div>
                         </div>
                     {{/afEachArrayItem}}

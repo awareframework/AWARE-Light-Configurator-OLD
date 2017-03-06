@@ -79,9 +79,9 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 			if( typeof response.scheduler != 'undefined'){
 					var scheduler ={};
 					scheduler.schedules=[];
-					for(j=0; j<response.scheduler.length;j++){
+					for(j=0; j<response.scheduler.length; j++){
 							var data ={};
-							switch (response.scheduler[j].scheduleCheck){
+							switch (response.scheduler[j].scheduleType){
 									case 'time':
 											if ( typeof response.scheduler[j].hours != 'undefined'){
 															data.hours = [];
@@ -100,11 +100,20 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 									case 'interval':
 											data.interval = response.scheduler[j].interval
 											break;
+                  case 'random':
+                      data.hour = [];
+                      data.hour[0] = response.scheduler[j].firsthour;
+                      data.hour[1] = response.scheduler[j].lasthour;
+                      // // for(k = 0; k < response.scheduler[j].hours.length; k++){
+                      //     data.hour[k] =response.scheduler[j].hours[k];
+                      // }
+    									data.random = {"random_times" : response.scheduler[j].nrRandoms, "random_interval" : response.scheduler[j].interNotifTime};
+    									break;
 									default:
 											console.log('error');
 							}
-							data.scheduleQuestion = response.scheduler[j].questionSchedule;
-							data.scheduleCheck = response.scheduler[j].scheduleCheck;
+							// data.scheduleQuestion = response.scheduler[j].questionSchedule;
+							// data.scheduleType = response.scheduler[j].scheduleType;
 							scheduler.schedules[j] = {schedule : data};
 					}
 					finalARRAY[2] = scheduler;
