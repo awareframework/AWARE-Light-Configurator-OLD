@@ -4,12 +4,10 @@ Template.Register.events({
           FlowRouter.redirect('/register');
       });
     }
-
-
 });
 
 
-Template.RegisterForm.events({
+Template.Register.events({
     'submit form': function(event) {
          event.preventDefault();
 
@@ -22,7 +20,7 @@ Template.RegisterForm.events({
             if (Meteor.user()) {
                console.log(Meteor.userId());
             } else {
-               console.log("ERROR: " + error.reason);
+                document.getElementById('form-feedback').innerHTML = error.reason;
             }
          });
      }

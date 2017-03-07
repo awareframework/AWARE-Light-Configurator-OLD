@@ -31,18 +31,24 @@
 
                                 <hr>
 
-                                {{#if afFieldValueIs name=this.current.scheduleType value="time"}}
-                                    <h3>Hour</h3>
+                                {{#if afFieldValueIs name=this.current.scheduleType value="interval"}}
                                     {{> afQuickField name=this.current.hours
-                                            template="bootstrap3-horizontal"
-                                            input-col-class="col-sm-12"
+                                      template="bootstrap3-horizontal"
+                                      label-class="col-sm-3"
+                                      input-col-class="col-sm-9"
                                     }}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Notification send at the determined hours.</p>
+                                    </div>
 
-                                    <h3>Weekday</h3>
-                                    {{> afQuickField name=this.current.weekdays
-                                            template="bootstrap3-horizontal"
-                                            input-col-class="col-sm-11"
+                                    {{> afQuickField name=this.current.days
+                                      template="bootstrap3-horizontal"
+                                      label-class="col-sm-3"
+                                      input-col-class="col-sm-9"
                                     }}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Notification send at the determined days.</p>
+                                    </div>
                                 {{/if}}
 
                                 {{#if afFieldValueIs name=this.current.scheduleType value="random"}}
@@ -81,14 +87,18 @@
                                     </div>
                                 {{/if}}
 
-                                {{#if afFieldValueIs name=this.current.scheduleType value="interval"}}
-                                    <h3>Interval</h3>
-                                    {{> afQuickField name=this.current.interval
+
+
+                                {{#if afFieldValueIs name=this.current.scheduleType value="repeat"}}
+                                    {{> afQuickField name=this.current.repeat
                                             template="bootstrap3-horizontal"
-                                            label-class="col-sm-2"
-                                            input-col-class="col-sm-8"
+                                            label-class="col-sm-3"
+                                            input-col-class="col-sm-9"
                                             placeholder="Triggered every X minutes"
                                     }}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Trigger interval in minutes.</p>
+                                    </div>
                                 {{/if}}
                             </div>
                         </div>

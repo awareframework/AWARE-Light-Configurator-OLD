@@ -98,7 +98,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 													}
 											break;
 									case 'interval':
-											data.interval = response.scheduler[j].interval
+											data.hour = response.scheduler[j].hours;
 											break;
                   case 'random':
                       data.hour = [];
@@ -108,6 +108,9 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                       //     data.hour[k] =response.scheduler[j].hours[k];
                       // }
     									data.random = {"random_times" : response.scheduler[j].nrRandoms, "random_interval" : response.scheduler[j].interNotifTime};
+    									break;
+                  case 'repeat':
+    									data.interval = response.scheduler[j].repeat;
     									break;
 									default:
 											console.log('error');

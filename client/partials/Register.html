@@ -25,26 +25,31 @@
     </div>
 </template>
 
-<template name = "RegisterForm">
+<template name="RegisterForm">
     <div class="panel-heading">
         <h3>Create a new account</h3>
     </div>
     <div class="panel-body">
         <p class="instruction">Please provide the requested information below to set up your account. Any studies you create will be linked to the provided e-mail address.</p>
-
+        <form>
         <div class="form-group" data-required="true">
-           <label class="col-sm-2 control-label">E-mail</label>
-           <div class="col-sm-10">
-               <input type="email" class="form-control" name="registerEmail" placeholder="E-mail address" />
-               <span class="help-block"></span>
+            <div class="row">
+              <label class="col-sm-2 control-label">E-mail</label>
+              <div class="col-sm-4">
+                 <input type="email" class="form-control" name="registerEmail" placeholder="E-mail address" />
+                 <span class="help-block"></span>
+             </div>
            </div>
-           <label class="col-sm-2 control-label">Password</label>
-           <div class="col-sm-10">
+           <div class="row">
+             <label class="col-sm-2 control-label">Password</label>
+             <div class="col-sm-4">
                <input type="password" class="form-control" name="registerPassword" placeholder="Password" />
                <span class="help-block"></span>
-           </div><br>
-
-          <button class="btn btn-primary">Register</button>
+             </div>
+           </div>
+          <p id="form-feedback" class="instruction"></p>
+        <button class="btn btn-primary">Register</button>
         </div>
-   </div>
+      </form>
+    </div>
 </template>

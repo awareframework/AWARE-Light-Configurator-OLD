@@ -27,7 +27,7 @@
                   <div class="panel-body">
                       {{#if Template.subscriptionsReady}}
                         {{#if hasStudies studyCount}}
-                          {{#each this.exported}}
+                          {{#each studies}}
                             {{#unless this.exported}}
                               {{> singleStudy}}
                             {{/unless}}
@@ -53,7 +53,7 @@
                     </div>
                     <div class="panel-body">
                         {{#if Template.subscriptionsReady}}
-                                {{#if hasStudies studyCount}}
+                                {{#if hasStudies studyCount exported}}
                                   {{#each studies}}
                                     {{#if this.exported}}
                                       {{> singleStudy}}
