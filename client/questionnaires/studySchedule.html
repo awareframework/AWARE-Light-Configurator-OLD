@@ -16,7 +16,7 @@
                             </div>
 
                             <div class="panel-body">
-                                <p class="instructions">It is possible to create different schedules and to assign different questions to each schedule.</p>
+                                <p class="instruction">It is possible to create different schedules and to assign different questions to each schedule.</p>
 
                                 <h5>Questions included in schedule {{incremented index}}</h5>
                                   {{> afQuickField name=this.current.questionSchedule
@@ -87,8 +87,6 @@
                                     </div>
                                 {{/if}}
 
-
-
                                 {{#if afFieldValueIs name=this.current.scheduleType value="repeat"}}
                                     {{> afQuickField name=this.current.repeat
                                             template="bootstrap3-horizontal"
@@ -109,7 +107,6 @@
                         <button class="btn btn-primary btn-md pull-right" type="submit">Next</button>
                     </div>
                     <br>
-
                 {{/autoForm}}
             </div>
 </template>

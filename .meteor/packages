@@ -23,7 +23,8 @@ kadira:blaze-layout
 erasaur:meteor-lodash
 fortawesome:fontawesome
 spiderable@1.0.13
-raix:handlebar-helpers
+# raix:handlebar-helpers
+evenfrost:spacekit          # JS handlebars - https://github.com/evenfrost/spacekit
 aldeed:collection2-core
 aldeed:autoform
 matb33:bootstrap-glyphicons

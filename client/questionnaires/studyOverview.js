@@ -1,4 +1,4 @@
-Template.studyConfig.onCreated(function() {
+Template.studyOverview.onCreated(function() {
   var self = this;
   self.autorun(function() {
     var id = FlowRouter.getParam('id');
@@ -6,7 +6,7 @@ Template.studyConfig.onCreated(function() {
   });
 });
 
-Template.studyConfig.events({
+Template.studyOverview.events({
   'click .btn-primary' : function() {
     var id = FlowRouter.getParam('id');
     Studies.update(
@@ -16,7 +16,7 @@ Template.studyConfig.events({
   }
 });
 
-Template.studyConfig.helpers({
+Template.studyOverview.helpers({
   study: ()=> {
     var id = FlowRouter.getParam('id');
     return Studies.findOne({_id: id});
@@ -91,4 +91,3 @@ Template.studyConfig.helpers({
     }
   }
 });
-

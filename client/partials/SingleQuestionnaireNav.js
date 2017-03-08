@@ -13,5 +13,16 @@ Template.SingleQuestionnaireNav.helpers({
   },
   biggerOrEqual: function(a, b) {
     return (a >= b);
+  },
+  exported: ()=> {
+    var id = FlowRouter.getParam('id');
+    study = Studies.findOne({_id: id});
+    if (typeof study != 'undefined') {
+      if(study.exported == false){
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 });

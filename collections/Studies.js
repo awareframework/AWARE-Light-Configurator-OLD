@@ -7,7 +7,8 @@ Studies.allow({
   },
   update: function(userId, doc, fields, modifier) {
     // Check that author_id matches user_id
-    if (userId == doc.user_id && !doc.exported) {
+    // if (userId == doc.user_id && !doc.exported) {
+    if (userId == doc.user_id) {
       return true;
     }
     else {

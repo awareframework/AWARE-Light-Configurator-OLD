@@ -4,28 +4,35 @@
           <ol type="1">
                 <li><a class="active" href="/study/{{study._id}}/title">Study Information</a></li>
 
-                {{#if biggerOrEqual menuIdx 1}}
+                <!-- {{#if biggerOrEqual menuIdx 1}} -->
                     <li><a href="/study/{{study._id}}/questions">Questions</a></li>
-                {{else}}
-                    <li class="disabled"><a>Questions</a></li>
-                {{/if}}
+                <!-- {{else}} -->
+                    <!-- <li class="disabled"><a>Questions</a></li> -->
+                <!-- {{/if}} -->
 
-                {{#if biggerOrEqual menuIdx 2}}
+                <!-- {{#if biggerOrEqual menuIdx 2}} -->
                     <li><a href="/study/{{study._id}}/schedule">Schedule configuration</a></li>
-                    {{else}}
-                    <li class="disabled"><a>Schedule configuration</a></li>
-                {{/if}}
+                    <!-- {{else}} -->
+                    <!-- <li class="disabled"><a>Schedule configuration</a></li> -->
+                <!-- {{/if}} -->
 
-                {{#if biggerOrEqual menuIdx 3}}
+                <!-- {{#if biggerOrEqual menuIdx 3}} -->
                     <li><a href="/study/{{study._id}}/sensor">Sensor data</a></li>
-                {{else}}
-                    <li class="disabled"><a>Sensor data</a></li>
-                {{/if}}
+                <!-- {{else}} -->
+                    <!-- <li class="disabled"><a>Sensor data</a></li> -->
+                <!-- {{/if}} -->
 
-                {{#if biggerOrEqual menuIdx 4}}
-                    <li><a href="/study/{{study._id}}/configuration">Overview</a></li>
+                <!-- {{#if biggerOrEqual menuIdx 4}} -->
+                    <li><a href="/study/{{study._id}}/overview">Overview</a></li>
+                <!-- {{else}} -->
+                    <!-- <li class="disabled"><a>Overview</a></li> -->
+                <!-- {{/if}} -->
+
+                <!-- {{#if biggerOrEqual menuIdx 5}} -->
+                {{#if exported}}
+                    <li class="nostyle"><a href="/study/{{study._id}}/export">Distribute study</a></li>
                 {{else}}
-                    <li class="disabled"><a>Overview</a></li>
+                    <li class="disabled nostyle"><a>Distribute study</a></li>
                 {{/if}}
             </ol>
         </nav>

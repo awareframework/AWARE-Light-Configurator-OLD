@@ -19,7 +19,7 @@ Template.studyQrCode.helpers({
     return {
         text: host+route,
         crisp: true,
-        size: 120
+        size: 170
     };
   }
 });
