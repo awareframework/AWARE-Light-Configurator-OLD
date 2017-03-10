@@ -16,8 +16,12 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 
 			finalARRAY[0] = studyData;
 
-			var questions ={};
-			questions.esms =[];
+			var action ={"type": "broadcast" ,"class":"ACTION_AWARE_QUEUE_ESM"};
+
+			var extras =[];
+			var extraJSON ={"extra_key" : "esm"};
+
+			extraJSON.extra_value =[];
 			for (i = 0; i < response.questions.length; i++) {
 			var data ={esm_type : response.questions[i].type,
                 esm_title :response.questions[i].question,
@@ -72,55 +76,50 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 							default:
 									console.log("error");
 					}
-					questions.esms[i] = {esm : data};
+					extraJSON.extra_value[i] = {esm : data};
 			}
-			finalARRAY[1] = questions;
+			extras[0] = extraJSON;
+			action.extras = extras;
 
 			if( typeof response.scheduler != 'undefined'){
-					var scheduler ={};
-					scheduler.schedules=[];
+					
 					for(j=0; j<response.scheduler.length; j++){
-							var data ={};
+							var trigger ={};
 							switch (response.scheduler[j].scheduleType){
-									case 'time':
+									case 'interval':
 											if ( typeof response.scheduler[j].hours != 'undefined'){
-															data.hours = [];
-															for(k = 0; k < response.scheduler[j].hours.length; k++){
-																			data.hours[k] =response.scheduler[j].hours[k];
-																	}
+													trigger.hour = response.scheduler[j].hours;
 													}
 
-											if ( typeof response.scheduler[j].weekdays != 'undefined'){
-															data.weekdays = [];
-															for(k = 0; k < response.scheduler[j].weekdays.length; k++){
-																	data.weekdays[k] =response.scheduler[j].weekdays[k];
-															}
+											if ( typeof response.scheduler[j].days != 'undefined' && response.scheduler[j].days.length !=7){
+													trigger.weekday = response.scheduler[j].days;		
 													}
 											break;
-									case 'interval':
-											data.hour = response.scheduler[j].hours;
+									case 'event':
+											trigger.hour = response.scheduler[j].hours;
 											break;
                   case 'random':
-                      data.hour = [];
-                      data.hour[0] = response.scheduler[j].firsthour;
-                      data.hour[1] = response.scheduler[j].lasthour;
+                      trigger.hour = [];
+                      trigger.hour[0] = response.scheduler[j].firsthour;
+                      trigger.hour[1] = response.scheduler[j].lasthour;
                       // // for(k = 0; k < response.scheduler[j].hours.length; k++){
                       //     data.hour[k] =response.scheduler[j].hours[k];
                       // }
-    									data.random = {"random_times" : response.scheduler[j].nrRandoms, "random_interval" : response.scheduler[j].interNotifTime};
+    									trigger.random = {"random_times" : response.scheduler[j].nrRandoms, "random_interval" : response.scheduler[j].interNotifTime};
     									break;
                   case 'repeat':
-    									data.interval = response.scheduler[j].repeat;
+    									triggers.interval = response.scheduler[j].repeat;
     									break;
 									default:
 											console.log('error');
 							}
 							// data.scheduleQuestion = response.scheduler[j].questionSchedule;
 							// data.scheduleType = response.scheduler[j].scheduleType;
-							scheduler.schedules[j] = {schedule : data};
 					}
-					finalARRAY[2] = scheduler;
+					action.trigger = trigger;
 			}
+
+			finalARRAY[1] = action;
 
 			// if (response.sensorCheck) {
 				var sensors = [];
@@ -261,7 +260,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 				}
 				var finalSensorJSON ={};
 				finalSensorJSON.sensors = sensors;
-				finalARRAY[3] = finalSensorJSON;
+				finalARRAY[2] = finalSensorJSON;
 			// }
 
 			var finalJSON = {AWARE: finalARRAY};
