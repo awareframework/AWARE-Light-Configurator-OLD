@@ -13,6 +13,20 @@ AutoForm.addHooks("updateSchedule",{
     }
 });
 
+AutoForm.addHooks(null, {
+  before: {
+    update: function(doc) {
+      _.each(doc.$set, function(value, setter) {
+        if (_.isArray(value)) {
+          var newValue = _.compact(value);
+          doc.$set[setter] = newValue;
+        }
+      });
+      return doc;
+    }
+  }
+});
+
 Template.registerHelper("questionsCheckbox", function() {
     var id = FlowRouter.getParam('id');
     study = Studies.findOne({_id: id});
@@ -55,20 +69,6 @@ Template.studySchedule.helpers({
   updateStudyId: function() {
     var id = FlowRouter.getParam('id');
     return Studies.findOne({_id: id});
-  }
-});
-
-AutoForm.addHooks(null, {
-  before: {
-    update: function(doc) {
-      _.each(doc.$set, function(value, setter) {
-        if (_.isArray(value)) {
-          var newValue = _.compact(value);
-          doc.$set[setter] = newValue;
-        }
-      });
-      return doc;
-    }
   }
 });
 

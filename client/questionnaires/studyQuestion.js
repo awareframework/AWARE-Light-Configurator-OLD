@@ -9,10 +9,23 @@ Template.studyQuestion.onCreated(function() {
 
 AutoForm.addHooks("updateQuestion",{
     onSuccess: function(formType, result) {
-      var id = FlowRouter.getParam('id');
-      study = Studies.findOne({_id: id});
       FlowRouter.go("/study/:id/schedule",{id: FlowRouter.getParam('id')});
     }
+});
+
+AutoForm.addHooks(null, {
+  before: {
+    update: function(doc) {
+      _.each(doc.$set, function(value, setter) {
+        if (_.isArray(value)) {
+          console.log(_.isArray(value));
+          var newValue = _.compact(value);
+          doc.$set[setter] = newValue;
+        }
+      });
+      return doc;
+    }
+  }
 });
 
 Template.registerHelper("likertMaxOptions", function() {
@@ -49,17 +62,3 @@ Template.studyQuestion.helpers({
 catch(err){
   console.log(err);
 }
-
-AutoForm.addHooks(null, {
-  before: {
-    update: function(doc) {
-      _.each(doc.$set, function(value, setter) {
-        if (_.isArray(value)) {
-          var newValue = _.compact(value);
-          doc.$set[setter] = newValue;
-        }
-      });
-      return doc;
-    }
-  }
-});
