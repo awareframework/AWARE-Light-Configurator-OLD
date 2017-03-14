@@ -9,117 +9,142 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
     }
     else {
 
-			var finalARRAY =[];
+    	var finalARRAY =[];
 
 			var studyData = {study_name: response.title , study_description: response.description ,
 					start_date: response.start_date, end_date: response.end_date};
 
 			finalARRAY[0] = studyData;
 
-			var action ={"type": "broadcast" ,"class":"ACTION_AWARE_QUEUE_ESM"};
+    	if( typeof response.scheduler != 'undefined'){
+    		var schedules = [];
 
-			var extras =[];
-			var extraJSON ={"extra_key" : "esm"};
+    		for(i=0; i<response.scheduler.length; i++){
 
-			extraJSON.extra_value =[];
-			for (i = 0; i < response.questions.length; i++) {
-			var data ={esm_type : response.questions[i].type,
-                esm_title :response.questions[i].question,
-				esm_instructions:response.questions[i].instructions,
-                esm_expiration_threshold :response.questions[i].expiration_threshold,
-                esm_notification_timeout :response.questions[i].notification_timeout,
-                esm_trigger : "AWARE_TEST"};
-					switch(response.questions[i].type){
+    			var singleSchedule = {};
+
+    			var d = new Date();
+
+    			singleSchedule.schedule_id = d.getTime();
+
+    			var action ={"type": "broadcast" ,"class":"ACTION_AWARE_QUEUE_ESM"};
+
+				var extraJSON ={"extra_key" : "esm"};
+
+				extraJSON.extra_value =[];
+					
+				for(j =0; j<response.scheduler[i].questionSchedule.length; j++){
+					
+
+					var questionNumber = response.scheduler[i].questionSchedule[j];
+
+					var data ={esm_type : response.questions[questionNumber].type,
+	                esm_title :response.questions[questionNumber].question,
+					esm_instructions:response.questions[questionNumber].instructions,
+	                esm_expiration_threshold :response.questions[questionNumber].expiration_threshold,
+	                esm_notification_timeout :response.questions[questionNumber].notification_timeout,
+	                esm_trigger : "AWARE_TEST"};
+					switch(response.questions[questionNumber].type){
 							case 1:
-									data.esm_submit = response.questions[i].submit;
+									data.esm_submit = response.questions[questionNumber].submit;
 									break;
 							case 2:
-									data.esm_submit = response.questions[i].submit;
+									data.esm_submit = response.questions[questionNumber].submit;
 									data.esm_radios =[];
-									for(j = 0; j < response.questions[i].options.length; j++){
-											data.esm_radios[j] =response.questions[i].options[j].option;
+									for(k = 0; k < response.questions[questionNumber].options.length; k++){
+											data.esm_radios[k] =response.questions[questionNumber].options[k].option;
 									}
 									break;
 							case 3:
-									data.esm_submit = response.questions[i].submit;
+									data.esm_submit = response.questions[questionNumber].submit;
 									data.esm_checkboxes =[];
-									for(j = 0; j < response.questions[i].options.length; j++){
-											data.esm_checkboxes[j] =response.questions[i].options[j].option;
+									for(k = 0; k < response.questions[k].options.length; k++){
+											data.esm_checkboxes[k] =response.questions[questionNumber].options[k].option;
 									}
 
 									break;
 							case 4:
-									data.esm_submit = response.questions[i].submit;
-									data.esm_likert_max = response.questions[i].maxValue;
-									data.esm_likert_max_label = response.questions[i].maxLabel;
-									data.esm_likert_min_label = response.questions[i].minLabel;
-									data.esm_likert_step = response.questions[i].stepSize;
+									data.esm_submit = response.questions[questionNumber].submit;
+									data.esm_likert_max = response.questions[questionNumber].maxValue;
+									data.esm_likert_max_label = response.questions[questionNumber].maxLabel;
+									data.esm_likert_min_label = response.questions[questionNumber].minLabel;
+									data.esm_likert_step = response.questions[questionNumber].stepSize;
 									break;
 							case 5:
 									data.esm_quick_answers =[];
-									for(j = 0; j < response.questions[i].options.length; j++){
-											data.esm_quick_answers[j] =response.questions[i].options[j].option;
+									for(k = 0; k < response.questions[questionNumber].options.length; k++){
+											data.esm_quick_answers[k] =response.questions[questionNumber].options[k].option;
 									}
 									break;
 							case 6:
-									data.esm_submit = response.questions[i].submit;
-									data.esm_scale_min = response.questions[i].minValue;
-									data.esm_scale_max = response.questions[i].maxValue;
-									data.esm_scale_start = response.questions[i].scaleStart;
-									data.esm_scale_max_label = response.questions[i].maxLabel;
-									data.esm_scale_min_label = response.questions[i].minLabel;
-									data.esm_scale_step = response.questions[i].stepSize;
+									data.esm_submit = response.questions[questionNumber].submit;
+									data.esm_scale_min = response.questions[questionNumber].minValue;
+									data.esm_scale_max = response.questions[questionNumber].maxValue;
+									data.esm_scale_start = response.questions[questionNumber].scaleStart;
+									data.esm_scale_max_label = response.questions[questionNumber].maxLabel;
+									data.esm_scale_min_label = response.questions[questionNumber].minLabel;
+									data.esm_scale_step = response.questions[questionNumber].stepSize;
 									break;
 							case 7:
-									data.esm_submit = response.questions[i].submit;
+									data.esm_submit = response.questions[questionNumber].submit;
 									break;
 							default:
 									console.log("error");
 					}
-					extraJSON.extra_value[i] = {esm : data};
-			}
-			extras[0] = extraJSON;
-			action.extras = extras;
-
-			if( typeof response.scheduler != 'undefined'){
 					
-					for(j=0; j<response.scheduler.length; j++){
-							var trigger ={};
-							switch (response.scheduler[j].scheduleType){
-									case 'interval':
-											if ( typeof response.scheduler[j].hours != 'undefined'){
-													trigger.hour = response.scheduler[j].hours;
-													}
+					extraJSON.extra_value[j] = {esm : data};
+				}
+				action.extras = extraJSON;
 
-											if ( typeof response.scheduler[j].days != 'undefined' && response.scheduler[j].days.length !=7){
-													trigger.weekday = response.scheduler[j].days;		
-													}
-											break;
-									case 'event':
-											trigger.hour = response.scheduler[j].hours;
-											break;
-                  case 'random':
-                      trigger.hour = [];
-                      trigger.hour[0] = response.scheduler[j].firsthour;
-                      trigger.hour[1] = response.scheduler[j].lasthour;
-                      // // for(k = 0; k < response.scheduler[j].hours.length; k++){
-                      //     data.hour[k] =response.scheduler[j].hours[k];
-                      // }
-    									trigger.random = {"random_times" : response.scheduler[j].nrRandoms, "random_interval" : response.scheduler[j].interNotifTime};
-    									break;
-                  case 'repeat':
-    									triggers.interval = response.scheduler[j].repeat;
-    									break;
-									default:
-											console.log('error');
+				
+
+    			var trigger ={};
+				switch (response.scheduler[i].scheduleType){
+					case 'interval':
+						if ( typeof response.scheduler[i].hours != 'undefined'){
+							trigger.hour = response.scheduler[i].hours;
 							}
+
+						if ( typeof response.scheduler[i].days != 'undefined' && response.scheduler[i].days.length !=7){
+							trigger.weekday = response.scheduler[i].days;		
+							}
+						break;
+
+					case 'event':
+						trigger.hour = response.scheduler[i].hours;
+						break;
+
+					case 'random':
+					    trigger.hour = [];
+					    trigger.hour[0] = response.scheduler[i].firsthour;
+					    trigger.hour[1] = response.scheduler[i].lasthour;
+					    // // for(k = 0; k < response.scheduler[j].hours.length; k++){
+					    //     data.hour[k] =response.scheduler[j].hours[k];
+                      	// }
+    					trigger.random = {"random_times" : response.scheduler[i].nrRandoms, "random_interval" : response.scheduler[i].interNotifTime};
+    					break;
+
+                  	case 'repeat':
+    					triggers.interval = response.scheduler[i].repeat;
+    					break;
+
+					default:
+						console.log('error');
+					}
 							// data.scheduleQuestion = response.scheduler[j].questionSchedule;
 							// data.scheduleType = response.scheduler[j].scheduleType;
-					}
-					action.trigger = trigger;
-			}
+				action.trigger = trigger;
 
-			finalARRAY[1] = action;
+				singleSchedule.action = action;
+				schedules[i] = singleSchedule;
+
+    		}
+    		finalARRAY[1] = schedules;
+    	}
+    			
+
+
+
 
 			// if (response.sensorCheck) {
 				var sensors = [];
@@ -262,6 +287,8 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 				finalSensorJSON.sensors = sensors;
 				finalARRAY[2] = finalSensorJSON;
 			// }
+
+			
 
 			var finalJSON = {AWARE: finalARRAY};
 
