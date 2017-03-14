@@ -87,6 +87,20 @@
                                     </div>
                                 {{/if}}
 
+                                {{#if afFieldValueIs name=this.current.scheduleType value="event"}}
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p class="instruction">Send questionnaire at the occurence of the selected event(s).</p>
+                                    </div>
+
+                                    {{#afEachArrayItem name="context"}}
+                                        {{> afQuickField name=this.current.contextType
+                                                template="bootstrap3-horizontal"
+                                                label-class="col-sm-3"
+                                                input-col-class="col-sm-9"
+                                        }}
+                                    {{/afEachArrayItem}}
+                                {{/if}}
+
                                 {{#if afFieldValueIs name=this.current.scheduleType value="repeat"}}
                                     {{> afQuickField name=this.current.repeat
                                             template="bootstrap3-horizontal"

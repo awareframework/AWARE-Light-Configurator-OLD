@@ -137,7 +137,7 @@ Sensor = new SimpleSchema({
     allowedValues: [
         "Accelerometer", "Application", "Barometer", "Battery", "Bluetooth", "Communication", "Gravity", "Gyroscope",
         "Installations", "Light", "Linear Accelerometer", "Location", "Magnetometer", "Network", "Processor",
-        "Proximity","Rotation", "Screen", "Telephony", "Temperature", "Wi-Fi"
+        "Proximity", "Rotation", "Screen", "Telephony", "Temperature", "Wi-Fi"
     ],
     autoform: {
       type: "hidden"
@@ -207,6 +207,50 @@ Sensor = new SimpleSchema({
   }
 });
 
+Context = new SimpleSchema({
+  contextType: {
+    type: [String],
+    optional: true,
+    allowedValues: [
+        "ACTION_AWARE_SCREEN_ON", "Application"
+    ],
+    autoform: {
+      type: "select-checkbox",
+      options: function () {
+        return [
+          {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
+          {label: "Application", value: "Application"}
+        ];
+      }
+    }
+  }
+
+  // contextActive: {
+  //   type: Boolean,
+  //   label: " ",
+  //   optional: true,
+  //   autoform:{
+  //     type: "boolean-checkbox",
+  //     defaultValue: false
+  //   }
+  // },
+  //
+  // ACTION_AWARE_SCREEN_ON: {
+  //   type: [String],
+  //   label: "Screen on",
+  //   optional: true,
+  //   autoform: {
+  //     type: "select-checkbox",
+  //     options: function () {
+  //       return [
+  //         {label: "Status Notifications", value: "notification"},
+  //         {label: "Status Crashes", value: "crash"},
+  //         {label: "Status keyboard", value: "keyboard"}
+  //       ];
+  //     }
+  //   }
+  // }
+});
 
 Schedule = new SimpleSchema({
   firsthour: {
@@ -287,6 +331,27 @@ Schedule = new SimpleSchema({
       defaultValue: ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
     }
   },
+
+  // context: {
+  //   type: [String],
+  //   optional: true,
+  //   label: "Context",
+  //   autoform: {
+  //     type: "select-checkbox-inline",
+  //     options: function () {
+  //       return [
+  //         {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
+  //         {label: "Tuesday", value: "tuesday"},
+  //         {label: "Wednesday", value: "wednesday"},
+  //         {label: "Thursday", value: "thursday"},
+  //         {label: "Friday", value: "friday"},
+  //         {label: "Saturday", value: "saturday"},
+  //         {label: "Sunday", value: "sunday"}
+  //       ];
+  //     },
+  //     defaultValue: ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+  //   }
+  // },
 
   nrRandoms: {
     type: Number,
@@ -372,9 +437,13 @@ Studies.attachSchema(new SimpleSchema({
     }
   },
 
-  questions : {
+  questions: {
   	type: [Question],
-    label: "TEST",
+    optional: true
+  },
+
+  context: {
+    type: [Context],
     optional: true
   },
 
@@ -387,30 +456,6 @@ Studies.attachSchema(new SimpleSchema({
   scheduler: {
   	type: [Schedule],
   	optional: true
-  },
-
-  start_date: {
-    type: Date,
-    label: "Start Date",
-    optional: true,
-    autoform: {
-      type: "bootstrap-datepicker",
-      datePickerOptions: {
-        format: "mm-dd-yyyy"
-      }
-    }
-  },
-
-  end_date: {
-    type: Date,
-    label: "End Date",
-    optional: true,
-    autoform: {
-      type: "bootstrap-datepicker",
-      datePickerOptions: {
-        format: "mm-dd-yyyy"
-      }
-    }
   },
 
   createdAt: {
