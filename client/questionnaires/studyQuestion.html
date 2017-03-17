@@ -224,6 +224,16 @@
                                     }}
                                 {{/if}}
 
+                                {{> afQuickField name=this.current.notification_timeout
+                                        template="bootstrap3-horizontal"
+                                        label-class="col-sm-3"
+                                        input-col-class="col-sm-9"
+                                }}
+
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <p class="instruction">Dismiss the notification after the specified time (in seconds).</p>
+                                </div>
+
                                 {{> afQuickField name=this.current.expiration_threshold
                                         template="bootstrap3-horizontal"
                                         label-class="col-sm-3"
@@ -233,17 +243,7 @@
                                 }}
 
                                 <div class="col-sm-9 col-sm-offset-3">
-                                    <p class="instruction">Close a question window after it has been open for a set amount of time (in seconds). Use 0 for unlimited answer time. If expiration time is higher than zero seconds, the questionnaire will be presented immediately as opposed to displaying a notification.</p>
-                                </div>
-
-                                {{> afQuickField name=this.current.notification_timeout
-                                        template="bootstrap3-horizontal"
-                                        label-class="col-sm-3"
-                                        input-col-class="col-sm-9"
-                                }}
-
-                                <div class="col-sm-9 col-sm-offset-3">
-                                    <p class="instruction">Dismiss the ESM notification after the specified time (in seconds).</p>
+                                    <p class="instruction">Specify the maximum time the participant has to answer the question (in seconds), use 0 for unlimited answer time. If an expiration time higher than zero seconds is used, the questionnaire will be shown as a pop-up. If the expiration time is zero, the questionnaire will be delivered as a notification.</p>
                                 </div>
 
                                 <div class="btn-toolbar mb-3" role="toolbar">

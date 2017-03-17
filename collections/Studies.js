@@ -46,7 +46,7 @@ Question = new SimpleSchema({
 
 	expiration_threshold: {
     	type: Number,
-    	label: "Expiration",
+    	label: "Expiration time",
         optional: true,
     	defaultValue: 0,
     	min: 0
