@@ -1,6 +1,6 @@
 # AWARE Create
 
-AWARE Create aims to make it easy for anyone to create mobile instrumentation-based experience sampling studies. It is available to all for free at www.create.awareframework.com.
+AWARE Create aims to make it easy for anyone to create mobile instrumentation-based experience sampling studies. It is available to all for free at http://create.awareframework.com.
 
 ## Getting Started
 
