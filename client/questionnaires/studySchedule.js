@@ -15,7 +15,7 @@ try {
                 _id: id
             });
             // TODO: active sensors depending on user choices
-            console.log(study.context.contextType);
+            //console.log(study.context.contextType);
 
 
             FlowRouter.go("/study/:id/sensor", {
