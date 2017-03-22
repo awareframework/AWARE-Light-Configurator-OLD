@@ -2,3 +2,5 @@
 .meteor/local/
 .deploy
 node_modules/
+
+settings.json

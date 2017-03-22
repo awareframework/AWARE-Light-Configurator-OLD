@@ -44,3 +44,4 @@ tooit:content-types
 meteorhacks:picker
 siyfion:webfontloader
 bchrobot:kjua                 # QR code
+eupton:node-slack             # Send messages to Slack
