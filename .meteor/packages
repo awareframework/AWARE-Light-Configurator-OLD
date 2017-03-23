@@ -20,6 +20,7 @@ shell-server@0.2.2          # Server-side component of the `meteor shell` comman
 
 kadira:flow-router
 kadira:blaze-layout
+twbs:bootstrap
 erasaur:meteor-lodash
 fortawesome:fontawesome
 spiderable@1.0.13
@@ -34,7 +35,6 @@ meteortoys:allthings
 datariot:ganalytics
 check@1.2.4
 momentjs:moment
-twbs:bootstrap
 stylus@2.513.9
 ian:accounts-ui-bootstrap-3
 accounts-password@1.3.4
@@ -45,3 +45,4 @@ meteorhacks:picker
 siyfion:webfontloader
 bchrobot:kjua                 # QR code
 eupton:node-slack             # Send messages to Slack
+peppelg:bootstrap-3-modal     # Modals as separate files

@@ -1,0 +1,27 @@
+<template name="FeedbackModal">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Feedback form</h4>
+          <p class="instruction">We love to hear from you! Please let us hear your thoughts, ideas, or any problems you ran into. If you prefer to talk to us directly, please join us in our <a href="https://awareframework.slack.com/messages/aware_create/">Slack channel</a>.</p>
+        </div>
+
+          {{#autoForm schema=contactFormSchema id="ContactForm" type="method" meteormethod="sendEmail"}}
+          <fieldset>
+            {{> afQuickField name="name"}}
+            {{> afQuickField name="email"}}
+            {{> afQuickField name="message" rows=4}}
+
+          </fieldset>
+          {{/autoForm}}
+
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" id="save" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

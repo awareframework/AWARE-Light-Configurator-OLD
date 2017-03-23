@@ -106,6 +106,7 @@ footer
     // background: accent-color
     background: #282b32
     border-radius: 0
+    border: 0
     .nav li a
         font-size: 1.1em
         padding: 20px
@@ -273,6 +274,40 @@ select.form-control
     background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>")
     background-position: 100% 50%
     background-repeat: no-repeat
+
+// Feedback form
+
+#FeedbackSidebar-outer
+  position: fixed;
+  right: 36px;
+  bottom: 220px;
+
+#FeedbackSidebar-inner
+  position: absolute;
+  bottom: 100%
+  transform: rotateZ(90deg)
+  transform-origin: 0 100%
+  white-space: nowrap
+  a
+    -webkit-transform: rotate(180deg);
+
+.modal-content
+  border-radius: 0
+
+.modal-title
+  padding-bottom: 10px
+
+.modal-header
+  border-bottom: 0
+  padding-bottom: 0
+  .instruction
+    padding-bottom: 0
+
+.modal-footer
+  border-top: 0
+
+fieldset
+  border: none
 
 // Indicate required fields
 [data-required] label:after {content: ' *'}

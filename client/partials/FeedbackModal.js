@@ -1,4 +1,4 @@
-Template.ContactForm.helpers({
+Template.FeedbackModal.helpers({
   contactFormSchema: function() {
     console.log("Nielss");
     return Schema.contact;
@@ -21,10 +21,13 @@ Meteor.methods({
 
     console.log("Niels");
 
-    // var Slack = require('node-slack');
-    var slack = new Slack(Meteor.settings.private.slack.hookUrl);
+    let SlackAPI = 'eupton:node-slack',
+    Slack = new SlackAPI( Meteor.settings.private.slack.hookUrl );
 
-    slack.send({
+    // var Slack = require('node-slack');
+    // var slack = new Slack(Meteor.settings.private.slack.hookUrl);
+
+    Slack.send({
       text: 'Howdy!',
       channel: '#foo',
       username: 'Bot'
