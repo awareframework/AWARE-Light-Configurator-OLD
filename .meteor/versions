@@ -37,7 +37,6 @@ ejson@1.0.13
 email@1.1.18
 erasaur:meteor-lodash@4.0.0
 es5-shim@4.6.15
-eupton:node-slack@0.0.1
 evenfrost:spacekit@0.0.6
 fastclick@1.0.13
 fortawesome:fontawesome@4.7.0

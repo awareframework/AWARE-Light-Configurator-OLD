@@ -1,44 +1,11 @@
 Template.FeedbackModal.helpers({
-  contactFormSchema: function() {
-    console.log("Nielss");
-    return Schema.contact;
+  FeedbackSchema: function() {
+    return FeedbackSchema;
   }
 });
 
-
-Meteor.methods({
-  sendEmail: function(doc) {
-    // Important server-side check for security and data integrity
-    // check(doc, Schema.contact);
-    //
-    //
-    // // Build the e-mail text
-    // var text = "Name: " + doc.name + "\n\n"
-    //         + "Email: " + doc.email + "\n\n\n\n"
-    //         + doc.message;
-    //
-    // this.unblock();
-
-    console.log("Niels");
-
-    let SlackAPI = 'eupton:node-slack',
-    Slack = new SlackAPI( Meteor.settings.private.slack.hookUrl );
-
-    // var Slack = require('node-slack');
-    // var slack = new Slack(Meteor.settings.private.slack.hookUrl);
-
-    Slack.send({
-      text: 'Howdy!',
-      channel: '#foo',
-      username: 'Bot'
-    });
-
-    // Send the e-mail
-    // Email.send({
-    //     to: "niels.van.berkel@ee.oulu.fi",
-    //     from: doc.email,
-    //     subject: "Website Contact Form - Message From " + doc.name,
-    //     text: text
-    // });
+Template.FeedbackModal.events({
+  'click #submit': function(e) {
+    Modal.hide('FeedbackModal');
   }
 });

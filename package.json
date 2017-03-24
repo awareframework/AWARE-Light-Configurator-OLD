@@ -7,6 +7,21 @@
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "meteor-node-stubs": "~0.2.0"
-  }
+    "meteor-node-stubs": "^0.2.6",
+    "node-slack": "0.0.7"
+  },
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NBerkel/esm-creator-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NBerkel/esm-creator-web/issues"
+  },
+  "homepage": "https://github.com/NBerkel/esm-creator-web#readme"
 }

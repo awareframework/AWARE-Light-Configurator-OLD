@@ -1,5 +1,5 @@
 Schema = {};
-Schema.contact = new SimpleSchema({
+FeedbackSchema = new SimpleSchema({
     name: {
         type: String,
         label: "Name",
@@ -16,4 +16,4 @@ Schema.contact = new SimpleSchema({
         label: "Message",
         max: 1000
     }
-}, { tracker: Tracker });
+});
