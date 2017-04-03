@@ -12,6 +12,12 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 
         var finalARRAY = [];
 
+        var study_config = [];
+
+        var sensors = [];
+
+        var count = 0;
+
         var studyData = {
             study_name: response.title,
             study_description: response.description,
@@ -30,7 +36,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 
                 var d = new Date();
 
-                singleSchedule.schedule_id = d.getTime();
+                singleSchedule.schedule_id = Math.random();
 
                 var action = {
                     "type": "broadcast",
@@ -41,7 +47,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                     "extra_key": "esm"
                 };
 
-                extraJSON.extra_value = [];
+                var extra_value = [];
 
                 for (j = 0; j < response.scheduler[i].questionSchedule.length; j++) {
 
@@ -104,11 +110,16 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                             console.log("error");
                     }
 
-                    extraJSON.extra_value[j] = {
-                        esm: data
-                    };
+                    extra_value[j] = {esm: data};
                 }
-                action.extras = extraJSON;
+                //CHANGE JSON TO STRING FOR AWARE TO UNDERSTAND
+                var stringJSON = JSON.stringify(extra_value);
+                extraJSON.extra_value =stringJSON;
+
+                // ASK NIELS OR DENZIL
+                var extras = [];
+                extras[0] = extraJSON;
+                action.extras = extras;
 
 
 
@@ -125,9 +136,25 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                         break;
 
                     case 'event':
-                        for (k = 0; k < response.context.length; k++) {
-                            trigger.context = response.context[k].contextType;
+                        for (k = 0; k < response.context[0].contextType.length; k++) {
+                            switch (response.context[0].contextType[k]){
+                                //console.log("hello "+ response.Context[k].contextType);
+                                case 'ACTION_AWARE_SCREEN_ON':
+                                    //ACTIVE SCREEN SENSOR 
+                                    //response.update({ "_id":  "rf4XuGzNXDhauCEXD", "sensor":{$elemMatch:{sensorType: "Screen"}}},{"$set": {"sensor.$.sensorActive" :true}});
+                                    sensors[count] = {"setting":"status_screen","value":"true"};
+                                    count++;
+                                   
+                                    break;
+                                case 'Application':
+                                    break;
+                                default:
+                                    console.log('error');
+                            }
+                           
                         }
+                        trigger.context = response.context[0].contextType;
+
                         break;
 
                     case 'random':
@@ -144,7 +171,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                         break;
 
                     case 'repeat':
-                        triggers.interval = response.scheduler[i].repeat;
+                        trigger.interval = response.scheduler[i].repeat;
                         break;
 
                     default:
@@ -152,13 +179,21 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                 }
                 // data.scheduleQuestion = response.scheduler[j].questionSchedule;
                 // data.scheduleType = response.scheduler[j].scheduleType;
-                action.trigger = trigger;
+                //just check
+                //action.trigger = trigger;
 
                 singleSchedule.action = action;
-                schedules[i] = singleSchedule;
+                singleSchedule.trigger = trigger;
+                schedules[i] = {"schedule":singleSchedule, "package" :"com.aware.phone"};
 
             }
-            finalARRAY[1] = schedules;
+            study_config[0] = {"schedulers": schedules};
+            //study_config[1] = {"sensors" : [{"setting":"status_esm","value":"true"}]}
+            sensors[count] = {"setting":"status_esm","value":"true"};
+            count++;
+
+
+            //finalARRAY[1] = study_config
         }
 
 
@@ -166,8 +201,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 
 
         // if (response.sensorCheck) {
-        var sensors = [];
-        var count = 0;
+        
         for (j = 0; j < response.sensor.length; j++) {
             if (response.sensor[j].sensorActive) {
                 var sensor_Data = {}
@@ -304,7 +338,10 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
         }
         var finalSensorJSON = {};
         finalSensorJSON.sensors = sensors;
-        finalARRAY[2] = finalSensorJSON;
+        study_config[1] = finalSensorJSON;
+
+
+        finalARRAY[1] = study_config
         // }
 
 
