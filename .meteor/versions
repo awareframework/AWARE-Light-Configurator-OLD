@@ -22,6 +22,7 @@ caching-compiler@1.1.9
 caching-html-compiler@1.1.2
 callback-hook@1.0.10
 check@1.2.5
+chuangbo:cookie@1.1.0
 coffeescript@1.12.3_1
 datariot:ganalytics@0.2.1
 ddp@1.2.5
@@ -61,6 +62,9 @@ matb33:bootstrap-glyphicons@10.0.0
 mdg:validation-error@0.5.1
 meteor@1.6.1
 meteor-base@1.0.4
+meteorhacks:fast-render@2.16.0
+meteorhacks:inject-data@2.0.0
+meteorhacks:meteorx@1.4.1
 meteorhacks:picker@1.0.3
 meteortoys:allthings@3.0.0
 meteortoys:authenticate@3.0.0

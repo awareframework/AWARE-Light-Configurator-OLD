@@ -13,7 +13,8 @@ Template.studyQrCode.helpers({
   },
 
   studyQrCode() {
-    var host =  Meteor.absoluteUrl();
+    //var host =  Meteor.absoluteUrl();
+    var host =  "http://create.awareframework.com/";
     var id = FlowRouter.getParam('id');
     var route = 'study/'+ id + '/json';
     return {

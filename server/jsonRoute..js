@@ -21,11 +21,13 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
         var studyData = {
             study_name: response.title,
             study_description: response.description,
-            start_date: response.start_date,
-            end_date: response.end_date
+            researcher_first: "",
+            researcher_last: "",
+            researcher_contact: response.researcher_contact
         };
 
-        finalARRAY[0] = studyData;
+        // finalARRAY[0] = studyData;
+        finalARRAY[0] = {"Study config": studyData};
 
         if (typeof response.scheduler != 'undefined') {
             var schedules = [];
@@ -140,18 +142,18 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                             switch (response.context[0].contextType[k]){
                                 //console.log("hello "+ response.Context[k].contextType);
                                 case 'ACTION_AWARE_SCREEN_ON':
-                                    //ACTIVE SCREEN SENSOR 
+                                    //ACTIVE SCREEN SENSOR
                                     //response.update({ "_id":  "rf4XuGzNXDhauCEXD", "sensor":{$elemMatch:{sensorType: "Screen"}}},{"$set": {"sensor.$.sensorActive" :true}});
                                     sensors[count] = {"setting":"status_screen","value":"true"};
                                     count++;
-                                   
+
                                     break;
                                 case 'Application':
                                     break;
                                 default:
                                     console.log('error');
                             }
-                           
+
                         }
                         trigger.context = response.context[0].contextType;
 
@@ -187,9 +189,17 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                 schedules[i] = {"schedule":singleSchedule, "package" :"com.aware.phone"};
 
             }
-            study_config[0] = {"schedulers": schedules};
+
+            finalARRAY[1] = {"schedulers": schedules};
+            // study_config[0] = {"schedulers": schedules};
             //study_config[1] = {"sensors" : [{"setting":"status_esm","value":"true"}]}
             sensors[count] = {"setting":"status_esm","value":"true"};
+            count++;
+            sensors[count] = {"setting":"status_webservice","value":"true"};
+            count++;
+            //var webservice_server = "http://35.157.62.184/study/" + params.id;
+            var webservice_server = "https://api.awareframework.com/index.php/webservice/index/1216/Sn6TGutF2OME"
+            sensors[count] = {"setting":"webservice_server","value":webservice_server};
             count++;
 
 
@@ -201,7 +211,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 
 
         // if (response.sensorCheck) {
-        
+
         for (j = 0; j < response.sensor.length; j++) {
             if (response.sensor[j].sensorActive) {
                 var sensor_Data = {}
@@ -288,7 +298,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                         sensor_Freq.setting = "frequency_linear_accelerometer";
                         break;
                     case "Location":
-                        sensor_Data.setting = "status_location";
+                        sensor_Data.setting = "status_location_gps";
                         break;
                     case "Magnetometer":
                         sensor_Data.setting = "status_magnetometer";
@@ -336,21 +346,19 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                 }
             }
         }
-        var finalSensorJSON = {};
-        finalSensorJSON.sensors = sensors;
-        study_config[1] = finalSensorJSON;
+        // var finalSensorJSON = {};
+        // finalSensorJSON.sensors = sensors;
+        finalARRAY[2] = {"sensors": sensors};
+        // study_config[1] = finalSensorJSON;
 
 
-        finalARRAY[1] = study_config
-        // }
+        // finalARRAY[0] = study_config
 
+        // var finalJSON = {
+        //      "AWARE": finalARRAY
+        // };
 
-
-        var finalJSON = {
-            AWARE: finalARRAY
-        };
-
-
+        var finalJSON = finalARRAY;
 
         res.setHeader('Content-Type', 'application/json');
         res.statusCode = 200;

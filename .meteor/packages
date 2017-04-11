@@ -45,3 +45,4 @@ meteorhacks:picker
 siyfion:webfontloader
 bchrobot:kjua                 # QR code
 peppelg:bootstrap-3-modal     # Modals as separate files
+meteorhacks:fast-render

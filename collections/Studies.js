@@ -425,6 +425,18 @@ Studies.attachSchema(new SimpleSchema({
   	label: "Description"
   },
 
+  researcher_contact: {
+  	type: String,
+    regEx: SimpleSchema.RegEx.Email,
+  	label: "Researcher e-mail",
+    autoValue: function(){
+      return Meteor.user().emails[0].address
+    },
+    autoform: {
+      type: "hidden"
+    }
+  },
+
   questionCheck: {
     type: Boolean,
     label:"Do you want to add Questions to the ESM?",

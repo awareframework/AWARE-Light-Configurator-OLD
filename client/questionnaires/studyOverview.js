@@ -4,6 +4,18 @@ Template.studyOverview.onCreated(function() {
     var id = FlowRouter.getParam('id');
     self.subscribe('singleStudy', id);
   });
+
+  var id = FlowRouter.getParam('id');
+  var study = Studies.findOne({_id: id});
+  var questionnaire = Studies.findOne({_id: id});
+
+  // for (var key in scores) {
+  //       var obj = {};
+  //       obj.key = key;
+  //       obj.value = scores[key];
+  //       arr.push(obj);
+  // }
+  // return arr;
 });
 
 Template.studyOverview.events({
@@ -11,8 +23,8 @@ Template.studyOverview.events({
     var id = FlowRouter.getParam('id');
     Studies.update(
       { _id: id },
-   { $set: { "exported": true } }
-  )
+      { $set: { "exported": true } }
+    )
   }
 });
 
@@ -25,44 +37,12 @@ Template.studyOverview.helpers({
     var id = FlowRouter.getParam('id');
     return Studies.findOne({_id: id});
   },
-  isIntervatTypeSchedule: function(type) {
-    if (type == "interval") {
-      return true;
-    }
-    else {
-      return false;
-    }
-  },
   getIndexWithOffset: function(value) {
     return value + 1;
   },
   equals: function(a, b) {
     return (a == b);
   },
-	formatTime: function(value) {
-		var zero = "";
-		if (value < 10 && value > 0) {
-			zero = "0";
-		}
-		if (value == 0) {
-			value = "24";
-		}
-		time = zero + value + ":00";
-		return time;
-	},
-	formatTimeUS: function(value) {
-		var format = "am";
-		var zero = "";
-		if (value >= 13) {
-			value = (value % 13) + 1;
-			format = "pm";
-		}
-		if (value < 10) {
-			zero = "0";
-		}
-		time = zero + value + ":00 " + format;
-		return time;
-	},
 	capitalize: function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 	},
