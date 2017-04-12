@@ -72,8 +72,12 @@ a:hover
 a i
     margin-right: 12px
 
-h1, h2, h3
+h1, h2, h3, h4, h5
     color: accent-color-text
+
+#study-title
+    margin-left: 20px
+    margin-bottom: 0
 
 hr
     border-color: accent-color
@@ -81,16 +85,29 @@ hr
 ol
     padding: 0
     font-size: 1.2em
+    list-style-position: inside
 
 ol li
     padding-bottom: 14px
-    padding-left: 10px
+    padding-left: 5px
+    a
+      margin-left: 5px
 
 li.nostyle
+    list-style-type: none
+
+li.bottom
     padding-top: 14px
     border-top: 1px solid color-disabled
     margin-right: 28px
-    list-style-type: none
+    a
+      margin-left: 0
+
+li.heading
+    padding-bottom: 4px
+    padding-left: 4px
+    p
+      margin-bottom: 0
 
 footer
     margin-top: 100px
@@ -262,6 +279,9 @@ footer
 .autoform-add-item
   margin-left: 15px
   margin-bottom: 15px
+
+.outside-form
+    margin-left: 0
 
 .checkbox-left, .sensor-name
     display: inline-block

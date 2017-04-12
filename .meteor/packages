@@ -46,3 +46,4 @@ siyfion:webfontloader
 bchrobot:kjua                 # QR code
 peppelg:bootstrap-3-modal     # Modals as separate files
 meteorhacks:fast-render
+tomwasd:flow-router-autoscroll  # Scroll to top of pages on navigating

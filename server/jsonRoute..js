@@ -198,19 +198,13 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
             sensors[count] = {"setting":"status_webservice","value":"true"};
             count++;
             //var webservice_server = "http://35.157.62.184/study/" + params.id;
+
+            // TODO: temporary placeholder for server url
             var webservice_server = "https://api.awareframework.com/index.php/webservice/index/1216/Sn6TGutF2OME"
             sensors[count] = {"setting":"webservice_server","value":webservice_server};
             count++;
-
-
             //finalARRAY[1] = study_config
         }
-
-
-
-
-
-        // if (response.sensorCheck) {
 
         for (j = 0; j < response.sensor.length; j++) {
             if (response.sensor[j].sensorActive) {

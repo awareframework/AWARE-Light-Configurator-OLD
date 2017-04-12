@@ -17,7 +17,6 @@ try {
             // TODO: active sensors depending on user choices
             //console.log(study.context.contextType);
 
-
             FlowRouter.go("/study/:id/sensor", {
                 id: FlowRouter.getParam('id')
             });
@@ -50,20 +49,6 @@ try {
                 json["label"] = "Q" + (i + 1) + " - " + study.questions[i].question;
                 json["value"] = i;
                 options[i] = json;
-            }
-            return options;
-        }
-    });
-
-    Template.registerHelper("questionsCheckboxChecked", function() {
-        var id = FlowRouter.getParam('id');
-        study = Studies.findOne({
-            _id: id
-        });
-        var options = [];
-        if (typeof study != "undefined") {
-            for (i = 0; i < study.questions.length; i++) {
-                options[i] = i;
             }
             return options;
         }

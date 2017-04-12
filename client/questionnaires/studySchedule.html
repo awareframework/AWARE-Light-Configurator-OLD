@@ -20,10 +20,10 @@
 
                                 <h5>Questions included in schedule {{incremented index}}</h5>
                                   {{> afQuickField name=this.current.questionSchedule
-                                          type ="select-checkbox"
+                                          type="select-checkbox"
+                                          class="question-checkbox"
                                           input-col-class="col-sm-12"
                                           options=questionsCheckbox
-                                          value=questionsCheckboxChecked
                                   }}
 
                                 <h5>Schedule method</h5>
@@ -117,10 +117,9 @@
                     {{/afEachArrayItem}}
 
                     <div>
-                        <button class="btn btn-primary btn-md autoform-add-item" data-autoform-field="scheduler">Add Schedule</button>
-                        <button class="btn btn-primary btn-md pull-right" type="submit">Next</button>
+                        <button class="btn btn-primary btn-md autoform-add-item outside-form" data-autoform-field="scheduler">Add a new schedule</button>
+                        <button class="btn btn-primary btn-md pull-right" type="submit">Next step: sensor data</button>
                     </div>
-                    <br>
                 {{/autoForm}}
             </div>
 </template>
