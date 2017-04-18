@@ -211,15 +211,13 @@ Context = new SimpleSchema({
   contextType: {
     type: [String],
     optional: true,
-    allowedValues: [
-        "ACTION_AWARE_SCREEN_ON", "Application"
-    ],
     autoform: {
       type: "select-checkbox",
       options: function () {
         return [
           {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
-          {label: "Application", value: "Application"}
+          {label: "Application", value: "Application"},
+          {label: "Charging phone", value: "ACTION_AWARE_BATTERY_CHARGING"}
         ];
       }
     }

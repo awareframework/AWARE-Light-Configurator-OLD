@@ -42,7 +42,7 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
 
                 var action = {
                     "type": "broadcast",
-                    "class": "ACTION_AWARE_QUEUE_ESM"
+                    "intent_action": "ACTION_AWARE_QUEUE_ESM"
                 };
 
                 var extraJSON = {
@@ -140,15 +140,20 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                     case 'event':
                         for (k = 0; k < response.context[0].contextType.length; k++) {
                             switch (response.context[0].contextType[k]){
-                                //console.log("hello "+ response.Context[k].contextType);
                                 case 'ACTION_AWARE_SCREEN_ON':
-                                    //ACTIVE SCREEN SENSOR
-                                    //response.update({ "_id":  "rf4XuGzNXDhauCEXD", "sensor":{$elemMatch:{sensorType: "Screen"}}},{"$set": {"sensor.$.sensorActive" :true}});
+                                    // Activate screen sensor
                                     sensors[count] = {"setting":"status_screen","value":"true"};
                                     count++;
-
                                     break;
                                 case 'Application':
+                                    // Activate application sensor
+                                    sensors[count] = {"setting":"status_applications","value":"true"};
+                                    count++;
+                                    break;
+                                case 'ACTION_AWARE_BATTERY_CHARGING':
+                                    // Activate battery sensor
+                                    sensors[count] = {"setting":"status_battery","value":"true"};
+                                    count++;
                                     break;
                                 default:
                                     console.log('error');
