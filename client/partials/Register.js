@@ -1,3 +1,9 @@
+Template.Register.onCreated(function() {
+  SEO.set({
+    title: "AWARE Create - Register"
+  });
+});
+
 Template.Register.events({
     'click #logout': function(){
       Meteor.logout(function(error) {
@@ -5,7 +11,6 @@ Template.Register.events({
       });
     }
 });
-
 
 Template.Register.events({
     'submit form': function(event) {

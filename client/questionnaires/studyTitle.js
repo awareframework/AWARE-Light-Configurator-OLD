@@ -5,6 +5,10 @@ Template.studyTitle.onCreated(function() {
     var id = FlowRouter.getParam('id');
     self.subscribe('singleStudy', id);
   });
+
+  SEO.set({
+    title: "AWARE Create - Study information"
+  });
 });
 
 AutoForm.addHooks("updateTitle",{

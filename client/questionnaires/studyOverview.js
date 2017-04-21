@@ -9,13 +9,9 @@ Template.studyOverview.onCreated(function() {
   var study = Studies.findOne({_id: id});
   var questionnaire = Studies.findOne({_id: id});
 
-  // for (var key in scores) {
-  //       var obj = {};
-  //       obj.key = key;
-  //       obj.value = scores[key];
-  //       arr.push(obj);
-  // }
-  // return arr;
+  SEO.set({
+    title: "AWARE Create - Overview"
+  });
 });
 
 Template.studyOverview.events({

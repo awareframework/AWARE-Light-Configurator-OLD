@@ -4,6 +4,10 @@ Template.studySensor.onCreated(function() {
     var id = FlowRouter.getParam('id');
     self.subscribe('singleStudy', id);
   });
+
+  SEO.set({
+    title: "AWARE Create - Sensor data"
+  });
 });
 
 Template.studySensor.helpers({

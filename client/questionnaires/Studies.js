@@ -4,6 +4,10 @@ Template.Studies.onCreated(function() {
   self.autorun(function() {
     self.subscribe('studies')
   });
+
+  SEO.set({
+    title: "AWARE Create - Study information"
+  });
 });
 
 AutoForm.addHooks("insertStudy",{

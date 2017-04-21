@@ -5,6 +5,10 @@ Template.studyQuestion.onCreated(function() {
     var id = FlowRouter.getParam('id');
     self.subscribe('singleStudy', id);
   });
+
+  SEO.set({
+    title: "AWARE Create - Questions"
+  });
 });
 
 AutoForm.addHooks("updateQuestion",{

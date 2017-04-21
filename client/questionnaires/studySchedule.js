@@ -5,6 +5,10 @@ try {
             var id = FlowRouter.getParam('id');
             self.subscribe('singleStudy', id);
         });
+
+        SEO.set({
+          title: "AWARE Create - Schedule configuration"
+        });
     });
 
     AutoForm.addHooks("updateSchedule", {

@@ -1,11 +1,15 @@
-Template.StudyPanel.onCreated(function() {
+Template.ControlPanel.onCreated(function() {
   var self = this;
   self.autorun(function() {
     self.subscribe('studies')
   });
+
+  SEO.set({
+    title: "AWARE Create - Control panel"
+  });
 });
 
-Template.StudyPanel.helpers({
+Template.ControlPanel.helpers({
   studies: ()=> {
     return Studies.find({});
   },
