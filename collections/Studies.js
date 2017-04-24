@@ -207,48 +207,50 @@ Sensor = new SimpleSchema({
   }
 });
 
-Context = new SimpleSchema({
-  contextType: {
-    type: [String],
-    optional: true,
-    autoform: {
-      type: "select-checkbox",
-      options: function () {
-        return [
-          {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
-          {label: "Application", value: "Application"},
-          {label: "Charging phone", value: "ACTION_AWARE_BATTERY_CHARGING"}
-        ];
-      }
-    }
-  }
-
-  // contextActive: {
-  //   type: Boolean,
-  //   label: " ",
-  //   optional: true,
-  //   autoform:{
-  //     type: "boolean-checkbox",
-  //     defaultValue: false
-  //   }
-  // },
-  //
-  // ACTION_AWARE_SCREEN_ON: {
-  //   type: [String],
-  //   label: "Screen on",
-  //   optional: true,
-  //   autoform: {
-  //     type: "select-checkbox",
-  //     options: function () {
-  //       return [
-  //         {label: "Status Notifications", value: "notification"},
-  //         {label: "Status Crashes", value: "crash"},
-  //         {label: "Status keyboard", value: "keyboard"}
-  //       ];
-  //     }
-  //   }
-  // }
-});
+// Context = new SimpleSchema({
+//   // contextType: {
+//   //   type: [String],
+//   //   optional: true,
+//   //   autoform: {
+//   //     type: "select-checkbox",
+//   //     options: function () {
+//   //       return [
+//   //         {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
+//   //         {label: "Screen unlocked", value: "ACTION_AWARE_SCREEN_UNLOCKED"},
+//   //         {label: "Starts using Application:", value: "Start using application: "},
+//   //         {label: "In a phone call", value: "ACTION_AWARE_USER_IN_CALL"},
+//   //         {label: "Charging phone", value: "ACTION_AWARE_BATTERY_CHARGING"}
+//   //       ];
+//   //     }
+//   //   }
+//   // },
+//
+//   // contextActive: {
+//   //   type: Boolean,
+//   //   label: " ",
+//   //   optional: true,
+//   //   autoform:{
+//   //     type: "boolean-checkbox",
+//   //     defaultValue: false
+//   //   }
+//   // },
+//   //
+//   // ACTION_AWARE_SCREEN_ON: {
+//   //   type: [String],
+//   //   label: "Screen on",
+//   //   optional: true,
+//   //   autoform: {
+//   //     type: "select-checkbox",
+//   //     options: function () {
+//   //       return [
+//   //         {label: "Status Notifications", value: "notification"},
+//   //         {label: "Status Crashes", value: "crash"},
+//   //         {label: "Status keyboard", value: "keyboard"}
+//   //       ];
+//   //     }
+//   //   }
+//   // }
+// });
 
 Schedule = new SimpleSchema({
   firsthour: {
@@ -330,27 +332,6 @@ Schedule = new SimpleSchema({
     }
   },
 
-  // context: {
-  //   type: [String],
-  //   optional: true,
-  //   label: "Context",
-  //   autoform: {
-  //     type: "select-checkbox-inline",
-  //     options: function () {
-  //       return [
-  //         {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
-  //         {label: "Tuesday", value: "tuesday"},
-  //         {label: "Wednesday", value: "wednesday"},
-  //         {label: "Thursday", value: "thursday"},
-  //         {label: "Friday", value: "friday"},
-  //         {label: "Saturday", value: "saturday"},
-  //         {label: "Sunday", value: "sunday"}
-  //       ];
-  //     },
-  //     defaultValue: ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
-  //   }
-  // },
-
   nrRandoms: {
     type: Number,
     optional: true,
@@ -393,12 +374,31 @@ Schedule = new SimpleSchema({
     }
   },
 
+  contextType: {
+    type: String,
+    optional: true,
+    autoform: {
+      type: "select-radio",
+      options: function () {
+        return [
+          {label: "Screen on", value: "ACTION_AWARE_SCREEN_ON"},
+          {label: "Screen unlocked", value: "ACTION_AWARE_SCREEN_UNLOCKED"},
+          {label: "Starts using Application:", value: "Application"},
+          {label: "In a phone call", value: "ACTION_AWARE_USER_IN_CALL"},
+          {label: "Charging phone", value: "ACTION_AWARE_BATTERY_CHARGING"}
+        ];
+      }
+    }
+  },
+
   repeat:{
     type: Number,
     label: "Repeat interval",
     optional: true,
     min: 1
   }
+
+
 });
 
 Studies.attachSchema(new SimpleSchema({
@@ -452,10 +452,10 @@ Studies.attachSchema(new SimpleSchema({
     optional: true
   },
 
-  context: {
-    type: [Context],
-    optional: true
-  },
+  // context: {
+  //   type: [Context],
+  //   optional: true
+  // },
 
   sensor: {
   	type: [Sensor],

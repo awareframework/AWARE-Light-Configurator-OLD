@@ -145,6 +145,16 @@ Picker.route('/study/:id/json', function(params, req, res, next) {
                                     sensors[count] = {"setting":"status_screen","value":"true"};
                                     count++;
                                     break;
+                                case 'ACTION_AWARE_SCREEN_UNLOCKED':
+                                        // Activate screen sensor
+                                        sensors[count] = {"setting":"status_screen","value":"true"};
+                                        count++;
+                                        break;
+                                case 'ACTION_AWARE_USER_IN_CALL':
+                                        // Activate communication sensor
+                                        sensors[count] = {"setting":"status_communication_events","value":"true"};
+                                        count++;
+                                        break;
                                 case 'Application':
                                     // Activate application sensor
                                     sensors[count] = {"setting":"status_applications","value":"true"};

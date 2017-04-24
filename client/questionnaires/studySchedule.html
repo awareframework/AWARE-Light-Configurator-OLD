@@ -92,13 +92,25 @@
                                         <p class="instruction">Send questionnaire at the occurence of the selected event(s).</p>
                                     </div>
 
-                                    {{#afEachArrayItem name="context"}}
-                                        {{> afQuickField name=this.current.contextType
+                                    <!-- {{#afEachArrayItem name="context"}} -->
+                                        <!-- {{> afQuickField name=this.current.contextType
                                                 template="bootstrap3-horizontal"
                                                 label-class="col-sm-3"
                                                 input-col-class="col-sm-9"
-                                        }}
-                                    {{/afEachArrayItem}}
+                                        }} -->
+
+                                    <!-- {{#afEachArrayItem name=this.current.contextType}} -->
+                                        {{> afQuickField name=this.current.contextType
+                                                template="bootstrap3-horizontal"
+                                                label-class="col-sm-3"
+                                                input-col-class="col-sm-9"}}
+                                    <!-- {{/afEachArrayItem}} -->
+
+                                    {{#if afFieldValueIs name=this.current.contextType value="Application"}}
+                                      <p>Hello?</p>
+                                    {{/if}}
+
+
                                 {{/if}}
 
                                 {{#if afFieldValueIs name=this.current.scheduleType value="repeat"}}
