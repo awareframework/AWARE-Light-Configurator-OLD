@@ -1,55 +1,18 @@
 <template name="Register">
-    <div>
         <div class="page-header">
-            <h1>Register</h1>
+            <h3>Sign in with Google</h3>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="panel panel-info">
-                    {{#if currentUser}}
-                        <div class="panel-heading">
-                            <h3>Hello {{currentUser.emails.[0].address}}!</h3>
-                        </div>
-                        <div class="panel-body">
-                            <p>You are already logged in. Please <a href="" id="logout">log out</a> if you want to create a new account.</p>
-                        </div>
-                    {{else}}
-                        {{> RegisterForm}}
-                    {{/if}}
-                </div>
+                {{#if currentUser}}
+                    <p>Hello {{currentUser.profile.name}}! You are already logged in. Please <a href="" id="logout">log out</a> if you want to sign in with a different account.</p>
+                {{else}}
+                    <p class="instruction">To protect against misuse of our service, we require you to identify with a Google account prior to creating a study. Please sign in using the button below.</p>
+                    <span class="loginPage">
+                        {{> loginButtons align="left"}}
+                    </span>
+                {{/if}}
             </div>
         </div>
-
-
-    </div>
-</template>
-
-<template name="RegisterForm">
-    <div class="panel-heading">
-        <h3>Create a new account</h3>
-    </div>
-    <div class="panel-body">
-        <p class="instruction">Please provide the requested information below to set up your account. Any studies you create will be linked to the provided e-mail address.</p>
-        <form>
-        <div class="form-group" data-required="true">
-            <div class="row">
-              <label class="col-sm-2 control-label">E-mail</label>
-              <div class="col-sm-4">
-                 <input type="email" class="form-control" name="registerEmail" placeholder="E-mail address" />
-                 <span class="help-block"></span>
-             </div>
-           </div>
-           <div class="row">
-             <label class="col-sm-2 control-label">Password</label>
-             <div class="col-sm-4">
-               <input type="password" class="form-control" name="registerPassword" placeholder="Password" />
-               <span class="help-block"></span>
-             </div>
-           </div>
-          <p id="form-feedback" class="instruction"></p>
-        <button class="btn btn-primary">Register</button>
-        </div>
-      </form>
-    </div>
 </template>
