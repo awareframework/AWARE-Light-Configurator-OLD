@@ -1,30 +1,29 @@
 <template name="studyTitle">
-          <h3 id="study-title">{{study.title}}</h3>
+    <h3 id="study-title">{{study.title}}</h3>
 
-            {{> SingleQuestionnaireNav}}
+    {{> SingleQuestionnaireNav}}
 
-            <div class="col-sm-9 input-form">
+    <div class="col-sm-9 input-form">
 
-                {{#autoForm collection="Studies" id="updateTitle" type="update" doc=study}}
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4>Study Information</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p class="instruction">Basic information of the study. This information will be presented to participants upon joining your study.</p>
+        {{#autoForm collection="Studies" id="updateTitle" type="update" doc=study}}
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>Study Information</h4>
+            </div>
+            <div class="panel-body">
+                <p class="instruction">Basic information of the study. This information will be presented to participants upon joining your study.</p>
 
                         {{> afQuickField name="title" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="The title of your study "}}
                         {{> afQuickField name="description" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="A short description of your study"}}
                         {{> afQuickField name="researcher_contact"}}
                         {{> afQuickField name="user_id"}}
                         {{> afQuickField name="createdAt"}}
-
-                    </div>
-                </div>
-
-                    <div>
-                        <button class="btn btn-primary btn-md pull-right">Next step: questions</button>
-                    </div>
-                {{/autoForm}}
             </div>
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-md pull-right">Next step: questions</button>
+        </div>
+        {{/autoForm}}
+    </div>
 </template>

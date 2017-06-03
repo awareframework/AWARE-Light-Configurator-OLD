@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 Schema = {};
 FeedbackSchema = new SimpleSchema({
     name: {

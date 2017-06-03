@@ -44,14 +44,15 @@ Template.registerHelper('incremented', function (index) {
     return index;
 });
 
-// Template.registerHelper("likertStepOptions", function() {
-//     return {
-//       0.5: "0.5",
-//       1: "1"
-//     };
-// });
-
 Template.studyQuestion.helpers({
+  quickFieldsAtts: function () {
+    // These are the quickForm attributes that we want to forward to the afQuickFields component.
+    // return _.pick(this.atts, 'id-prefix');
+    return _.pick(this, 'name', 'id-prefix');
+  },
+  append(string1, string2) {
+    return string1 + '.' + string2;
+  },
   study: ()=> {
     var id = FlowRouter.getParam('id');
     return Studies.findOne({_id: id});
