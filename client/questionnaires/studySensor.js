@@ -11,6 +11,9 @@ Template.studySensor.onCreated(function() {
 });
 
 Template.studySensor.helpers({
+  append(string1, string2) {
+    return string1 + '.' + string2;
+  },
   study: ()=> {
     var id = FlowRouter.getParam('id');
     return Studies.findOne({_id: id});
@@ -21,8 +24,9 @@ Template.studySensor.helpers({
   }
 });
 
-AutoForm.addHooks("updateStudyId",{
+AutoForm.addHooks("updateSensors",{
   onSuccess: function(formType, result) {
+    console.log("test");
     FlowRouter.go("/study/:id/overview",{id: FlowRouter.getParam('id')});
   }
 });

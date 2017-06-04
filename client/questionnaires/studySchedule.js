@@ -1,36 +1,26 @@
 try {
-    Template.studySchedule.onCreated(function() {
+    Template.studySchedule.onCreated(function () {
         var self = this;
-        self.autorun(function() {
+        self.autorun(function () {
             var id = FlowRouter.getParam('id');
             self.subscribe('singleStudy', id);
         });
 
         SEO.set({
-          title: "AWARE Create - Schedule configuration"
+            title: "AWARE Create - Schedule configuration"
         });
     });
 
     AutoForm.addHooks("updateSchedule", {
-        onSuccess: function(formType, result) {
-
-            var id = FlowRouter.getParam('id');
-            study = Studies.findOne({
-                _id: id
-            });
-            // TODO: active sensors depending on user choices
-            //console.log(study.context.contextType);
-
-            FlowRouter.go("/study/:id/sensor", {
-                id: FlowRouter.getParam('id')
-            });
+        onSuccess: function (formType, result) {
+            FlowRouter.go("/study/:id/sensor",{id: FlowRouter.getParam('id')});
         }
     });
 
     AutoForm.addHooks(null, {
         before: {
-            update: function(doc) {
-                _.each(doc.$set, function(value, setter) {
+            update: function (doc) {
+                _.each(doc.$set, function (value, setter) {
                     if (_.isArray(value)) {
                         var newValue = _.compact(value);
                         doc.$set[setter] = newValue;
@@ -41,7 +31,7 @@ try {
         }
     });
 
-    Template.registerHelper("questionsCheckbox", function() {
+    Template.registerHelper("questionsCheckbox", function () {
         var id = FlowRouter.getParam('id');
         study = Studies.findOne({
             _id: id
@@ -50,7 +40,7 @@ try {
         if (typeof study != "undefined") {
             for (i = 0; i < study.questions.length; i++) {
                 var json = {};
-                json["label"] = "Q" + (i + 1) + " - " + study.questions[i].question;
+                json["label"] = "Q" + (i + 1) + " - " + study.questions[i].title;
                 json["value"] = i;
                 options[i] = json;
             }
@@ -58,19 +48,22 @@ try {
         }
     });
 
-    Template.registerHelper('incremented', function(index) {
+    Template.registerHelper('incremented', function (index) {
         index++;
         return index;
     });
 
     Template.studySchedule.helpers({
+        append(string1, string2) {
+            return string1 + '.' + string2;
+        },
         study: () => {
             var id = FlowRouter.getParam('id');
             return Studies.findOne({
                 _id: id
             });
         },
-        updateStudyId: function() {
+        updateStudyId: function () {
             var id = FlowRouter.getParam('id');
             return Studies.findOne({
                 _id: id

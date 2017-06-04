@@ -45,11 +45,6 @@ Template.registerHelper('incremented', function (index) {
 });
 
 Template.studyQuestion.helpers({
-  quickFieldsAtts: function () {
-    // These are the quickForm attributes that we want to forward to the afQuickFields component.
-    // return _.pick(this.atts, 'id-prefix');
-    return _.pick(this, 'name', 'id-prefix');
-  },
   append(string1, string2) {
     return string1 + '.' + string2;
   },
