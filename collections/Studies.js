@@ -59,7 +59,7 @@ Schema.Questions = new SimpleSchema({
   maxLabel: { type: String, optional: true, label: "Maximum label" },
   stepSize: { type: Number, optional: true, label: "Step size" },
   scaleStart: { type: Number, optional: true, label: "Scale start" }
-});
+}, { tracker: Tracker });
 
 Schema.Schedules = new SimpleSchema({
   type: {
@@ -175,7 +175,7 @@ Schema.Schedules = new SimpleSchema({
   },
 
   questionSchedule: {
-    type: Number,
+    type: Schema.Questions,
     optional: true,
     autoform: {
       label: false,
@@ -208,7 +208,7 @@ Schema.Schedules = new SimpleSchema({
     optional: true,
     min: 1
   }
-});
+}, { tracker: Tracker });
 
 Schema.Sensors = new SimpleSchema({
 
@@ -342,7 +342,7 @@ Schema.Sensors = new SimpleSchema({
   //     }
   //   }
   // }
-});
+}, { tracker: Tracker });
 
 Schema.Study = new SimpleSchema({
   user_id: {
@@ -398,8 +398,8 @@ Schema.Study = new SimpleSchema({
 
   "questions.$": {
     type: Schema.Questions,
-    optional: true,
-    minCount: 1
+    minCount: 1,
+    optional: true
   },
 
   schedules: {
@@ -422,8 +422,32 @@ Schema.Study = new SimpleSchema({
     type: Schema.Sensors,
     optional: true,
     minCount: 1
-  }
-});
+  },
+}, { tracker: Tracker });
 
 // Schema.Study.extend(Schema.Questions);
 Studies.attachSchema(Schema.Study);
+
+Meteor.methods({
+  deleteStudies: function (id) {
+    // Check that user is logged
+    if (this.userId) {
+      // Check id format
+      check(id, String);
+
+      // Find study to be removed
+      study = Studies.findOne({ _id: id });
+
+      // Check that author matches with login
+      if (study.user_id == this.userId) {
+        Studies.remove(id);
+      }
+      else {
+        throw new Meteor.Error('not-authorized');
+      }
+    }
+    else {
+      throw new Meteor.Error('not-authorized');
+    }
+  }
+});
