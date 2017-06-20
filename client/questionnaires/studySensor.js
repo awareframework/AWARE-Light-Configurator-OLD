@@ -26,7 +26,6 @@ Template.studySensor.helpers({
 
 AutoForm.addHooks("updateSensors",{
   onSuccess: function(formType, result) {
-    console.log("test");
     FlowRouter.go("/study/:id/overview",{id: FlowRouter.getParam('id')});
   }
 });

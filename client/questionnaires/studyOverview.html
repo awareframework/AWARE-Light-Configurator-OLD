@@ -64,7 +64,7 @@
         <a href="/study/{{study._id}}/schedule" class="btn btn-default align-right" role="button">Edit schedule configuration</a>
       </div>
       <div class="panel-body">
-        {{#each $ study.scheduler}}
+        {{#each $ study.schedules}}
 
         <div class="row">
           <label class="col-sm-4 control-label">Schedule {{getIndexWithOffset @index}}</label>
@@ -114,10 +114,14 @@
         <a href="/study/{{study._id}}/sensor" class="btn btn-default align-right" role="button">Edit sensor data</a>
       </div>
       <div class="panel-body">
-        {{#each study.sensors}}
-          
-          <!--TODO-->
-          <p>To-Do</p>
+        {{#each $ study.sensors}}
+
+        <div class="row">
+          <label class="col-sm-4 control-label">Sensor {{getIndexWithOffset @index}}</label>
+          <div class="col-sm-8">
+            
+          </div>
+        </div>
 
           {{#if this.sensorActive}}
             <div class="row">
