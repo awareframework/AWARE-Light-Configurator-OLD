@@ -1,0 +1,18 @@
+<template name="singleStudy" xmlns="http://www.w3.org/1999/html">
+    <article class="questionnaire-overview">
+      <div class="clearfix">
+          <h4>{{title}}</h4>
+      </div>
+
+        <p class="instruction">{{description}}. Created {{formatDate createdAt}}.</p>
+
+        <!-- {{nrStudies}} -->
+
+        {{#if exported}}
+            <a class="btn btn-primary" href="/study/{{_id}}/overview">View overview</a>
+        {{else}}
+            <a class="btn btn-primary" href="/study/{{_id}}/title">Edit study</a>
+        {{/if}}
+            <button class="btn btn-danger btn-md autoform-remove-item" data-autoform-field="items">Remove study</button>
+    </article>
+</template>

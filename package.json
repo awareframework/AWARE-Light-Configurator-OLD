@@ -2,9 +2,29 @@
   "name": "esm-creator",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "reset": "meteor reset"
   },
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0"
-  }
+    "babel-runtime": "^6.23.0",
+    "font-awesome": "^4.7.0",
+    "meteor-node-stubs": "^0.2.11",
+    "node-slack": "0.0.7",
+    "sharer.js": "^0.3.1",
+    "simpl-schema": "^0.3.0"
+  },
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NBerkel/esm-creator-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NBerkel/esm-creator-web/issues"
+  },
+  "homepage": "https://github.com/NBerkel/esm-creator-web#readme"
 }

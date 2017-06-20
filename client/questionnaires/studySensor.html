@@ -1,0 +1,117 @@
+<template name="studySensor">
+    <h3 id="study-title">{{study.title}}</h3>
+    {{> SingleQuestionnaireNav menuIdx="3"}}
+
+    <div class="col-sm-9 input-form">
+
+        {{#autoForm collection="Studies" id="updateSensors" type="update" doc=study}}
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>Sensors data</h4>
+            </div>
+            <div class="panel panel-body">
+                <p class="instruction">Collect sensor data from the participants' phone during your study. Some sensors require specific permissions
+                    to be enabled on the phone. These are automatically requested when the study is joined. Keep in mind
+                    that the collection of multiple sensors at high frequency can decrease battery life of the phone.</p>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>Software sensors</h4>
+            </div>
+
+            <div class="panel panel-body">
+                <div>
+                    {{#afEachArrayItem name="sensors"}}
+                    {{> afQuickField name=(append this.name "sensor_application") }}
+                    <p class="instruction">Application usage and incoming notifications on the device.</p>
+
+                    <!--{{#if afFieldValueIs name=(append this.name "sensor_application" value=true}}
+                            {{> afQuickField name=(append this.name "sensor_application_config" }}
+                        {{/if}}-->
+
+                    {{> afQuickField name=(append this.name "sensor_battery") }}
+                    <p class="instruction">Battery information and power related events (phone shutting down, rebooting).</p>
+
+                    {{> afQuickField name=(append this.name "sensor_communication") }}
+                    <p class="instruction">Communication events such as calls and messages, performed by or received by the user.</p>
+
+                    {{> afQuickField name=(append this.name "sensor_installations") }}
+                    <p class="instruction">Application installations, removal, and updates.</p>
+
+                    {{> afQuickField name=(append this.name "sensor_screen") }}
+                    <p class="instruction">Smartphone screen status; turning on, turning off, lock, and unlock.</p>
+
+                    {{> afQuickField name=(append this.name "sensor_telephony") }}
+                    <p class="instruction">Information on the mobile phone capabilities of the device, connected cell towers, and neighboring towers.</p>
+                    {{/afEachArrayItem}}
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading clearfix">
+                <h4>Hardware sensors</h4>
+            </div>
+
+            <div class="panel panel-body">
+
+                {{#afEachArrayItem name="sensors"}} {{> afQuickField name=(append this.name "sensor_accelerometer") }}
+                <p class="instruction">Acceleration applied to the device, including the force of gravity.</p>
+
+                {{> afQuickField name=(append this.name "sensor_barometer") }}
+                <p class="instruction">Ambient air pressure.</p>
+
+                {{> afQuickField name=(append this.name "sensor_bluetooth") }}
+                <p class="instruction">Smartphone's Bluetooth sensor and surrounding Bluetooth-enabled and visible devices. Includes respective
+                    RSSI dB values.</p>
+
+                {{> afQuickField name=(append this.name "sensor_gravity") }}
+                <p class="instruction">Force of gravity applied to the the device, provides a three dimensional vector indicating the direction
+                    and magnitude of gravity.</p>
+
+                {{> afQuickField name=(append this.name "sensor_gyroscope") }}
+                <p class="instruction">Rate or rotation in rad/s around a device’s x-, y-, and z-axis.</p>
+
+                {{> afQuickField name=(append this.name "sensor_light") }}
+                <p class="instruction">Level of ambient light.</p>
+
+                {{> afQuickField name=(append this.name "sensor_linear_accelerometer") }}
+                <p class="instruction">Acceleration applied to the device, excluding the force of gravity.</p>
+
+                {{> afQuickField name=(append this.name "sensor_location") }}
+                <p class="instruction">Best location estimate of the users’ current location, based on an algorithm that results in minimum battery
+                    impact.</p>
+
+                {{> afQuickField name=(append this.name "sensor_magnetometer") }}
+                <p class="instruction">Geomagnetic field strength around the device.</p>
+
+                {{> afQuickField name=(append this.name "sensor_network") }}
+                <p class="instruction">Information on the network sensors availability of the device. These include use of airplane mode, Wi-Fi,
+                    Bluetooth, GPS, mobile, and WIMAX status as well as internet availability.</p>
+
+                {{> afQuickField name=(append this.name "sensor_processor") }}
+                <p class="instruction">Processor load.</p>
+
+                {{> afQuickField name=(append this.name "sensor_proximity") }}
+                <p class="instruction">Distance to an object in front of the device.</p>
+
+                {{> afQuickField name=(append this.name "sensor_rotation") }}
+                <p class="instruction">Orientation of the device as a combination of an angle and an axis.</p>
+
+                {{> afQuickField name=(append this.name "sensor_temperature") }}
+                <p class="instruction">Ambient air temperature in Celsius (˚C). Not many devices have this sensor available.</p>
+
+                {{> afQuickField name=(append this.name "sensor_wifi") }}
+                <p class="instruction">The device’s Wi-Fi sensor, current AP, and surrounding Wi-Fi visible devices with respective RSSI dB values.
+                </p>
+
+                {{/afEachArrayItem}}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-md pull-right">Next step: overview</button> {{/autoForm}}
+    </div>
+</template>

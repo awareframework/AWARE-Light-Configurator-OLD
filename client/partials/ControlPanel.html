@@ -1,0 +1,75 @@
+<template name="ControlPanel">
+    <div>
+        <div class="page-header">
+            <h1>Control Panel</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>Create new study</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p class="instruction">Define study questions, configure the timing of notifications, and enable the collection of sensor data.</p>
+                        <a href="/study" class="btn btn-success" role="button">Create a new study</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+              <div class="panel panel-warning">
+                  <div class="panel-heading">
+                      <h3>Incomplete studies</h3>
+                  </div>
+                  <div class="panel-body">
+                      {{#if Template.subscriptionsReady}}
+                        {{#if hasStudies studyCount}}
+                          {{#each studies}}
+                            {{#unless this.exported}}
+                              {{> singleStudy}}
+                            {{/unless}}
+                          {{else}}
+                            <p class="instruction">No incomplete studies.</p>
+                          {{/each}}
+                        {{else}}
+                          <p class="instruction">No incomplete studies.</p>
+                        {{/if}}
+                      {{else}}
+                        <p>Loading</p>
+                      {{/if}}
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3>Exported studies</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{#if Template.subscriptionsReady}}
+                                {{#if hasStudies studyCount exported}}
+                                  {{#each studies}}
+                                    {{#if this.exported}}
+                                      {{> singleStudy}}
+                                    {{/if}}
+                                  {{else}}
+                                    <p class="instruction">No exported studies.</p>
+                                  {{/each}}
+                                {{else}}
+                                  <p class="instruction">No exported studies.</p>
+                                {{/if}}
+                        {{else}}
+                            <p>Loading</p>
+                        {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</template>
