@@ -392,6 +392,32 @@ Schema.Study = new SimpleSchema({
     }
   },
 
+  aware_database: {
+    type: Boolean,
+    label: "Use AWARE database?",
+    autoform: {
+         type: 'boolean-radios',
+         trueLabel: 'Yes, use the provided database.',
+         falseLabel: 'No, I prefer data to be stored on my own server.',
+         value: true
+      }
+  },
+
+  database: {
+    type: Array,
+    optional: true
+  },
+
+  "database.$": {
+    type: Object,
+    maxCount: 1,
+    optional: true
+  },
+
+  "database.$.ip": { type: String },
+  "database.$.username": { type: String },
+  "database.$.pw": { type: String },
+
   questions: {
     type: Array,
     optional: true
