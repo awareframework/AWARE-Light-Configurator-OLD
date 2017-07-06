@@ -22,10 +22,7 @@ Meteor.methods({
         });
     },
 
-
     async testDatabase (ip, database, username, password) {
-
-
         try {
             const connection = await mysql.createConnection({
                 host: ip,

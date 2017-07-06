@@ -2,6 +2,8 @@ try {
   Template.studyTitle.onCreated(function () {
     var self = this;
 
+    Meteor.subscribe("userData");
+
     self.autorun(function () {
       var id = FlowRouter.getParam('id');
       self.subscribe('singleStudy', id);

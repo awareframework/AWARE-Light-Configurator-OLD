@@ -3,12 +3,6 @@ Picker.route('/study/:id/json', function (params, req, res, next) {
         _id: params.id
     });
 
-    console.log("hello?");
-
-    console.log(response);
-
-    console.log(response.exported);
-
     // Check that study configuration has been already exported
     if (!response.exported) {
         res.setHeader('Content-Type', 'text/html');
@@ -28,8 +22,8 @@ Picker.route('/study/:id/json', function (params, req, res, next) {
         var studyData = {
             study_name: response.title,
             study_description: response.description,
-            researcher_first: "",
-            researcher_last: "",
+            researcher_givenname: response.researcher_givenname,
+            researcher_familyname: response.researcher_familyname,
             researcher_contact: response.researcher_contact
         };
 
@@ -124,7 +118,7 @@ Picker.route('/study/:id/json', function (params, req, res, next) {
                 // action.extras = extras;
 
                 var trigger = {};
-                switch (response.schedules[i].scheduleType) {
+                switch (response.schedules[i].type) {
                     case 'interval':
                         if (typeof response.schedules[i].hours != 'undefined') {
                             trigger.hour = response.schedules[i].hours;

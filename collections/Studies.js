@@ -378,14 +378,34 @@ Schema.Study = new SimpleSchema({
     }
   },
 
+  researcher_givenname: {
+    type: String,
+    label: "Researcher given name",
+    autoValue: function () {
+      return Meteor.user().services.google.given_name
+    },
+    autoform: {
+      type: "hidden"
+    }
+  },
+
+  researcher_familyname: {
+    type: String,
+    label: "Researcher family name",
+    autoValue: function () {
+      return Meteor.user().services.google.family_name
+    },
+    autoform: {
+      type: "hidden"
+    }
+  },
+
   researcher_contact: {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: "Researcher e-mail",
     autoValue: function () {
-      //return Meteor.user().services.google.email
-      // TODO
-      return "test@example.com"
+      return Meteor.user().services.google.email
     },
     autoform: {
       type: "hidden"

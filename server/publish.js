@@ -25,8 +25,10 @@ try {
     }
   });
 
+  Meteor.publish("userData", function () {
+    return Meteor.users.find({ _id: this.userId });
+  });
 }
-
 
 catch (err) {
   console.log(err);
