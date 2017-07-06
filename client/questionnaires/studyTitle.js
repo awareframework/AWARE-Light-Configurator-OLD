@@ -46,7 +46,7 @@ try {
       var id = FlowRouter.getParam('id');
       return Studies.findOne({ _id: id });
     },
-    getLatest: function () {
+    response: function () {
       return Session.get('response') || "";
     }
   });

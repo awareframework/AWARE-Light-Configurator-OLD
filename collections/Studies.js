@@ -393,13 +393,14 @@ Schema.Study = new SimpleSchema({
   },
 
   aware_database: {
-    type: Boolean,
-    label: "Use AWARE database?",
+    type: String,
+    label: "Use the AWARE server for data storage?",
     autoform: {
-         type: 'boolean-radios',
-         trueLabel: 'Yes, use the provided database.',
-         falseLabel: 'No, I prefer data to be stored on my own server.',
-         value: true
+         type: 'select-radio',
+         options: [
+                {label: "Yes, use the provided database", value: "yes"},
+                {label: "No, I prefer data to be stored on my own server", value: "no"}
+        ]
       }
   },
 
@@ -780,6 +781,14 @@ Schema.Study = new SimpleSchema({
           { label: "Status keyboard", value: "keyboard" }
         ];
       }
+    }
+  },
+  exported: {
+    type: Boolean,
+    label: "Exported",
+    optional: true,
+    autoform: {
+      type: "hidden"
     }
   }
 }, { tracker: Tracker });

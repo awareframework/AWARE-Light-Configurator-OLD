@@ -22,30 +22,28 @@
           <div class="col-sm-12">
               <div class="panel panel-warning">
                   <div class="panel-heading">
-                      <h3>Incomplete studies</h3>
+                      <h3>Studies</h3>
                   </div>
                   <div class="panel-body">
                       {{#if Template.subscriptionsReady}}
                         {{#if hasStudies studyCount}}
                           {{#each studies}}
-                            {{#unless this.exported}}
                               {{> singleStudy}}
-                            {{/unless}}
                           {{else}}
-                            <p class="instruction">No incomplete studies.</p>
+                            <p class="instruction">No studies created yet.</p>
                           {{/each}}
                         {{else}}
-                          <p class="instruction">No incomplete studies.</p>
+                          <p class="instruction">No studies created yet.</p>
                         {{/if}}
                       {{else}}
-                        <p>Loading</p>
+                        <p>Loading..</p>
                       {{/if}}
                   </div>
               </div>
           </div>
         </div>
 
-        <div class="row">
+        <!--<div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
@@ -70,6 +68,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
   </div>
 </template>

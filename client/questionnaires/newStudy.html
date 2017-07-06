@@ -21,11 +21,56 @@
         {{> afQuickField name="createdAt"}}
 
       </div>
-    </div>
 
-    <div>
-      <button class="btn btn-primary btn-md pull-right">Next step: questions</button>
+      <div class="panel-body">
+                <p class="instruction">Database configuration. Where will the study data be stored?</p>
+
+                    {{> afQuickField name="aware_database" template="bootstrap3" }}
+                    
+                    {{#if afFieldValueIs name="aware_database" value="no"}}
+                        <div class="form-group" data-required="true">
+                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Host / Server IP</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="ip-input" value="nielsvanberkel.com" name="description" placeholder="e.g. 139.130.4.5" required="" data-schema-key="description" class="form-control">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" data-required="true">
+                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Database</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="database-input" value="nielsvan_aware" name="description" placeholder="Database" required="" data-schema-key="description" class="form-control">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" data-required="true">
+                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Username</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="username-input" value="nielsvan_awareuser" name="description" placeholder="Username" required="" data-schema-key="description" class="form-control">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" data-required="true">
+                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" id="password-input" value="Aware123!" name="description" placeholder="Password" required="" data-schema-key="description" class="form-control">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>                                
+
+                        <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
+
+                        <p id="connection_status">{{response}}</p>
+                    {{/if}}
+
+            </div>
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-md pull-right" type=submit>Next step: questions</button>
+        </div>
+        {{/autoForm}}
     </div>
-    {{/autoForm}}
-  </div>
 </template>
