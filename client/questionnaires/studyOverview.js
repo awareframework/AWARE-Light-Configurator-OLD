@@ -1,13 +1,13 @@
-Template.studyOverview.onCreated(function() {
+Template.studyOverview.onCreated(function () {
   var self = this;
-  self.autorun(function() {
+  self.autorun(function () {
     var id = FlowRouter.getParam('id');
     self.subscribe('singleStudy', id);
   });
 
   var id = FlowRouter.getParam('id');
-  var study = Studies.findOne({_id: id});
-  var questionnaire = Studies.findOne({_id: id});
+  var study = Studies.findOne({ _id: id });
+  var questionnaire = Studies.findOne({ _id: id });
 
   SEO.set({
     title: "AWARE Create - Overview"
@@ -15,7 +15,7 @@ Template.studyOverview.onCreated(function() {
 });
 
 Template.studyOverview.events({
-  'click .btn-primary' : function() {
+  'click .btn-primary': function () {
     var id = FlowRouter.getParam('id');
     Studies.update(
       { _id: id },
@@ -25,24 +25,24 @@ Template.studyOverview.events({
 });
 
 Template.studyOverview.helpers({
-  study: ()=> {
+  study: () => {
     var id = FlowRouter.getParam('id');
-    return Studies.findOne({_id: id});
+    return Studies.findOne({ _id: id });
   },
-  updateStudyId: function() {
+  updateStudyId: function () {
     var id = FlowRouter.getParam('id');
-    return Studies.findOne({_id: id});
+    return Studies.findOne({ _id: id });
   },
-  getIndexWithOffset: function(value) {
+  getIndexWithOffset: function (value) {
     return value + 1;
   },
-  equals: function(a, b) {
+  equals: function (a, b) {
     return (a == b);
   },
-	capitalize: function(string) {
+  capitalize: function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-	},
-  getQuestionType: function(value) {
+  },
+  getQuestionType: function (value) {
     //TODO: user proper query to get the labels over hardcoding.
     if (value == 1) {
       return "Free Text";
@@ -65,5 +65,15 @@ Template.studyOverview.helpers({
     else if (value == 7) {
       return "Numeric";
     }
+  },
+
+  getSensors: function () {
+    var id = FlowRouter.getParam('id');
+    var sensors = Studies.findOne({ _id: id }, { fields: { sensor: 1 } });
+    return(sensors);
+  },
+
+  isSensorActive: function (sensor) {
+    return sensor.sensorActive;
   }
 });
