@@ -211,140 +211,6 @@ Schema.Options = new SimpleSchema({
 //   }
 // }, { tracker: Tracker });
 
-// Schema.Sensors = new SimpleSchema({
-
-//   sensor_accelerometer: {
-//     type: Boolean, label: "Accelerometer", optional: true
-//   },
-
-//   sensor_application: {
-//     type: Boolean, label: "Application", optional: true
-//   },
-
-//   sensor_barometer: {
-//     type: Boolean, label: "Barometer", optional: true
-//   },
-
-//   sensor_battery: {
-//     type: Boolean, label: "Battery", optional: true
-//   },
-
-//   sensor_bluetooth: {
-//     type: Boolean, label: "Bluetooth", optional: true
-//   },
-
-//   sensor_communication: {
-//     type: Boolean, label: "Communication", optional: true
-//   },
-
-//   sensor_gravity: {
-//     type: Boolean, label: "Gravity", optional: true
-//   },
-
-//   sensor_gyroscope: {
-//     type: Boolean, label: "Gyroscope", optional: true
-//   },
-
-//   sensor_installations: {
-//     type: Boolean, label: "Installations", optional: true
-//   },
-
-//   sensor_light: {
-//     type: Boolean, label: "Light", optional: true
-//   },
-
-//   sensor_linear_accelerometer: {
-//     type: Boolean, label: "Linear accelerometer", optional: true
-//   },
-
-//   sensor_location: {
-//     type: Boolean, label: "Location", optional: true
-//   },
-
-//   sensor_magnetometer: {
-//     type: Boolean, label: "Magnetometer", optional: true
-//   },
-
-//   sensor_network: {
-//     type: Boolean, label: "Network", optional: true
-//   },
-
-//   sensor_processor: {
-//     type: Boolean, label: "Processor", optional: true
-//   },
-
-//   sensor_proximity: {
-//     type: Boolean, label: "Proximity", optional: true
-//   },
-
-//   sensor_rotation: {
-//     type: Boolean, label: "Rotation", optional: true
-//   },
-
-//   sensor_screen: {
-//     type: Boolean, label: "Screen", optional: true
-//   },
-
-//   sensor_telephony: {
-//     type: Boolean, label: "Telephony", optional: true
-//   },
-
-//   sensor_temperature: {
-//     type: Boolean, label: "Temperature", optional: true
-//   },
-
-//   sensor_wifi: {
-//     type: Boolean, label: "Wi-Fi", optional: true
-//   },
-
-
-//   sensor_application_config: {
-//     type: String,
-//     label: "Application Options",
-//     optional: true,
-//     autoform: {
-//       type: "select-checkbox",
-//       options: function () {
-//         return [
-//           { label: "Status Notifications", value: "notification" },
-//           { label: "Status Crashes", value: "crash" },
-//           { label: "Status keyboard", value: "keyboard" }
-//         ];
-//       }
-//     }
-//   },
-
-//   // communication: {
-//   //   type: String,
-//   //   optional: true,
-//   //   label: "Communication Options",
-//   //   autoform: {
-//   //     type: "select-checkbox",
-//   //     options: function () {
-//   //       return [
-//   //         { label: "Status Calls", value: "calls" },
-//   //         { label: "Status Messages", value: "messages" }
-//   //       ];
-//   //     }
-//   //   }
-//   // },
-
-//   // network: {
-//   //   type: String,
-//   //   optional: true,
-//   //   label: "Network Options",
-//   //   autoform: {
-//   //     type: "select-checkbox",
-//   //     options: function () {
-//   //       return [
-//   //         { label: "Status Network Events", value: "network" },
-//   //         { label: "Status Network Traffic", value: "traffic" }
-//   //       ];
-//   //     }
-//   //   }
-//   // }
-// }, { tracker: Tracker });
-
 Schema.Study = new SimpleSchema({
   user_id: {
     type: String,
@@ -378,19 +244,66 @@ Schema.Study = new SimpleSchema({
     }
   },
 
-  researcher_contact: {
+  researcher_givenname: {
     type: String,
-    regEx: SimpleSchema.RegEx.Email,
-    label: "Researcher e-mail",
+    label: "Researcher given name",
     autoValue: function () {
-      //return Meteor.user().services.google.email
-      // TODO
-      return "test@example.com"
+      return Meteor.user().services.google.given_name
     },
     autoform: {
       type: "hidden"
     }
   },
+
+  researcher_familyname: {
+    type: String,
+    label: "Researcher family name",
+    autoValue: function () {
+      return Meteor.user().services.google.family_name
+    },
+    autoform: {
+      type: "hidden"
+    }
+  },
+
+  researcher_contact: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email,
+    label: "Researcher e-mail",
+    autoValue: function () {
+      return Meteor.user().services.google.email
+    },
+    autoform: {
+      type: "hidden"
+    }
+  },
+
+  aware_database: {
+    type: String,
+    label: "Use the AWARE server for data storage?",
+    autoform: {
+      type: 'select-radio',
+      options: [
+        { label: "Yes, use the provided database", value: "yes" },
+        { label: "No, I prefer data to be stored on my own server", value: "no" }
+      ]
+    }
+  },
+
+  database: {
+    type: Array,
+    optional: true
+  },
+
+  "database.$": {
+    type: Object,
+    maxCount: 1,
+    optional: true
+  },
+
+  "database.$.ip": { type: String },
+  "database.$.username": { type: String },
+  "database.$.pw": { type: String },
 
   questions: {
     type: Array,
@@ -465,12 +378,24 @@ Schema.Study = new SimpleSchema({
     minCount: 1
   },
 
+  "schedules.$.schedule_questions": {
+    type: Array,
+    label: "Included questions",
+    autoform: {
+      type: "select-checkbox",
+    }
+  },
+  "schedules.$.schedule_questions.$": {
+    type: Number,
+    optional: true
+  },
+
   "schedules.$.type": {
     type: String,
     optional: true,
     autoform: {
       type: "select-radio",
-      label: false,
+      label: "Schedule type",
       options: function () {
         return [
           { label: "Interval contingent (time based)", value: "interval" },
@@ -483,65 +408,68 @@ Schema.Study = new SimpleSchema({
   },
 
   "schedules.$.firsthour": {
-    type: Number,
+    type: Array,
     optional: true,
     label: "First hour",
     autoform: {
       type: "select",
       options: function () {
         return [
-          { label: "00:00", value: 0 }, { label: "01:00", value: 1 }, { label: "02:00", value: 2 }, { label: "04:00", value: 4 },
-          { label: "05:00", value: 5 }, { label: "06:00", value: 6 }, { label: "07:00", value: 7 }, { label: "08:00", value: 8 },
-          { label: "09:00", value: 9 }, { label: "10:00", value: 10 }, { label: "11:00", value: 11 }, { label: "12:00", value: 12 },
-          { label: "13:00", value: 13 }, { label: "14:00", value: 14 }, { label: "15:00", value: 15 }, { label: "16:00", value: 16 },
-          { label: "17:00", value: 17 }, { label: "18:00", value: 18 }, { label: "19:00", value: 19 }, { label: "20:00", value: 20 },
-          { label: "21:00", value: 21 }, { label: "22:00", value: 22 }, { label: "23:00", value: 23 }
+          { label: "00:00", value: 0 }, { label: "01:00", value: 1 }, { label: "02:00", value: 2 }, { label: "03:00", value: 3 },
+          { label: "04:00", value: 4 }, { label: "05:00", value: 5 }, { label: "06:00", value: 6 }, { label: "07:00", value: 7 },
+          { label: "08:00", value: 8 }, { label: "09:00", value: 9 }, { label: "10:00", value: 10 }, { label: "11:00", value: 11 },
+          { label: "12:00", value: 12 }, { label: "13:00", value: 13 }, { label: "14:00", value: 14 }, { label: "15:00", value: 15 },
+          { label: "16:00", value: 16 }, { label: "17:00", value: 17 }, { label: "18:00", value: 18 }, { label: "19:00", value: 19 },
+          { label: "20:00", value: 20 }, { label: "21:00", value: 21 }, { label: "22:00", value: 22 }, { label: "23:00", value: 23 }
         ];
       }
     }
   },
+  "schedules.$.firsthour.$": Number,
 
   "schedules.$.lasthour": {
-    type: Number,
+    type: Array,
     optional: true,
     label: "Last hour",
     autoform: {
       type: "select",
       options: function () {
         return [
-          { label: "00:00", value: 0 }, { label: "01:00", value: 1 }, { label: "02:00", value: 2 }, { label: "04:00", value: 4 },
-          { label: "05:00", value: 5 }, { label: "06:00", value: 6 }, { label: "07:00", value: 7 }, { label: "08:00", value: 8 },
-          { label: "09:00", value: 9 }, { label: "10:00", value: 10 }, { label: "11:00", value: 11 }, { label: "12:00", value: 12 },
-          { label: "13:00", value: 13 }, { label: "14:00", value: 14 }, { label: "15:00", value: 15 }, { label: "16:00", value: 16 },
-          { label: "17:00", value: 17 }, { label: "18:00", value: 18 }, { label: "19:00", value: 19 }, { label: "20:00", value: 20 },
-          { label: "21:00", value: 21 }, { label: "22:00", value: 22 }, { label: "23:00", value: 23 }
+          { label: "00:00", value: 0 }, { label: "01:00", value: 1 }, { label: "02:00", value: 2 }, { label: "03:00", value: 3 },
+          { label: "04:00", value: 4 }, { label: "05:00", value: 5 }, { label: "06:00", value: 6 }, { label: "07:00", value: 7 },
+          { label: "08:00", value: 8 }, { label: "09:00", value: 9 }, { label: "10:00", value: 10 }, { label: "11:00", value: 11 },
+          { label: "12:00", value: 12 }, { label: "13:00", value: 13 }, { label: "14:00", value: 14 }, { label: "15:00", value: 15 },
+          { label: "16:00", value: 16 }, { label: "17:00", value: 17 }, { label: "18:00", value: 18 }, { label: "19:00", value: 19 },
+          { label: "20:00", value: 20 }, { label: "21:00", value: 21 }, { label: "22:00", value: 22 }, { label: "23:00", value: 23 }
         ];
       }
     }
   },
+  "schedules.$.lasthour.$": Number,
 
   "schedules.$.hours": {
-    type: Number,
+    type: Array,
     optional: true,
     label: "Hours",
     autoform: {
       type: "select-checkbox-inline",
       options: function () {
         return [
-          { label: "00:00", value: 0 }, { label: "01:00", value: 1 }, { label: "02:00", value: 2 }, { label: "04:00", value: 4 },
-          { label: "05:00", value: 5 }, { label: "06:00", value: 6 }, { label: "07:00", value: 7 }, { label: "08:00", value: 8 },
-          { label: "09:00", value: 9 }, { label: "10:00", value: 10 }, { label: "11:00", value: 11 }, { label: "12:00", value: 12 },
-          { label: "13:00", value: 13 }, { label: "14:00", value: 14 }, { label: "15:00", value: 15 }, { label: "16:00", value: 16 },
-          { label: "17:00", value: 17 }, { label: "18:00", value: 18 }, { label: "19:00", value: 19 }, { label: "20:00", value: 20 },
-          { label: "21:00", value: 21 }, { label: "22:00", value: 22 }, { label: "23:00", value: 23 }
+          { label: "00:00", value: 0 }, { label: "01:00", value: 1 }, { label: "02:00", value: 2 }, { label: "03:00", value: 3 },
+          { label: "04:00", value: 4 }, { label: "05:00", value: 5 }, { label: "06:00", value: 6 }, { label: "07:00", value: 7 },
+          { label: "08:00", value: 8 }, { label: "09:00", value: 9 }, { label: "10:00", value: 10 }, { label: "11:00", value: 11 },
+          { label: "12:00", value: 12 }, { label: "13:00", value: 13 }, { label: "14:00", value: 14 }, { label: "15:00", value: 15 },
+          { label: "16:00", value: 16 }, { label: "17:00", value: 17 }, { label: "18:00", value: 18 }, { label: "19:00", value: 19 },
+          { label: "20:00", value: 20 }, { label: "21:00", value: 21 }, { label: "22:00", value: 22 }, { label: "23:00", value: 23 }
         ];
       },
-      // defaultValue: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      defaultValue: [8, 10, 12, 14, 16, 18]
     }
   },
+  "schedules.$.hours.$": Number,
 
   "schedules.$.days": {
-    type: String,
+    type: Array,
     optional: true,
     label: "Days",
     autoform: {
@@ -557,9 +485,10 @@ Schema.Study = new SimpleSchema({
           { label: "Sunday", value: "sunday" }
         ];
       },
-      // defaultValue: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+      defaultValue: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
     }
   },
+  "schedules.$.days.$": String,
 
   "schedules.$.nrRandoms": {
     type: Number,
@@ -576,16 +505,6 @@ Schema.Study = new SimpleSchema({
     // defaultValue: 0,
     min: 0
   },
-
-  "schedules.$.questionSchedule": {
-    type: Object
-  },
-
-  // "sensors.$.questionSchedule.$.question": {
-  //   type: Number,
-  //   optional: true,
-  //   minCount: 1
-  // },
 
   "schedules.$.contextType": {
     type: String,
@@ -606,13 +525,14 @@ Schema.Study = new SimpleSchema({
 
   "schedules.$.contextApplication": { type: String, optional: true },
 
-  "schedules.$.repeat": {
+  "schedules.$.repeat_interval": {
     type: Number,
     label: "Repeat interval",
     optional: true,
     min: 1
   },
 
+  // SENSORS
   sensors: {
     type: Array,
     optional: true
@@ -624,136 +544,177 @@ Schema.Study = new SimpleSchema({
     minCount: 1
   },
 
-  "sensors.$.abc": {
-    type: String,
-    optional: true,
-    label: "test",
-    autoform: {
-      type: "select",
-      options: function () {
-        return [
-          { label: "Accelerometer", value: "accelerometer" }, { label: "Application", value: "Application" }
-        ];
-      }
-    }
-  },
-
-  "sensors.$.sensorr": {
-    type: Number,
-    label: "Question type",
-    autoform: {
-      type: "select",
-      options: function () {
-        return [
-          { label: "Free Text", value: 1 },
-          { label: "Single Choice (Radio)", value: 2 },
-          { label: "Multiple Choice (Checkbox)", value: 3 },
-          { label: "Likert Scale", value: 4 },
-          { label: "Quick Answer", value: 5 },
-          { label: "Scale", value: 6 },
-          { label: "Numeric", value: 7 }
-        ];
-      }
-    }
-  },
-
   "sensors.$.sensor_accelerometer": {
-    type: Boolean, label: "Accelerometer", optional: true
+    type: Object, label: "Accelerometer", optional: true
+  },
+  "sensors.$.sensor_accelerometer.status": {
+    type: Boolean, optional: true, label: "Accelerometer"
+  },
+  "sensors.$.sensor_accelerometer.frequency": {
+    type: Number, optional: true, label: "Sampling frequency (in microsec.)", autoform: { defaultValue: 200000 }
   },
 
   "sensors.$.sensor_application": {
-    type: Boolean, label: "Application", optional: true
+    type: Object, label: "Application", optional: true
+  },
+  "sensors.$.sensor_application.status": {
+    type: Boolean, optional: true, label: "Application"
+  },
+  "sensors.$.sensor_application.status_applications": {
+    type: Boolean, optional: true, label: "Application usage"
+  },
+  "sensors.$.sensor_application.status_notifications": {
+    type: Boolean, optional: true, label: "Notifications"
+  },
+  "sensors.$.sensor_application.status_crashes": {
+    type: Boolean, optional: true, label: "Crashes"
   },
 
   "sensors.$.sensor_barometer": {
+    type: Object, label: "Barometer", optional: true
+  },
+  "sensors.$.sensor_barometer.status": {
     type: Boolean, label: "Barometer", optional: true
   },
 
   "sensors.$.sensor_battery": {
-    type: Boolean, label: "Battery", optional: true
+    type: Object, label: "Battery", optional: true
+  },
+  "sensors.$.sensor_battery.status": {
+    type: Boolean, optional: true, label: "Battery"
   },
 
   "sensors.$.sensor_bluetooth": {
+    type: Object, label: "Bluetooth", optional: true
+  },
+  "sensors.$.sensor_bluetooth.status": {
     type: Boolean, label: "Bluetooth", optional: true
   },
 
   "sensors.$.sensor_communication": {
-    type: Boolean, label: "Communication", optional: true
+    type: Object, label: "Communication", optional: true
+  },
+  "sensors.$.sensor_communication.status": {
+    type: Boolean, optional: true, label: "Communication"
+  },
+  "sensors.$.sensor_communication.status_calls": {
+    type: Boolean, optional: true, label: "Calls sensor"
+  },
+  "sensors.$.sensor_communication.status_messages": {
+    type: Boolean, optional: true, label: "Text messages sensor"
   },
 
   "sensors.$.sensor_gravity": {
+    type: Object, label: "Gravity", optional: true
+  },
+  "sensors.$.sensor_gravity.status": {
     type: Boolean, label: "Gravity", optional: true
   },
 
   "sensors.$.sensor_gyroscope": {
+    type: Object, label: "Gyroscope", optional: true
+  },
+  "sensors.$.sensor_gyroscope.status": {
     type: Boolean, label: "Gyroscope", optional: true
   },
 
   "sensors.$.sensor_installations": {
-    type: Boolean, label: "Installations", optional: true
+    type: Object, label: "Installations", optional: true
+  },
+  "sensors.$.sensor_installations.status": {
+    type: Boolean, optional: true, label: "Installations"
   },
 
   "sensors.$.sensor_light": {
+    type: Object, label: "Light", optional: true
+  },
+  "sensors.$.sensor_light.status": {
     type: Boolean, label: "Light", optional: true
   },
 
   "sensors.$.sensor_linear_accelerometer": {
+    type: Object, label: "Linear accelerometer", optional: true
+  },
+  "sensors.$.sensor_linear_accelerometer.status": {
     type: Boolean, label: "Linear accelerometer", optional: true
   },
 
   "sensors.$.sensor_location": {
+    type: Object, label: "Location", optional: true
+  },
+  "sensors.$.sensor_location.status": {
     type: Boolean, label: "Location", optional: true
   },
 
   "sensors.$.sensor_magnetometer": {
+    type: Object, label: "Magnetometer", optional: true
+  },
+  "sensors.$.sensor_magnetometer.status": {
     type: Boolean, label: "Magnetometer", optional: true
   },
 
   "sensors.$.sensor_network": {
+    type: Object, label: "Network", optional: true
+  },
+  "sensors.$.sensor_network.status": {
     type: Boolean, label: "Network", optional: true
   },
 
   "sensors.$.sensor_processor": {
+    type: Object, label: "Processor", optional: true
+  },
+  "sensors.$.sensor_processor.status": {
     type: Boolean, label: "Processor", optional: true
   },
 
   "sensors.$.sensor_proximity": {
+    type: Object, label: "Proximity", optional: true
+  },
+  "sensors.$.sensor_proximity.status": {
     type: Boolean, label: "Proximity", optional: true
   },
 
   "sensors.$.sensor_rotation": {
+    type: Object, label: "Rotation", optional: true
+  },
+  "sensors.$.sensor_rotation.status": {
     type: Boolean, label: "Rotation", optional: true
   },
 
   "sensors.$.sensor_screen": {
-    type: Boolean, label: "Screen", optional: true
+    type: Object, label: "Screen", optional: true
+  },
+  "sensors.$.sensor_screen.status": {
+    type: Boolean, optional: true, label: "Screen"
   },
 
   "sensors.$.sensor_telephony": {
+    type: Object, label: "Telephony", optional: true
+  },
+  "sensors.$.sensor_telephony.status": {
     type: Boolean, label: "Telephony", optional: true
   },
 
   "sensors.$.sensor_temperature": {
+    type: Object, label: "Temperature", optional: true
+  },
+  "sensors.$.sensor_temperature.status": {
     type: Boolean, label: "Temperature", optional: true
   },
 
   "sensors.$.sensor_wifi": {
+    type: Object, label: "Wi-Fi", optional: true
+  },
+  "sensors.$.sensor_wifi.status": {
     type: Boolean, label: "Wi-Fi", optional: true
   },
 
-  "sensors.$.sensor_application_config": {
-    type: String,
-    label: "Application Options",
+  exported: {
+    type: Boolean,
+    label: "Exported",
     optional: true,
     autoform: {
-      type: "select-checkbox",
-      options: function () {
-        return [
-          { label: "Status Notifications", value: "notification" },
-          { label: "Status Crashes", value: "crash" },
-          { label: "Status keyboard", value: "keyboard" }
-        ];
-      }
+      type: "hidden"
     }
   }
 }, { tracker: Tracker });

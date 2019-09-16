@@ -35,7 +35,7 @@
         <div class="row">
           <label class="col-sm-4 control-label">Question {{getIndexWithOffset @index}}</label>
           <div class="col-sm-8">
-            {{this.question}}
+            {{this.title}}
           </div>
         </div>
 
@@ -114,26 +114,12 @@
         <a href="/study/{{study._id}}/sensor" class="btn btn-default align-right" role="button">Edit sensor data</a>
       </div>
       <div class="panel-body">
-        {{#each $ study.sensors}}
-
-        <div class="row">
-          <label class="col-sm-4 control-label">Sensor {{getIndexWithOffset @index}}</label>
-          <div class="col-sm-8">
-            
-          </div>
-        </div>
-
-          {{#if this.sensorActive}}
-            <div class="row">
-              <label class="col-sm-8 control-label">{{this.sensorType}}</label>
-            </div>
+        {{#each getSensors.sensor}}
+          {{#if isSensorActive this}}
+            <li>{{this.sensorType}}</li>
           {{/if}}
-          {{else}}
-          <!-- TODO : currently never shows as each check does not consider active state. -->
-          <div class="row">
-            <label class="col-sm-8 control-label">No sensor(s) activated.</label>
-          </div>
         {{/each}}
+        <!-- TODO: Display informative message when no sensors are selected. -->
       </div>
     </div>
 

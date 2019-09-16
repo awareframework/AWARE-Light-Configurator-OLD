@@ -1,5 +1,4 @@
 <template name="studySchedule">
-
       <h3 id="study-title">{{study.title}}</h3>
 
             {{> SingleQuestionnaireNav menuIdx="2"}}
@@ -16,22 +15,15 @@
                             </div>
 
                             <div class="panel-body">
-                                <p class="instruction">It is possible to create different schedules and to assign different questions to each schedule.</p>
+                                <p class="instruction">If desired, create multiple schedules and assign different questions to each schedule.</p>
 
-                                <h5>Questions included in schedule {{incremented index}}</h5>
-                                  {{> afFormGroup name=(append this.name "questionSchedule")
-                                          type="select-checkbox"
-                                          class="question-checkbox"
-                                          input-col-class="col-sm-12"
-                                          options=questionsCheckbox
-                                  }}
-
-                                <h5>Schedule method</h5>
+                                {{> afQuickField name=(append this.name "schedule_questions") template="bootstrap3-horizontal"
+                                        label-class="col-sm-3" input-col-class="col-sm-9"
+                                        options=questionsCheckbox defaultValue=questionsCheckboxValue
+                                }}
 
                                 {{> afQuickField name=(append this.name "type") template="bootstrap3-horizontal"
                                         label-class="col-sm-3" input-col-class="col-sm-9" }}
-
-                                <hr>
 
                                 {{#if afFieldValueIs  name=(append this.name "type") value="interval"}}
                                     {{> afQuickField  name=(append this.name "hours") template="bootstrap3-horizontal"
@@ -87,12 +79,10 @@
                                             placeholder="Application name, e.g. Facebook"
                                         }}
                                     {{/if}}
-
-
                                 {{/if}}
 
                                 {{#if afFieldValueIs  name=(append this.name "type") value="repeat"}}
-                                    {{> afQuickField name=(append this.name "repeat")
+                                    {{> afQuickField name=(append this.name "repeat_interval")
                                             template="bootstrap3-horizontal"
                                             label-class="col-sm-3"
                                             input-col-class="col-sm-9"
@@ -107,7 +97,7 @@
                     {{/afEachArrayItem}}
 
                     <div>
-                        <button class="btn btn-primary btn-md autoform-add-item outside-form" data-autoform-field="scheduler" type="button">Add a new schedule</button>
+                        <button class="btn btn-primary btn-md autoform-add-item outside-form" data-autoform-field="schedules" type="button">Add a new schedule</button>
                         <button class="btn btn-primary btn-md pull-right" type="submit">Next step: sensor data</button>
                     </div>
                 {{/autoForm}}
