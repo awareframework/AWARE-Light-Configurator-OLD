@@ -1,5 +1,4 @@
-try{
-import { Accounts } from 'meteor/accounts-base'
+import { Accounts } from 'meteor/accounts-base';
 
 Accounts.ui.config({
     requestPermissions: {},
@@ -19,7 +18,3 @@ Accounts.ui.config({
     //     }
     // }]
 });
-}
-catch (err){
-    console.log(err);
-}

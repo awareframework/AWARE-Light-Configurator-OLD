@@ -129,7 +129,8 @@ Picker.route('/study/:id/json', function (params, req, res, next) {
                         }
                         break;
 
-                    case 'event':
+                  case 'event':
+                        // TODO RIO: Check if this is necessary
                         for (k = 0; k < response.context[0].contextType.length; k++) {
                             switch (response.context[0].contextType[k]) {
                                 case 'ACTION_AWARE_SCREEN_ON':
@@ -172,7 +173,7 @@ Picker.route('/study/:id/json', function (params, req, res, next) {
                         trigger.hour[1] = response.schedules[i].lasthour;
                         // // for(k = 0; k < response.schedules[j].hours.length; k++){
                         //     data.hour[k] =response.schedules[j].hours[k];
-                        // }
+                        //
                         trigger.random = {
                             "random_times": response.schedules[i].nrRandoms,
                             "random_interval": response.schedules[i].interNotifTime
@@ -214,7 +215,7 @@ Picker.route('/study/:id/json', function (params, req, res, next) {
 
         finalARRAY[2] = { "schedulers": schedules };
 
-        if (typeof response.sensor != 'undefined') {
+        if (typeof response.sensor !== 'undefined') {
             for (j = 0; j < response.sensor.length; j++) {
                 if (response.sensor[j].sensorActive) {
                     var sensor_Data = {}

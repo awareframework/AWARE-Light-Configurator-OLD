@@ -1,11 +1,13 @@
+const { toStudyConfig } = require('../utils');
+
 Template.studyOverview.onCreated(function () {
   var self = this;
-  self.autorun(function () {
-    var id = FlowRouter.getParam('id');
-    self.subscribe('singleStudy', id);
-  });
+  // self.autorun(function () {
+  //   var id = FlowRouter.getParam('id');
+  //   self.subscribe('singleStudy', id);
+  // });
 
-  var id = FlowRouter.getParam('id');
+  const id = Session.get('studyId');
   var study = Studies.findOne({ _id: id });
   var questionnaire = Studies.findOne({ _id: id });
 
@@ -14,23 +16,30 @@ Template.studyOverview.onCreated(function () {
   });
 });
 
-Template.studyOverview.events({
-  'click .btn-primary': function () {
-    var id = FlowRouter.getParam('id');
-    Studies.update(
-      { _id: id },
-      { $set: { "exported": true } }
-    )
-  }
-});
-
 Template.studyOverview.helpers({
   study: () => {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     return Studies.findOne({ _id: id });
   },
+  studyConfig: () => {
+    const id = Session.get('studyId');
+    let study = Studies.findOne({ _id: id }) || {};
+    // let config = Studies.findOne({ _id: id }) || {};
+    // let sensors = []
+    //
+    // for (let key in config.sensors || {}) {
+    //   // TODO RIO: Only include sensors that are active
+    //   sensors.push({setting: key, value: config.sensors[key]})
+    // }
+    // config.study_info.id = config._id;
+    //
+    // config.sensors = sensors;
+    //
+    // return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config));
+    return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toStudyConfig(study)));
+  },
   updateStudyId: function () {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     return Studies.findOne({ _id: id });
   },
   getIndexWithOffset: function (value) {
@@ -68,7 +77,7 @@ Template.studyOverview.helpers({
   },
 
   getSensors: function () {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     var sensors = Studies.findOne({ _id: id }, { fields: { sensor: 1 } });
     return(sensors);
   },

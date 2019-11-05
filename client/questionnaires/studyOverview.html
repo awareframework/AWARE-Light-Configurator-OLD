@@ -7,19 +7,19 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Study information</h4>
-        <a href="/study/{{study._id}}/title" class="btn btn-default align-right" role="button">Edit study information</a>
+        <a href="/study/title" class="btn btn-default align-right" role="button">Edit study information</a>
       </div>
       <div class="panel-body">
         <div class="row">
           <label class="col-sm-4 control-label">Study title</label>
           <div class="col-sm-8">
-            {{study.title}}
+            {{study.study_info.study_title}}
           </div>
         </div>
         <div class="row">
           <label class="col-sm-4 control-label">Study description</label>
           <div class="col-sm-8">
-            {{study.description}}
+            {{study.study_info.study_description}}
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Questions</h4>
-        <a href="/study/{{study._id}}/questions" class="btn btn-default align-right" role="button">Edit questions</a>
+        <a href="/study/questions" class="btn btn-default align-right" role="button">Edit questions</a>
       </div>
       <div class="panel-body">
         {{#each $ study.questions}}
@@ -61,7 +61,7 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Schedule configuration</h4>
-        <a href="/study/{{study._id}}/schedule" class="btn btn-default align-right" role="button">Edit schedule configuration</a>
+        <a href="/study/schedule" class="btn btn-default align-right" role="button">Edit schedule configuration</a>
       </div>
       <div class="panel-body">
         {{#each $ study.schedules}}
@@ -72,7 +72,7 @@
             {{this.scheduleType}}
           </div>
         </div>
-        
+
         <div class="row">
           <label class="col-sm-4 control-label">Questions</label>
           <div class="col-sm-8">
@@ -111,7 +111,7 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Sensor data</h4>
-        <a href="/study/{{study._id}}/sensor" class="btn btn-default align-right" role="button">Edit sensor data</a>
+        <a href="/study/sensor" class="btn btn-default align-right" role="button">Edit sensor data</a>
       </div>
       <div class="panel-body">
         {{#each getSensors.sensor}}
@@ -124,7 +124,8 @@
     </div>
 
     <div>
-      <a href="/study/{{study._id}}/export" class="btn btn-primary btn-md pull-right" type="button">Distribute study</a>
+      <!--<a href="/study/{{study._id}}/export" class="btn btn-primary btn-md pull-right" type="button">Distribute study</a>-->
+      <a href="{{studyConfig}}" class="btn btn-primary btn-md pull-right" type="button" download="study-config.json">Download Study Config</a>
     </div>
   </div>
 

@@ -29,13 +29,13 @@
                                     {{> afQuickField  name=(append this.name "hours") template="bootstrap3-horizontal"
                                       label-class="col-sm-3" input-col-class="col-sm-9" }}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Notification send at the determined hours.</p>
+                                        <p class="instruction">Notification sent at the determined hours.</p>
                                     </div>
 
                                     {{> afQuickField name=(append this.name "days") template="bootstrap3-horizontal"
                                       label-class="col-sm-3" input-col-class="col-sm-9" }}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Notification send at the determined days.</p>
+                                        <p class="instruction">Notification sent at the determined days.</p>
                                     </div>
                                 {{/if}}
 
@@ -61,16 +61,16 @@
                                     </div>
                                 {{/if}}
 
-                                {{#if afFieldValueIs name=(append this.name "type") value="event"}}
+<!--                                {{#if afFieldValueIs name=(append this.name "type") value="event"}}
                                     <div class="col-sm-9 col-sm-offset-3">
-                                        <p class="instruction">Send questionnaire at the occurence of the selected event(s).</p>
+                                        <p class="instruction">Send questionnaire at the occurrence of the selected event(s).</p>
                                     </div>
 
                                         {{> afQuickField name=(append this.name "contextType")
                                                 template="bootstrap3-horizontal"
                                                 label-class="col-sm-3"
                                                 input-col-class="col-sm-9"}}
-                                
+
                                     {{#if afFieldValueIs name=(append this.name "contextType") value="Application"}}
                                         {{> afQuickField name=(append this.name "contextApplication")
                                             template="bootstrap3-horizontal"
@@ -79,7 +79,7 @@
                                             placeholder="Application name, e.g. Facebook"
                                         }}
                                     {{/if}}
-                                {{/if}}
+                                {{/if}}-->
 
                                 {{#if afFieldValueIs  name=(append this.name "type") value="repeat"}}
                                     {{> afQuickField name=(append this.name "repeat_interval")

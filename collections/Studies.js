@@ -1,27 +1,31 @@
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
+// import { PersistentMinimongo } from 'meteor/persistent-minimongo';
 
 Schema = {};
 
 // Required AutoForm setup
 SimpleSchema.extendOptions(['autoform']);
 
-Studies = new Mongo.Collection('studies');
+Studies = new Mongo.Collection('studies', {connection: null});
+// Studies = new PersistentMinimongo('studies', {connection: null});
+
+if (Meteor.isClient) {
+  // TODO RIO: Why does this keep refreshing data?
+  StudiesObserver = new PersistentMinimongo(Studies);
+}
 
 Studies.allow({
-  insert: function (userId, doc) {
-    return !!userId;
+  insert: function (doc) {
+    return true;
   },
-  update: function (userId, doc, fields, modifier) {
-    // Check that author_id matches user_id
-    // if (userId == doc.user_id && !doc.exported) {
-    if (userId == doc.user_id) {
-      return true;
-    } else {
-      return false;
-    }
+  update: function (doc, fields, modifier) {
+    return true;
   }
 });
+
+// create a local persistence observer
+// let studiesObserver = new LocalPersist(Studies, 'persistedStudiesCollection');
 
 Schema.Options = new SimpleSchema({
   option: { type: String, optional: true }
@@ -212,25 +216,30 @@ Schema.Options = new SimpleSchema({
 // }, { tracker: Tracker });
 
 Schema.Study = new SimpleSchema({
-  user_id: {
-    type: String,
-    label: "User_id",
-    autoValue: function () {
-      return this.userId
-    },
-    autoform: {
-      type: "hidden"
-    }
+  "study_info": {
+    type: Object,
+    optional: false,
+    minCount: 1
   },
-
-  title: {
+  "study_info.study_title": {
     type: String,
     label: "Study title"
   },
-
-  description: {
+  "study_info.study_description": {
     type: String,
     label: "Description"
+  },
+  "study_info.researcher_first": {
+    type: String,
+    label: "Researcher's first name"
+  },
+  "study_info.researcher_last": {
+    type: String,
+    label: "Researcher's last name"
+  },
+  "study_info.researcher_contact": {
+    type: String,
+    label: "Researcher's email"
   },
 
   createdAt: {
@@ -244,66 +253,45 @@ Schema.Study = new SimpleSchema({
     }
   },
 
-  researcher_givenname: {
-    type: String,
-    label: "Researcher given name",
-    autoValue: function () {
-      return Meteor.user().services.google.given_name
-    },
-    autoform: {
-      type: "hidden"
-    }
-  },
-
-  researcher_familyname: {
-    type: String,
-    label: "Researcher family name",
-    autoValue: function () {
-      return Meteor.user().services.google.family_name
-    },
-    autoform: {
-      type: "hidden"
-    }
-  },
-
-  researcher_contact: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Email,
-    label: "Researcher e-mail",
-    autoValue: function () {
-      return Meteor.user().services.google.email
-    },
-    autoform: {
-      type: "hidden"
-    }
-  },
-
-  aware_database: {
-    type: String,
-    label: "Use the AWARE server for data storage?",
-    autoform: {
-      type: 'select-radio',
-      options: [
-        { label: "Yes, use the provided database", value: "yes" },
-        { label: "No, I prefer data to be stored on my own server", value: "no" }
-      ]
-    }
-  },
-
-  database: {
-    type: Array,
-    optional: true
-  },
-
-  "database.$": {
+  // DATABASE
+  "database": {
     type: Object,
-    maxCount: 1,
-    optional: true
+    optional: false,
+    minCount: 1
   },
-
-  "database.$.ip": { type: String },
-  "database.$.username": { type: String },
-  "database.$.pw": { type: String },
+  "database.database_host": {
+    type: String,
+    label: "Host / Server IP"
+  },
+  "database.database_port": {
+    type: Number,
+    label: "Port number",
+    autoform: { defaultValue: 3306 }
+  },
+  "database.database_name": {
+    type: String,
+    label: "Database name"
+  },
+  "database.database_username": {
+    type: String,
+    label: "Username"
+  },
+  "database.database_password": {
+    type: String,
+    label: "Password"
+  },
+  // database_ca: {
+  //   type: String,
+  //   label: "CA File (.pem)"
+  // },
+  // database_client_cert: {
+  //   type: String,
+  //   label: "Client Certificate (.pem)"
+  // },
+  // database_client_key: {
+  //   type: String,
+  //   label: "Client Private Key (.pem)"
+  // },
 
   questions: {
     type: Array,
@@ -400,7 +388,7 @@ Schema.Study = new SimpleSchema({
         return [
           { label: "Interval contingent (time based)", value: "interval" },
           { label: "Signal contingent (random pattern)", value: "random" },
-          { label: "Event contingent (sensor signal)", value: "event" },
+          // { label: "Event contingent (sensor signal)", value: "event" },  TODO RIO: Comment this out
           { label: "Repeat", value: "repeat" }
         ];
       }
@@ -533,181 +521,171 @@ Schema.Study = new SimpleSchema({
   },
 
   // SENSORS
-  sensors: {
-    type: Array,
-    optional: true
-  },
-
-  "sensors.$": {
+  "sensors": {
     type: Object,
     optional: true,
     minCount: 1
   },
 
-  "sensors.$.sensor_accelerometer": {
-    type: Object, label: "Accelerometer", optional: true
-  },
-  "sensors.$.sensor_accelerometer.status": {
+  // Accelerometer
+  "sensors.status_accelerometer": {
     type: Boolean, optional: true, label: "Accelerometer"
   },
-  "sensors.$.sensor_accelerometer.frequency": {
+  "sensors.frequency_accelerometer": {
     type: Number, optional: true, label: "Sampling frequency (in microsec.)", autoform: { defaultValue: 200000 }
   },
 
-  "sensors.$.sensor_application": {
-    type: Object, label: "Application", optional: true
+  "sensors.status_applications": {
+    type: Boolean, label: "Application", optional: true
   },
-  "sensors.$.sensor_application.status": {
-    type: Boolean, optional: true, label: "Application"
-  },
-  "sensors.$.sensor_application.status_applications": {
-    type: Boolean, optional: true, label: "Application usage"
-  },
-  "sensors.$.sensor_application.status_notifications": {
+  "sensors.status_notifications": {
     type: Boolean, optional: true, label: "Notifications"
   },
-  "sensors.$.sensor_application.status_crashes": {
+  "sensors.status_crashes": {
     type: Boolean, optional: true, label: "Crashes"
   },
 
-  "sensors.$.sensor_barometer": {
-    type: Object, label: "Barometer", optional: true
-  },
-  "sensors.$.sensor_barometer.status": {
+  // Barometer
+  "sensors.status_barometer": {
     type: Boolean, label: "Barometer", optional: true
   },
-
-  "sensors.$.sensor_battery": {
-    type: Object, label: "Battery", optional: true
+  "sensors.frequency_barometer": {
+    type: Number, label: "Frequency barometer", optional: true, autoform: { defaultValue: 200000 }
   },
-  "sensors.$.sensor_battery.status": {
+  "sensors.threshold_barometer": {
+    type: Number, label: "Threshold barometer", optional: true, autoform: { defaultValue: 0 }
+  },
+  "sensors.frequency_barometer_enforce": {
+    type: Boolean, label: "Frequency barometer enforce", optional: true, autoform: { defaultValue: false }
+  },
+
+  "sensors.status_battery": {
     type: Boolean, optional: true, label: "Battery"
   },
 
-  "sensors.$.sensor_bluetooth": {
-    type: Object, label: "Bluetooth", optional: true
-  },
-  "sensors.$.sensor_bluetooth.status": {
+  "sensors.status_bluetooth": {
     type: Boolean, label: "Bluetooth", optional: true
   },
 
-  "sensors.$.sensor_communication": {
-    type: Object, label: "Communication", optional: true
-  },
-  "sensors.$.sensor_communication.status": {
+  "sensors.status_communication_events": {
     type: Boolean, optional: true, label: "Communication"
   },
-  "sensors.$.sensor_communication.status_calls": {
+  "sensors.status_calls": {
     type: Boolean, optional: true, label: "Calls sensor"
   },
-  "sensors.$.sensor_communication.status_messages": {
+  "sensors.status_messages": {
     type: Boolean, optional: true, label: "Text messages sensor"
   },
 
-  "sensors.$.sensor_gravity": {
-    type: Object, label: "Gravity", optional: true
-  },
-  "sensors.$.sensor_gravity.status": {
+  "sensors.status_gravity": {
     type: Boolean, label: "Gravity", optional: true
   },
 
-  "sensors.$.sensor_gyroscope": {
-    type: Object, label: "Gyroscope", optional: true
-  },
-  "sensors.$.sensor_gyroscope.status": {
+  "sensors.status_gyroscope": {
     type: Boolean, label: "Gyroscope", optional: true
   },
 
-  "sensors.$.sensor_installations": {
-    type: Object, label: "Installations", optional: true
-  },
-  "sensors.$.sensor_installations.status": {
+  "sensors.status_installations": {
     type: Boolean, optional: true, label: "Installations"
   },
 
-  "sensors.$.sensor_light": {
-    type: Object, label: "Light", optional: true
-  },
-  "sensors.$.sensor_light.status": {
+  "sensors.status_light": {
     type: Boolean, label: "Light", optional: true
   },
 
-  "sensors.$.sensor_linear_accelerometer": {
-    type: Object, label: "Linear accelerometer", optional: true
-  },
-  "sensors.$.sensor_linear_accelerometer.status": {
+  "sensors.status_linear_accelerometer": {
     type: Boolean, label: "Linear accelerometer", optional: true
   },
 
-  "sensors.$.sensor_location": {
-    type: Object, label: "Location", optional: true
-  },
-  "sensors.$.sensor_location.status": {
+  "sensors.status_location_gps": {
     type: Boolean, label: "Location", optional: true
   },
 
-  "sensors.$.sensor_magnetometer": {
-    type: Object, label: "Magnetometer", optional: true
-  },
-  "sensors.$.sensor_magnetometer.status": {
+  "sensors.status_magnetometer": {
     type: Boolean, label: "Magnetometer", optional: true
   },
 
-  "sensors.$.sensor_network": {
-    type: Object, label: "Network", optional: true
-  },
-  "sensors.$.sensor_network.status": {
+  "sensors.status_network_events": {
     type: Boolean, label: "Network", optional: true
   },
 
-  "sensors.$.sensor_processor": {
-    type: Object, label: "Processor", optional: true
-  },
-  "sensors.$.sensor_processor.status": {
+  "sensors.status_processor": {
     type: Boolean, label: "Processor", optional: true
   },
 
-  "sensors.$.sensor_proximity": {
-    type: Object, label: "Proximity", optional: true
-  },
-  "sensors.$.sensor_proximity.status": {
+  "sensors.status_proximity": {
     type: Boolean, label: "Proximity", optional: true
   },
 
-  "sensors.$.sensor_rotation": {
+  "sensors.sensor_rotation": {
     type: Object, label: "Rotation", optional: true
   },
-  "sensors.$.sensor_rotation.status": {
+  "sensors.status_rotation": {
     type: Boolean, label: "Rotation", optional: true
   },
 
-  "sensors.$.sensor_screen": {
-    type: Object, label: "Screen", optional: true
-  },
-  "sensors.$.sensor_screen.status": {
+  "sensors.status_screen": {
     type: Boolean, optional: true, label: "Screen"
   },
 
-  "sensors.$.sensor_telephony": {
-    type: Object, label: "Telephony", optional: true
-  },
-  "sensors.$.sensor_telephony.status": {
+  "sensors.status_telephony": {
     type: Boolean, label: "Telephony", optional: true
   },
 
-  "sensors.$.sensor_temperature": {
-    type: Object, label: "Temperature", optional: true
-  },
-  "sensors.$.sensor_temperature.status": {
+  "sensors.status_temperature": {
     type: Boolean, label: "Temperature", optional: true
   },
 
-  "sensors.$.sensor_wifi": {
-    type: Object, label: "Wi-Fi", optional: true
-  },
-  "sensors.$.sensor_wifi.status": {
+  "sensors.status_wifi": {
     type: Boolean, label: "Wi-Fi", optional: true
   },
+
+  // Web service
+  "sensors.webservice_wifi_only": {
+    type: Boolean, label: "Wifi only", optional: true
+  },
+  "sensors.frequency_webservice": {
+    type: Number, label: "Offload frequency", optional: true, autoform: { defaultValue: 30 }
+  },
+  "sensors.frequency_clean_old_data": {
+    type: Number, label: "Clean data frequency", optional: true, autoform: {
+      type: 'select-radio-inline',
+      options: function() { return [{label: "Never", value: 0}, {label: "Weekly", value: 1},
+        {label: "Monthly", value: 2}, {label: "Daily", value: 3}, {label: "Always", value: 4}]}
+    }
+  },
+  "sensors.webservice_charging": {
+    type: Boolean, label: "Charging only", optional: true
+  },
+  "sensors.webservice_silent": {
+    type: Boolean, label: "Silent", optional: true
+  },
+  "sensors.fallback_network": {
+    type: Number, label: "Fallback network", optional: true, autoform: { defaultValue: 30 }
+  },
+  "sensors.remind_to_charge": {
+    type: Boolean, label: "Remind to charge", optional: true
+  },
+  "sensors.foreground_priority": {
+    type: Boolean, label: "Foreground priority", optional: true, autoform: { defaultValue: true }
+  },
+  // "sensors.debug_flag": {
+  //   type: Boolean, label: "Debug flag", optional: true
+  // },
+  "sensors.frequency_sync_config": {
+    type: Number, label: "Config update frequency", optional: true, autoform: { defaultValue: 1 }
+  },
+
+  // Plugins
+  // "plugins": {
+  //   type: Object,
+  //   optional: true,
+  //   minCount: 1
+  // },
+  //
+  // "plugins.status_wifi": {
+  //   type: Boolean, label: "Wi-Fi", optional: true
+  // },
 
   exported: {
     type: Boolean,
@@ -724,24 +702,11 @@ Studies.attachSchema(Schema.Study);
 
 Meteor.methods({
   deleteStudies: function (id) {
-    // Check that user is logged
-    if (this.userId) {
-      // Check id format
-      check(id, String);
+    // Check id format
+    check(id, String);
 
-      // Find study to be removed
-      study = Studies.findOne({ _id: id });
-
-      // Check that author matches with login
-      if (study.user_id == this.userId) {
-        Studies.remove(id);
-      }
-      else {
-        throw new Meteor.Error('not-authorized');
-      }
-    }
-    else {
-      throw new Meteor.Error('not-authorized');
-    }
+    // Find study to be removed
+    study = Studies.findOne({ _id: id });
+    Studies.remove(id);
   }
 });

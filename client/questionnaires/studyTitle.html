@@ -1,71 +1,47 @@
 <template name="studyTitle">
-    <h3 id="study-title">{{study.title}}</h3>
+    <h3 id="study-title">
+        {{#if study and study.study_info.study_title}}
+            {{study.study_info.study_title}}
+        {{else}}
+            New study
+        {{/if}}
+    </h3>
 
     {{> SingleQuestionnaireNav}}
 
     <div class="col-sm-9 input-form">
 
-        {{#autoForm collection="Studies" id="updateTitle" type="update" doc=study}}
+        {{#autoForm collection="Studies" id="studyInfo" type=formType doc=study}}
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4>Study Information</h4>
             </div>
             <div class="panel-body">
                 <p class="instruction">Basic information of the study. This information will be presented to participants upon joining your study.</p>
-
-                    {{> afQuickField name="title" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="The title of your study "}}
-                    {{> afQuickField name="description" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="A short description of your study"}}
-                    {{> afQuickField name="researcher_givenname"}}
-                    {{> afQuickField name="researcher_familyname"}}
-                    {{> afQuickField name="researcher_contact"}}
-                    {{> afQuickField name="user_id"}}
-                    {{> afQuickField name="createdAt"}}
-                    {{> afQuickField name="exported"}}
+                    {{> afQuickField name="study_info.study_title" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="The title of your study "}}
+                    {{> afQuickField name="study_info.study_description" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="A short description of your study"}}
+                    {{> afQuickField name="study_info.researcher_first" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="First name"}}
+                    {{> afQuickField name="study_info.researcher_last" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Last name"}}
+                    {{> afQuickField name="study_info.researcher_contact" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="email@example.com"}}
             </div>
 
+            <div class="panel-heading">
+                <h4>Database Configuration</h4>
+            </div>
             <div class="panel-body">
-                <p class="instruction">Database configuration. Where will the study data be stored?</p>
+                <p class="instruction">Where will the study data be stored?</p>
+                {{> afQuickField name="database.database_host" id="database_host" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="e.g. 139.130.4.5"}}
+                {{> afQuickField name="database.database_port" id="database_port" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="e.g. 3036"}}
+                {{> afQuickField name="database.database_name" id="database_name" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Database name"}}
+                {{> afQuickField name="database.database_username" id="database_username" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Username"}}
+                {{> afQuickField name="database.database_password" id="database_password" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="password"}}
+                <!--{{> afQuickField name="database.database_ca" id="database_ca" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="file"}}-->
+                <!--{{> afQuickField name="database.database_client_cert" id="database_client_cert" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="file"}}-->
+                <!--{{> afQuickField name="database.database_client_key" id="database_client_key" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="file"}}-->
 
-                    {{> afQuickField name="aware_database" template="bootstrap3" }}
-                    
-                    {{#if afFieldValueIs name="aware_database" value="no"}}
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Host / Server IP</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="ip-input" value="nielsvanberkel.com" name="description" placeholder="e.g. 139.130.4.5" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
+                <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
 
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Database</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="database-input" value="nielsvan_aware" name="description" placeholder="Database" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Username</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="username-input" value="nielsvan_awareuser" name="description" placeholder="Username" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Password</label>
-                            <div class="col-sm-9">
-                                <input type="password" id="password-input" value="Aware123!" name="description" placeholder="Password" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>                                
-
-                        <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
-
-                        <p id="connection_status">{{response}}</p>
-                    {{/if}}
-
+                <p id="connection_status" class="text-danger">{{dbConnectionResponse}}</p>
             </div>
         </div>
 
@@ -74,4 +50,4 @@
         </div>
         {{/autoForm}}
     </div>
-</template>
+</TEMPLATE>

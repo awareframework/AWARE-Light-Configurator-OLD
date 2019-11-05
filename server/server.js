@@ -1,31 +1,41 @@
 import SlackAPI from 'node-slack';
-const Slack = new SlackAPI(Meteor.settings.private.slack.hookUrl);
+// const Slack = new SlackAPI(Meteor.settings.private.slack.hookUrl);
 
 import mysql from 'promise-mysql';
 
 Meteor.methods({
-    sendFeedback: function (doc) {
-        // Important server-side check for security and data integrity
-        check(doc, FeedbackSchema);
+    // sendFeedback: function (doc) {
+    //     // Important server-side check for security and data integrity
+    //     check(doc, FeedbackSchema);
+    //
+    //     // Build the text
+    //     var text = "Name: " + doc.name + "\n" +
+    //         "Email: " + doc.email + "\n\n" +
+    //         doc.message;
+    //
+    //     this.unblock();
+    //
+    //     Slack.send({
+    //         text: text,
+    //         channel: '#aware_create_dev',
+    //         username: 'Feedback form'
+    //     });
+    // },
 
-        // Build the text
-        var text = "Name: " + doc.name + "\n" +
-            "Email: " + doc.email + "\n\n" +
-            doc.message;
+    async testDatabase (ip, port, database, username, password) {
+        console.log("Testing database connection ...");
 
-        this.unblock();
-
-        Slack.send({
-            text: text,
-            channel: '#aware_create_dev',
-            username: 'Feedback form'
-        });
-    },
-
-    async testDatabase (ip, database, username, password) {
         try {
+            let dbconfig = {
+              host: ip,
+              port: port,
+              user: username,
+              password: password,
+              database: database
+            }
             const connection = await mysql.createConnection({
                 host: ip,
+                port: port,
                 user: username,
                 password: password,
                 database: database
@@ -40,28 +50,30 @@ Meteor.methods({
             const rows = await connection.query('SHOW GRANTS FOR CURRENT_USER');
 
             var result = JSON.stringify(rows);
-
             console.log('on server', result);
 
-            if(result.match( /(ALL|DROP|EXECUTE|UPDATE|ROUTINE|EVENT|TRIGGER)/ )) {
+            if(result.match( /(ALL|CREATE|DROP|EXECUTE|UPDATE|ROUTINE|EVENT|TRIGGER)/ )) {
                 // User account has too many privileges. Warn user and try to make a new account?
                 result = "User account has too many privileges. Warn user and try to make a new account?";
+                console.log(result);
                 
                 connection.end();
                 return result;
             }
 
-            if(!result.match( /(INSERT|CREATE)/ )) {
+            if(!result.match( /(INSERT)/ )) {
                 // User account has insufficient privileges to store data
-                result = "Insufficient priviliges for this MySQL account. Please ask your database administrator to add 'INSERT' and 'CREATE' privileges to your account.";
+                result = "Insufficient privileges for this MySQL account. Please ask your database administrator to add 'INSERT' privilege to your account.";
+                console.log(result);
 
                 connection.end();
                 return result;
             }
 
             result = "Successfully connected. User account has correct privileges.";
+            console.log(result);
             connection.end();
-            return rows;
+            return result;
         } catch (err) {
             result = "Error establishing a connection to server. Please verify connection details.";
             return result;

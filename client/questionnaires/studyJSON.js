@@ -1,10 +1,10 @@
 try {
   Template.studyJSON.onCreated(function () {
     var self = this;
-    self.autorun(function () {
-      var id = FlowRouter.getParam('id');
-      self.subscribe('singleStudy', id);
-    });
+    // self.autorun(function () {
+    //   var id = FlowRouter.getParam('id');
+    //   self.subscribe('singleStudy', id);
+    // });
   });
 
   Template.studyJSON.helpers({

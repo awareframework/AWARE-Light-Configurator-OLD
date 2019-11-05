@@ -1,10 +1,10 @@
 try {
     Template.studySchedule.onCreated(function () {
         var self = this;
-        self.autorun(function () {
-            var id = FlowRouter.getParam('id');
-            self.subscribe('singleStudy', id);
-        });
+        // self.autorun(function () {
+        //     var id = FlowRouter.getParam('id');
+        //     self.subscribe('singleStudy', id);
+        // });
 
         SEO.set({
             title: "AWARE Create - Schedule configuration"
@@ -13,7 +13,7 @@ try {
 
     AutoForm.addHooks("updateSchedule", {
         onSuccess: function (formType, result) {
-            FlowRouter.go("/study/:id/sensor", { id: FlowRouter.getParam('id') });
+            FlowRouter.go("/study/sensor");
         }
     });
 
@@ -41,36 +41,36 @@ try {
             return string1 + '.' + string2;
         },
         study: () => {
-            var id = FlowRouter.getParam('id');
+            const id = Session.get('studyId');
             return Studies.findOne({
                 _id: id
             });
         },
         updateStudyId: function () {
-            var id = FlowRouter.getParam('id');
+            const id = Session.get('studyId');
             return Studies.findOne({
                 _id: id
             });
         },
         questionsCheckbox: function () {
-            var id = FlowRouter.getParam('id');
+            const id = Session.get('studyId');
             study = Studies.findOne({
                 _id: id
             });
             var options = [];
-            if (typeof study != "undefined") {
+            if (typeof study != "undefined" && study.questions) {
                 for (i = 0; i < study.questions.length; i++) {
                     var json = {};
                     json["label"] = "Question " + (i + 1) + " - " + study.questions[i].title;
                     json["value"] = study.questions[i].id;
                     options[i] = json;
                 }
-                return options;
             }
+            return options;
         },
         questionsCheckboxValue: function () {
             var options = [];
-            if (typeof study != "undefined") {
+            if (typeof study != "undefined" && study.questions) {
                 for (i = 0; i < study.questions.length; i++) {
                     options[i] = study.questions[i].id;
                 }

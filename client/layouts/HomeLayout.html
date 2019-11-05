@@ -7,11 +7,13 @@
               based on the power of AWARE.</p>
 
             <div class="cta">
-              {{#if currentUser}}
-                <a href="/study" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
-              {{else}}
-                <a href="/register" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
-              {{/if}}
+              <!--{{#if currentUser}}-->
+                <!--<a href="/study" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>-->
+              <!--{{else}}-->
+                <!--<a href="/register" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>-->
+              <!--{{/if}}-->
+                <a href="/study" id="newStudyBtn" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
+                <a href="/study/upload" id="uploadStudyBtn" class="btn-lg btn-default" role="button"><i class="fa fa-pencil fa-lg"></i>Update an existing study</a>
             </div>
         </div>
 

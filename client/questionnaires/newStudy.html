@@ -1,5 +1,7 @@
 <template name="newStudy">
-  <h3 id="study-title">New study</h3>
+  <h3 id="study-title">
+    New study {{study.title}}
+  </h3>
 
   {{> SingleQuestionnaireNav}}
 
@@ -26,47 +28,66 @@
 
       <div class="panel-body">
                 <p class="instruction">Database configuration. Where will the study data be stored?</p>
-
-                    {{> afQuickField name="aware_database" template="bootstrap3" }}
-                    
-                    {{#if afFieldValueIs name="aware_database" value="no"}}
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Host / Server IP</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="ip-input" value="nielsvanberkel.com" name="description" placeholder="e.g. 139.130.4.5" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="ip-input">Host / Server IP</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="ip-input" name="ip-input" placeholder="e.g. 139.130.4.5" required class="form-control">
+                            <span class="help-block"></span>
                         </div>
+                    </div>
 
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Database</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="database-input" value="nielsvan_aware" name="description" placeholder="Database" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="database-input">Database</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="database-input" name="database-input" placeholder="Database" required class="form-control">
+                            <span class="help-block"></span>
                         </div>
+                    </div>
 
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Username</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="username-input" value="nielsvan_awareuser" name="description" placeholder="Username" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="username-input">Username</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="username-input" name="username-input" placeholder="Username" required class="form-control">
+                            <span class="help-block"></span>
                         </div>
+                    </div>
 
-                        <div class="form-group" data-required="true">
-                            <label class="col-sm-3 control-label" for="tf5rxAfpjq37xkFwE">Password</label>
-                            <div class="col-sm-9">
-                                <input type="password" id="password-input" value="Aware123!" name="description" placeholder="Password" required="" data-schema-key="description" class="form-control">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>                                
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="password-input">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" id="password-input" name="password-input" placeholder="Password" required class="form-control">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
 
-                        <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="ca-file">CA File (.pem)</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="ca-file" name="ca-file" required class="form-control">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
 
-                        <p id="connection_status">{{response}}</p>
-                    {{/if}}
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="client-cert">Client Certificate (.pem)</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="client-cert" name="client-cert" required class="form-control">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
 
+                    <div class="form-group" data-required="true">
+                        <label class="col-sm-3 control-label" for="client-key">Client Private Key (.pem)</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="client-key" name="client-key" required class="form-control">
+                            <span class="help-block"></span>
+                            <!-- TODO RIO: Add more descriptions to these help blocks -->
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
+
+                    <p id="connection_status">abc {{dbConnectionResponse}}</p>
             </div>
         </div>
 

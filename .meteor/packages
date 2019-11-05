@@ -50,3 +50,9 @@ ian:accounts-ui-bootstrap-3
 accounts-google@1.2.0
 google-config-ui@1.0.0
 dynamic-import
+http
+cultofcoders:persistent-session
+jeffm:local-persist
+frozeman:persistent-minimongo
+session
+reactive-dict

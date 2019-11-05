@@ -1,9 +1,9 @@
 Template.studySensor.onCreated(function () {
   var self = this;
-  self.autorun(function () {
-    var id = FlowRouter.getParam('id');
-    self.subscribe('singleStudy', id);
-  });
+  // self.autorun(function () {
+  //   var id = FlowRouter.getParam('id');
+  //   self.subscribe('singleStudy', id);
+  // });
 
   SEO.set({
     title: "AWARE Create - Sensor data"
@@ -26,7 +26,7 @@ AutoForm.addHooks(null, {
 
 AutoForm.addHooks("updateSensors", {
   onSuccess: function (formType, result) {
-    FlowRouter.go("/study/:id/overview", { id: FlowRouter.getParam('id') });
+    FlowRouter.go("/study/overview");
   }
 });
 
@@ -35,11 +35,11 @@ Template.studySensor.helpers({
     return string1 + '.' + string2;
   },
   study: () => {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     return Studies.findOne({ _id: id });
   },
   updateStudyId: function () {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     return Studies.findOne({ _id: id });
   }
 });
