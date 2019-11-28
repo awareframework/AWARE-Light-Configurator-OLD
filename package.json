@@ -1,32 +1,48 @@
 {
-  "name": "esm-creator",
+  "name": "aware-create",
   "private": true,
   "scripts": {
     "start": "meteor run",
     "reset": "meteor reset"
   },
   "dependencies": {
+    "@babel/runtime": "^7.7.4",
     "babel-runtime": "^6.26.0",
+    "basic-auth-connect": "^1.0.0",
+    "combined-stream2": "^1.1.2",
+    "compression": "^1.7.4",
+    "connect": "^3.7.0",
+    "cookie-parser": "^1.4.4",
+    "decimal.js": "^10.2.0",
+    "ejson": "^2.2.0",
+    "fibers": "^4.0.2",
     "font-awesome": "^4.7.0",
+    "jquery": "^2.2.4",
+    "lodash.isequal": "^4.5.0",
     "meteor-node-stubs": "^0.2.11",
     "mysql": "^2.17.1",
-    "node-slack": "0.0.7",
+    "parseurl": "^1.3.3",
     "promise-mysql": "^3.3.2",
+    "qs": "^6.9.1",
+    "reify": "^0.20.12",
+    "send": "^0.17.1",
     "sharer.js": "^0.3.8",
-    "simpl-schema": "^0.3.2"
+    "simpl-schema": "^0.3.2",
+    "useragent": "^2.3.0",
+    "webpage": "^0.3.0"
   },
   "description": "",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NBerkel/esm-creator-web.git"
+    "url": "https://github.com/awareframework/AWARE-Create.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NBerkel/esm-creator-web/issues"
+    "url": "https://github.com/awareframework/AWARE-Create/issues"
   },
-  "homepage": "https://github.com/NBerkel/esm-creator-web#readme"
+  "homepage": "https://github.com/awareframework/AWARE-Create#readme"
 }
