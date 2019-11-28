@@ -16,8 +16,11 @@
 
                             <div class="panel-body">
                                 <p class="instruction">If desired, create multiple schedules and assign different questions to each schedule.</p>
-
-                                {{> afQuickField name=(append this.name "schedule_questions") template="bootstrap3-horizontal"
+                                
+                                {{> afQuickField name=(append this.name "title") template="bootstrap3-horizontal"
+                                        label-class="col-sm-3" input-col-class="col-sm-9" }}
+                                
+                                {{> afQuickField name=(append this.name "questions") template="bootstrap3-horizontal"
                                         label-class="col-sm-3" input-col-class="col-sm-9"
                                         options=questionsCheckbox defaultValue=questionsCheckboxValue
                                 }}
@@ -46,14 +49,14 @@
                                     {{> afQuickField name=(append this.name "lasthour") template="bootstrap3-horizontal"
                                             label-class="col-sm-3" input-col-class="col-sm-9" value=20 }}
 
-                                    {{> afQuickField name=(append this.name "nrRandoms") template="bootstrap3-horizontal"
+                                    {{> afQuickField name=(append this.name "randomCount") template="bootstrap3-horizontal"
                                             label-class="col-sm-3" value="6" input-col-class="col-sm-9" }}
 
                                     <div class="col-sm-9 col-sm-offset-3">
                                         <p class="instruction">Number of notifications across the scheduled hour(s).</p>
                                     </div>
 
-                                    {{> afQuickField name=(append this.name "interNotifTime") template="bootstrap3-horizontal"
+                                    {{> afQuickField name=(append this.name "randomInterval") template="bootstrap3-horizontal"
                                             label-class="col-sm-3" input-col-class="col-sm-9" value="15" }}
 
                                     <div class="col-sm-9 col-sm-offset-3">
@@ -82,7 +85,7 @@
                                 {{/if}}-->
 
                                 {{#if afFieldValueIs  name=(append this.name "type") value="repeat"}}
-                                    {{> afQuickField name=(append this.name "repeat_interval")
+                                    {{> afQuickField name=(append this.name "repeatInterval")
                                             template="bootstrap3-horizontal"
                                             label-class="col-sm-3"
                                             input-col-class="col-sm-9"

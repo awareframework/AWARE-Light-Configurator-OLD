@@ -20,7 +20,7 @@ try {
       // let caFile = document.getElementById("database_ca").files[0];
       // let clientCertFile = document.getElementById("database_client_cert").files[0];
       // let clientKey = document.getElementById("database_client_key").files[0];
-      // TODO RIO: Add certificates here as well
+      // TODO: Add certificates here as well
 
       Meteor.call('testDatabase', host, port, database, username, password, function (err, response) {
         if (response) {

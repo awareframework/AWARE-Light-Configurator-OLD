@@ -47,7 +47,7 @@
                     <p class="instruction">Recommended to keep AWARE running non-stop.</p>
 
                     {{> afQuickField name="sensors.frequency_sync_config" }}
-                    <p class="instruction">How frequently to check for new study config (days)?</p>
+                    <p class="instruction">How frequently to check for new study config (min)?</p>
                 </div>
             </div>
         </div>
@@ -61,36 +61,62 @@
                 <div>
                     {{> afQuickField name="sensors.status_applications" }}
                     <p class="instruction">Application usage and incoming notifications on the device.</p>
-
                     {{#if afFieldValueIs name="sensors.status_applications" value=true}}
                         <div class="col-md-offset-1">
-                        {{> afQuickField name="sensors.status_notifications" }}
-                        {{> afQuickField name="sensors.status_crashes" }}
+                            {{> afQuickField name="sensors.status_notifications" }}
+                            <p class="instruction">Activate or deactivate application notifications sensor.</p>
+                            {{> afQuickField name="sensors.status_crashes" }}
+                            <p class="instruction">Activate or deactivate application crashes sensor.</p>
+                            {{> afQuickField name="sensors.frequency_applications" }}
+                            <p class="instruction">How frequently to check updates on background applications and services statuses (default 30 seconds)</p>
+                            {{> afQuickField name="sensors.status_keyboard" }}
+                            <p class="instruction">Log keyboard input.</p>
+                            {{> afQuickField name="sensors.mask_keyboard" }}
+                            <p class="instruction">Swaps all alphanumeric characters by A, a, and 1</p>
+                            {{> afQuickField name="sensors.mask_touch_text" }}
+                            <p class="instruction">Swaps all alphanumeric characters by A, a, and 1</p>
                         </div>
                     {{/if}}
 
                     {{> afQuickField name="sensors.status_battery" }}
                     <p class="instruction">Battery information and power related events (phone shutting down, rebooting).</p>
 
-                    {{> afQuickField name="sensors.status_communication_events" }}
+                    {{> afQuickField name="sensors.communication" }}
                     <p class="instruction">Communication events such as calls and messages, performed by or received by the user.</p>
-
-                    {{#if afFieldValueIs name="sensors.status_communication_events" value=true}}
+                    {{#if afFieldValueIs name="sensors.communication" value=true}}
                         <div class="col-md-offset-1">
-                        {{> afQuickField name="sensors.status_calls" }}
-                        {{> afQuickField name="sensors.status_messages" }}
+                            {{> afQuickField name="sensors.status_communication_events" }}
+                            <p class="instruction">Activate or deactivate high-level context of users’ communication usage.</p>
+                            {{> afQuickField name="sensors.status_calls" }}
+                            <p class="instruction">Activate or deactivate calls sensor.</p>
+                            {{> afQuickField name="sensors.status_messages" }}
+                            <p class="instruction">Activate or deactivate messages sensor.</p>
                         </div>
                     {{/if}}
 
                     {{> afQuickField name="sensors.status_installations" }}
                     <p class="instruction">Application installations, removal, and updates.</p>
 
-
                     {{> afQuickField name="sensors.status_screen" }}
                     <p class="instruction">Smartphone screen status; turning on, turning off, lock, and unlock.</p>
+                    {{#if afFieldValueIs name="sensors.status_screen" value=true}}
+                        <div class="col-md-offset-1">
+                            {{> afQuickField name="sensors.status_touch" }}
+                            <p class="instruction">Logs clicks, long-clicks and scroll up/down events.</p>
+                        </div>
+                    {{/if}}
 
                     {{> afQuickField name="sensors.status_telephony" }}
                     <p class="instruction">Information on the mobile phone capabilities of the device, connected cell towers, and neighboring towers.</p>
+
+                    {{> afQuickField name="sensors.status_timezone" }}
+                    <p class="instruction">Logs user's current timezone.</p>
+                    {{#if afFieldValueIs name="sensors.status_timezone" value=true}}
+                        <div class="col-md-offset-1">
+                            {{> afQuickField name="sensors.frequency_timezone" }}
+                            <p class="instruction">Frequency in seconds to check for changes in timezone.</p>
+                        </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -105,7 +131,12 @@
                 <p class="instruction">Acceleration applied to the device, including the force of gravity.</p>
                 {{#if afFieldValueIs name="sensors.status_accelerometer" value=true}}
                     <div class="col-md-offset-1">
-                        {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-5" name="sensors.frequency_accelerometer" }}
+                        {{> afQuickField name="sensors.frequency_accelerometer" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest).</p>
+                        {{> afQuickField name="sensors.threshold_accelerometer" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01. 0 = disabled</p>
+                        {{> afQuickField name="sensors.frequency_accelerometer_enforce" }}
+                        <p class="instruction">Enforce sampling rate</p>
                     </div>
                 {{/if}}
 
@@ -113,91 +144,194 @@
                 <p class="instruction">Ambient air pressure.</p>
                 {{#if afFieldValueIs name="sensors.status_barometer" value=true}}
                     <div class="col-md-offset-1">
-                        {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-5" name="sensors.frequency_barometer" }}
+                        {{> afQuickField name="sensors.frequency_barometer" }}
                         <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
-                        {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-5" name="sensors.threshold_barometer" }}
-                        {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-5" name="sensors.frequency_barometer_enforce" }}
+                        {{> afQuickField name="sensors.threshold_barometer" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01. 0 = disabled</p>
+                        {{> afQuickField name="sensors.frequency_barometer_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
                     </div>
                 {{/if}}
 
                 {{> afQuickField name="sensors.status_bluetooth" }}
                 <p class="instruction">Smartphone's Bluetooth sensor and surrounding Bluetooth-enabled and visible devices. Includes respective RSSI dB values.</p>
+                {{#if afFieldValueIs name="sensors.status_bluetooth" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_bluetooth" }}
+                        <p class="instruction">Deterministic frequency in seconds (default is 60 seconds).</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_gravity" }}
                 <p class="instruction">Force of gravity applied to the the device, provides a three dimensional vector indicating the direction and magnitude of gravity.</p>
+                {{#if afFieldValueIs name="sensors.status_gravity" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_gravity" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_gravity" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_gravity_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_gyroscope" }}
                 <p class="instruction">Rate or rotation in rad/s around a device’s x-, y-, and z-axis.</p>
+                {{#if afFieldValueIs name="sensors.status_gyroscope" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_gyroscope" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_gyroscope" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_gyroscope_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_light" }}
                 <p class="instruction">Level of ambient light.</p>
+                {{#if afFieldValueIs name="sensors.status_light" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_light" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_light" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_light_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_linear_accelerometer" }}
                 <p class="instruction">Acceleration applied to the device, excluding the force of gravity.</p>
+                {{#if afFieldValueIs name="sensors.status_linear_accelerometer" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_linear_accelerometer" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_linear_accelerometer" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_linear_accelerometer_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
-                {{> afQuickField name="sensors.status_location_gps" }}
+                {{> afQuickField name="sensors.location" }}
                 <p class="instruction">Best location estimate of the users’ current location, based on an algorithm that results in minimum battery impact.</p>
+                {{#if afFieldValueIs name="sensors.location" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.status_location_gps" }}
+                        <p class="instruction">Activate or deactivate GPS locations.</p>
+                        {{> afQuickField name="sensors.status_location_network" }}
+                        <p class="instruction">Activate or deactivate Network locations.</p>
+                        {{> afQuickField name="sensors.frequency_gps" }}
+                        <p class="instruction">How frequent to check the GPS location, in seconds. By default, every 180 seconds. Setting to 0 (zero) will keep the GPS location tracking always on.</p>
+                        {{> afQuickField name="sensors.frequency_network" }}
+                        <p class="instruction">How frequently to check the network location, in seconds. By default, every 300 seconds. Setting to 0 (zero) will keep the network location tracking always on.</p>
+                        {{> afQuickField name="sensors.min_location_gps_accuracy" }}
+                        <p class="instruction">The minimum acceptable accuracy of GPS location, in meters. By default, 150 meters. Setting to 0 (zero) will keep the GPS location tracking always on.</p>
+                        {{> afQuickField name="sensors.min_location_network_accuracy" }}
+                        <p class="instruction">The minimum acceptable accuracy of network location, in meters. By default, 1500 meters. Setting to 0 (zero) will keep the network location tracking always on.</p>
+                        {{> afQuickField name="sensors.location_expiration_time" }}
+                        <p class="instruction">The amount of elapsed time, in seconds, until the location is considered outdated. By default, 300 seconds.</p>
+                        {{> afQuickField name="sensors.status_location_passive" }}
+                        <p class="instruction">Don't fetch locations, but use locations if other apps request them.</p>
+                        {{> afQuickField name="sensors.location_save_all" }}
+                        <p class="instruction">Don't use heuristics to only record best locations</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_magnetometer" }}
                 <p class="instruction">Geomagnetic field strength around the device.</p>
+                {{#if afFieldValueIs name="sensors.status_magnetometer" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_magnetometer" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_magnetometer" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_magnetometer_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
-                {{> afQuickField name="sensors.status_network_events" }}
+                {{> afQuickField name="sensors.network" }}
                 <p class="instruction">Information on the network sensors availability of the device. These include use of airplane mode, Wi-Fi, Bluetooth, GPS, mobile, and WIMAX  status as well as internet availability.</p>
+                {{#if afFieldValueIs name="sensors.network" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.status_network_events" }}
+                        <p class="instruction">Activate or deactivate sensor.</p>
+                        {{> afQuickField name="sensors.status_network_traffic" }}
+                        <p class="instruction">Activate or deactivate sensor.</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_processor" }}
                 <p class="instruction">Processor load.</p>
+                {{#if afFieldValueIs name="sensors.status_processor" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_processor" }}
+                        <p class="instruction">Frequency in seconds to update the processor load, by default is 10 seconds.</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_proximity" }}
                 <p class="instruction">Distance to an object in front of the device.</p>
+                {{#if afFieldValueIs name="sensors.status_proximity" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_proximity" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_proximity" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_proximity_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_rotation" }}
                 <p class="instruction">Orientation of the device as a combination of an angle and an axis.</p>
+                {{#if afFieldValueIs name="sensors.status_rotation" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_rotation" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest)</p>
+                        {{> afQuickField name="sensors.threshold_rotation" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01</p>
+                        {{> afQuickField name="sensors.frequency_rotation_enforce" }}
+                        <p class="instruction">Enforce the frequency</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_temperature" }}
                 <p class="instruction">Ambient air temperature in Celsius (˚C). Not many devices have this sensor available.</p>
+                {{#if afFieldValueIs name="sensors.status_temperature" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_temperature" }}
+                        <p class="instruction">Non-deterministic frequency in microseconds (dependent of the hardware sensor capabilities and resources), e.g., 200000 (normal), 60000 (UI), 20000 (game), 0 (fastest).</p>
+                        {{> afQuickField name="sensors.threshold_temperature" }}
+                        <p class="instruction">E.g., log only if [x,y,z] >= 0.01. 0 = disabled</p>
+                        {{> afQuickField name="sensors.frequency_temperature_enforce" }}
+                        <p class="instruction">Enforce sampling rate</p>
+                    </div>
+                {{/if}}
 
                 {{> afQuickField name="sensors.status_wifi" }}
-                <p class="instruction">The device’s Wi-Fi sensor, current AP, and surrounding Wi-Fi visible devices with respective RSSI dB values.
-                </p>
+                <p class="instruction">The device’s Wi-Fi sensor, current AP, and surrounding Wi-Fi visible devices with respective RSSI dB values.</p>
+                {{#if afFieldValueIs name="sensors.status_wifi" value=true}}
+                    <div class="col-md-offset-1">
+                        {{> afQuickField name="sensors.frequency_wifi" }}
+                        <p class="instruction">How often to scan for devices, in seconds (default = 60 seconds).</p>
+                    </div>
+                {{/if}}
             </div>
         </div>
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h4>Plugins</h4>
-            </div>
+        <!--<div class="panel panel-info">-->
+            <!--<div class="panel-heading">-->
+                <!--<h4>Plugins</h4>-->
+            <!--</div>-->
 
-            <div class="panel panel-body">
-                <div>
-                    <!--{{> afQuickField name="sensors.webservice_wifi_only" }}-->
-                    <!--<p class="instruction">Upload data only when connected to Wi-Fi.</p>-->
-
-                    <!--{{> afQuickField name="sensors.webservice_charging" }}-->
-                    <!--<p class="instruction">Upload only if charging.</p>-->
-
-                    <!--{{> afQuickField name="sensors.frequency_webservice" }}-->
-                    <!--<p class="instruction">How often the data is synchronised with the webservices (min)?</p>-->
-
-                    <!--{{> afQuickField name="sensors.frequency_clean_old_data" }}-->
-                    <!--<p class="instruction">How frequently to clean old data?</p>-->
-
-                    <!--{{> afQuickField name="sensors.webservice_silent" }}-->
-                    <!--<p class="instruction">Don't show sync notifications.</p>-->
-
-                    <!--{{> afQuickField name="sensors.fallback_network" }}-->
-                    <!--<p class="instruction">Fallback to 3G syncing after specified number of hours trying over WiFi.</p>-->
-
-                    <!--{{> afQuickField name="sensors.remind_to_charge" }}-->
-                    <!--<p class="instruction">Remind to charge when 15% battery is left.</p>-->
-
-                    <!--{{> afQuickField name="sensors.foreground_priority" }}-->
-                    <!--<p class="instruction">Recommended to keep AWARE running non-stop.</p>-->
-
-                    <!--{{> afQuickField name="sensors.frequency_sync_config" }}-->
-                    <!--<p class="instruction">How frequently to check for new study config (days)?</p>-->
-                </div>
-            </div>
-        </div>
+            <!--<div class="panel panel-body">-->
+                <!--<div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <button type="submit" class="btn btn-primary btn-md pull-right">Next step: overview</button> {{/autoForm}}
     </div>

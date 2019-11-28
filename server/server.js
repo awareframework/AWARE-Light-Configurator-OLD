@@ -1,4 +1,4 @@
-import SlackAPI from 'node-slack';
+// import SlackAPI from 'node-slack';
 // const Slack = new SlackAPI(Meteor.settings.private.slack.hookUrl);
 
 import mysql from 'promise-mysql';

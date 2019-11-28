@@ -51,8 +51,6 @@ function toStudySchema(config) {
       }
 
       updatedQuestion[updatedKey] = value
-
-      console.log('Key: ' + key + ' | Updated key: ' + updatedKey + ' | value: ' + value)
     }
     questions.push(updatedQuestion)
   }
@@ -78,17 +76,6 @@ function toStudyConfig(study) {
   for (let key in config.sensors || {}) {
     sensors.push({setting: key, value: config.sensors[key]})
   }
-
-  // for (let key in config.sensors || {}) {
-  //   let sensor = config.sensors[key]
-  //
-  //   if (typeof sensor === 'object' && sensor[SENSOR_STATUS_KEY]) {
-  //     for (let settingKey in sensor) {
-  //       let settingName = SENSOR_STATUS_PREFIX + key ? settingKey === SENSOR_STATUS_KEY : settingKey
-  //       sensors.push({setting: settingName, value: sensor[settingKey]})
-  //     }
-  //   }
-  // }
 
   // Include default required sensors
   sensors.push({setting: 'status_esm', value: true})
@@ -127,6 +114,7 @@ function toStudyConfig(study) {
   config.study_info.id = config._id;
   config.questions = questions;
   config.sensors = sensors;
+  config.schedules = config.schedules || [];
 
   console.log("Exported study config: " + config)
 

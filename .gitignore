@@ -3,5 +3,4 @@
 .deploy
 .DS_store
 node_modules/
-
-settings.json
+build/

@@ -24,18 +24,10 @@ Template.studyOverview.helpers({
   studyConfig: () => {
     const id = Session.get('studyId');
     let study = Studies.findOne({ _id: id }) || {};
-    // let config = Studies.findOne({ _id: id }) || {};
-    // let sensors = []
-    //
-    // for (let key in config.sensors || {}) {
-    //   // TODO RIO: Only include sensors that are active
-    //   sensors.push({setting: key, value: config.sensors[key]})
-    // }
-    // config.study_info.id = config._id;
-    //
-    // config.sensors = sensors;
-    //
-    // return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config));
+
+    // Update study's updatedAt field
+    study.updatedAt = new Date();
+
     return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toStudyConfig(study)));
   },
   updateStudyId: function () {
