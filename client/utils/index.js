@@ -58,8 +58,7 @@ function toStudySchema(config) {
   config.questions = questions;
   config.sensors = sensors;
 
-  console.log("Imported study config schema: ")
-  console.log(config)
+  console.log("Imported study config schema: " + config)
 
   return config
 }
@@ -82,7 +81,7 @@ function toStudyConfig(study) {
   sensors.push({setting: 'status_webservice', value: true})
 
   // Update esm question to match client's ESM factory schema
-  for (let question of config.questions || {}) {
+  for (let question of config.questions || []) {
     let updatedQuestion = {}
     let questionType = ESM_TYPE_MAPPING[question['type']]
 

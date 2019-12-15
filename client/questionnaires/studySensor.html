@@ -1,5 +1,5 @@
 <template name="studySensor">
-    <h3 id="study-title">{{study.title}}</h3>
+    <h3 id="study-title">{{study.study_info.study_title}}</h3>
     {{> SingleQuestionnaireNav menuIdx="3"}}
 
     <div class="col-sm-9 input-form">
@@ -46,8 +46,14 @@
                     {{> afQuickField name="sensors.foreground_priority" }}
                     <p class="instruction">Recommended to keep AWARE running non-stop.</p>
 
+                    {{> afQuickField name="sensors.debug_flag" }}
+                    <p class="instruction">Show debug messages in logcat.</p>
+
                     {{> afQuickField name="sensors.frequency_sync_config" }}
                     <p class="instruction">How frequently to check for new study config (min)?</p>
+
+                    {{> afQuickField name="sensors.enable_config_update" }}
+                    <p class="instruction">Allow participants to modify the study config from the mobile.</p>
                 </div>
             </div>
         </div>
@@ -328,11 +334,105 @@
             <!--</div>-->
 
             <!--<div class="panel panel-body">-->
-                <!--<div>-->
-                <!--</div>-->
+                <!--{{> afQuickField name="plugins.status_plugin_google_login" }}-->
+                <!--<p class="instruction">This plugin allows researchers and users to personalise their AWARE experience with Google.</p>-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_device_usage" }}-->
+                <!--<p class="instruction">This plugin measures how much you use your device: for how long you didn't use; average non-use, average use and daily total amount of use.</p>-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_ambient_noise" }}-->
+                <!--<p class="instruction">This plugin measures the ambient noise (Hz, dB) as noisy or silent moments. It adds the daily noise exposure on the stream, showing the average dB and Hz per hour throughout the day.</p>-->
+                <!--{{#if afFieldValueIs name="plugins.status_plugin_ambient_noise" value=true}}-->
+                    <!--<div class="col-md-offset-1">-->
+                        <!--{{> afQuickField name="plugins.frequency_plugin_ambient_noise" }}-->
+                        <!--<p class="instruction">Interval between audio data snippets, in minutes. Recommended value is every 5 minutes or higher.</p>-->
+                        <!--{{> afQuickField name="plugins.plugin_ambient_noise_silence_threshold" }}-->
+                        <!--<p class="instruction">How many dB is a noisy environment?</p>-->
+                        <!--{{> afQuickField name="plugins.plugin_ambient_noise_sample_size" }}-->
+                        <!--<p class="instruction">For how long we collect data, in seconds.</p>-->
+                        <!--{{> afQuickField name="plugins.plugin_ambient_noise_no_raw" }}-->
+                        <!--<p class="instruction">Only store the signal analysis.</p>-->
+                    <!--</div>-->
+                <!--{{/if}}-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_google_activity_recognition" }}-->
+                <!--<p class="instruction">This plugin uses Google Location APIs to capture users mode of transportation: still, walking, running, biking, in vehicle (car, bus).</p>-->
+                <!--{{#if afFieldValueIs name="plugins.status_plugin_google_activity_recognition" value=true}}-->
+                    <!--<div class="col-md-offset-1">-->
+                        <!--{{> afQuickField name="plugins.frequency_plugin_google_activity_recognition" }}-->
+                        <!--<p class="instruction">How frequently to detect users' activity, in seconds. By default, every 60 seconds.</p>-->
+                    <!--</div>-->
+                <!--{{/if}}-->
+
+                <!--{{> afQuickField name="plugins.status_google_fused_location" }}-->
+                <!--<p class="instruction">This plugin uses Google's Fused Locations API to provide the user's current location in an energy efficient way. It also allows the user to define geo-tagged areas.</p>-->
+                <!--{{#if afFieldValueIs name="plugins.status_google_fused_location" value=true}}-->
+                    <!--<div class="col-md-offset-1">-->
+                        <!--{{> afQuickField name="plugins.frequency_google_fused_location" }}-->
+                        <!--<p class="instruction">How frequently to fetch user's location (in seconds), default 300 seconds.</p>-->
+                        <!--{{> afQuickField name="plugins.max_frequency_google_fused_location" }}-->
+                        <!--<p class="instruction">How fast are you willing to get the latest location (in seconds), default 60 seconds.</p>-->
+                        <!--{{> afQuickField name="plugins.accuracy_google_fused_location" }}-->
+                        <!--<p class="instruction">One of the following: * 100 (high power): uses GPS only - works best outdoors, highest accuracy * 102 (balanced): uses GPS, Network and Wifi - works both indoors and outdoors, good accuracy (default) * 104 (low power): uses only Network and WiFi - poorest accuracy, medium accuracy * 105 (no power) - scavenges location requests from other apps.</p>-->
+                        <!--{{> afQuickField name="plugins.fallback_location_timeout" }}-->
+                        <!--<p class="instruction">Wait X seconds for GPS satellite fix to timeout, default 20 seconds.</p>-->
+                        <!--{{> afQuickField name="plugins.location_sensitivity" }}-->
+                        <!--<p class="instruction">Move more than X meter(s) to request another location fix, default 5 meters.</p>-->
+                    <!--</div>-->
+                <!--{{/if}}-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_openweather" }}-->
+                <!--<p class="instruction">This plugin uses Google Fused Location in low power mode and OpenWeather API to provide the weather conditions where the user is.</p>-->
+                <!--{{#if afFieldValueIs name="plugins.status_plugin_openweather" value=true}}-->
+                    <!--<div class="col-md-offset-1">-->
+                        <!--{{> afQuickField name="plugins.plugin_openweather_frequency" }}-->
+                        <!--<p class="instruction">How frequently to fetch weather information (in minutes), default 60 minutes.</p>-->
+                        <!--{{> afQuickField name="plugins.api_key_plugin_openweather" }}-->
+                        <!--<p class="instruction">OpenWeather API key. Get your free API key from openweathermap.org.</p>-->
+                        <!--{{> afQuickField name="plugins.units_plugin_openweather" }}-->
+                        <!--<p class="instruction">Imperial or metric, default metric.</p>-->
+                    <!--</div>-->
+                <!--{{/if}}-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_studentlife_audio" }}-->
+                <!--<p class="instruction">This plugin detects if the user is engaged in a conversation or not. This plugin was developed as a collaboration between Cornell and Dartmouth College.</p>-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_fitbit" }}-->
+                <!--<p class="instruction">This plugin allows researchers to collect the data from a Fitbit device: calories, steps, heart-rate, sleep.</p>-->
+                <!--{{#if afFieldValueIs name="plugins.status_plugin_fitbit" value=true}}-->
+                    <!--<div class="col-md-offset-1">-->
+                        <!--{{> afQuickField name="plugins.plugin_fitbit_frequency" }}-->
+                        <!--<p class="instruction">interval in which to check for new data on Fitbit. Fitbit has a hard-limit of 150 data checks, per hour, per device.</p>-->
+                        <!--{{> afQuickField name="plugins.units_plugin_fitbit" }}-->
+                        <!--<p class="instruction">One of metric/imperial</p>-->
+                        <!--{{> afQuickField name="plugins.fitbit_granularity" }}-->
+                        <!--<p class="instruction">Intraday granularity. One of 1d/15min/1min for daily summary, 15 minutes and 1 minute, respectively.</p>-->
+                        <!--{{> afQuickField name="plugins.fitbit_hr_granularity" }}-->
+                        <!--<p class="instruction">Intraday granularity. One of 1min/1sec for 1 minute, and 5 second interval respectively (setting is 1sec but returns every 5sec).</p>-->
+                        <!--{{> afQuickField name="plugins.api_key_plugin_fitbit" }}-->
+                        <!--{{> afQuickField name="plugins.api_secret_plugin_fitbit" }}-->
+                    <!--</div>-->
+                <!--{{/if}}-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_contacts" }}-->
+                <!--<p class="instruction">This plugin allows researchers to match contacts with calls and sms one-way hash.</p>-->
+                <!--{{#if afFieldValueIs name="plugins.status_plugin_contacts" value=true}}-->
+                    <!--<div class="col-md-offset-1">-->
+                        <!--{{> afQuickField name="plugins.frequency_plugin_contacts" }}-->
+                        <!--<p class="instruction">Update every X days.</p>-->
+                    <!--</div>-->
+                <!--{{/if}}-->
+
+                <!--{{> afQuickField name="plugins.status_plugin_esm_scheduler" }}-->
+                <!--<p class="instruction">This plugin allows you to schedule ESMs using a shared Google Calendar with your study participants. This plugin reads the events of a shared Google calendar.</p>-->
             <!--</div>-->
         <!--</div>-->
 
-        <button type="submit" class="btn btn-primary btn-md pull-right">Next step: overview</button> {{/autoForm}}
+        <div>
+            <a class="btn btn-primary btn-md pull-left" href="/study/schedule">Back</a>
+            <button type="submit" class="btn btn-primary btn-md pull-right">Next step: overview</button>
+        </div>
+
+        {{/autoForm}}
     </div>
 </template>

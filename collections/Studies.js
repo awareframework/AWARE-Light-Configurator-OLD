@@ -132,7 +132,10 @@ Schema.Study = new SimpleSchema({
 
   // QUESTIONS
   "questions.$.title": { type: String, max: 50 },
-  "questions.$.instructions": String,
+  "questions.$.instructions": {
+    type: String,
+    optional: true
+  },
   "questions.$.id": {
     type: Number,
     autoform: {
@@ -200,13 +203,14 @@ Schema.Study = new SimpleSchema({
 
   "schedules.$.title": {
     type: String,
-    optional: true,
+    optional: false,
     label: "Title"
   },
   "schedules.$.type": {
     type: String,
     optional: true,
     autoform: {
+      defaultValue: "interval",
       type: "select-radio",
       label: "Schedule type",
       options: function () {
@@ -616,7 +620,7 @@ Schema.Study = new SimpleSchema({
     type: Boolean, label: "Timezone", optional: true
   },
   "sensors.frequency_timezone": {
-    type: Number, label: "Frequency temperature", optional: true, autoform: { defaultValue: 200000 }
+    type: Number, label: "Frequency timezone", optional: true, autoform: { defaultValue: 200000 }
   },
 
   // Wi-fi
@@ -657,32 +661,132 @@ Schema.Study = new SimpleSchema({
   "sensors.foreground_priority": {
     type: Boolean, label: "Foreground priority", optional: true, autoform: { defaultValue: true }
   },
-  // "sensors.debug_flag": {
-  //   type: Boolean, label: "Debug flag", optional: true
-  // },
+  "sensors.debug_flag": {
+    type: Boolean, label: "Debug flag", optional: true
+  },
   "sensors.frequency_sync_config": {
-    type: Number, label: "Config update frequency", optional: true, autoform: { defaultValue: 1 }
+    type: Number, label: "Config update frequency", optional: true, autoform: { defaultValue: 60 }
+  },
+  "sensors.enable_config_update": {
+    type: Boolean, label: "Enable settings update", optional: true, autoform: { defaultValue: false }
   },
 
-  // Plugins
+  // // Plugins
   // "plugins": {
   //   type: Object,
   //   optional: true,
   //   minCount: 1
   // },
   //
-  // "plugins.status_wifi": {
-  //   type: Boolean, label: "Wi-Fi", optional: true
+  // // Google Auth
+  // "plugins.status_plugin_google_login": {
+  //   type: Boolean, label: "AWARE: Google Auth", optional: true
   // },
-
-  exported: {
-    type: Boolean,
-    label: "Exported",
-    optional: true,
-    autoform: {
-      type: "hidden"
-    }
-  }
+  //
+  // // Device usage
+  // "plugins.status_plugin_device_usage": {
+  //   type: Boolean, label: "AWARE: Device Usage", optional: true
+  // },
+  //
+  // // Ambient Noise
+  // "plugins.status_plugin_ambient_noise": {
+  //   type: Boolean, label: "AWARE: Ambient Noise", optional: true
+  // },
+  // "plugins.frequency_plugin_ambient_noise": {
+  //   type: Number, label: "Frequency plugin ambient noise", optional: true
+  // },
+  // "plugins.plugin_ambient_noise_silence_threshold": {
+  //   type: Number, label: "Plugin ambient noise silence threshold", optional: true
+  // },
+  // "plugins.plugin_ambient_noise_sample_size": {
+  //   type: Number, label: "Plugin ambient noise sample size", optional: true
+  // },
+  // "plugins.plugin_ambient_noise_no_raw": {
+  //   type: Boolean, label: "Plugin ambient noise no raw", optional: true
+  // },
+  //
+  // // Activity recognition
+  // "plugins.status_plugin_google_activity_recognition": {
+  //   type: Boolean, label: "AWARE: Activity Recognition", optional: true
+  // },
+  // "plugins.frequency_plugin_google_activity_recognition": {
+  //   type: Number, label: "Frequency plugin google activity recognition", optional: true
+  // },
+  //
+  // // Google fused location
+  // "plugins.status_google_fused_location": {
+  //   type: Boolean, label: "AWARE: Google Fused Location", optional: true
+  // },
+  // "plugins.frequency_google_fused_location": {
+  //   type: Number, label: "Frequency google fused location", optional: true
+  // },
+  // "plugins.max_frequency_google_fused_location": {
+  //   type: Number, label: "Max frequency google fused location", optional: true
+  // },
+  // "plugins.accuracy_google_fused_location": {
+  //   type: Number, label: "Accuracy google fused location", optional: true
+  // },
+  // "plugins.fallback_location_timeout": {
+  //   type: Boolean, label: "Fallback location timeout", optional: true
+  // },
+  // "plugins.location_sensitivity": {
+  //   type: Boolean, label: "Location sensitivity", optional: true
+  // },
+  //
+  // // Open weather
+  // "plugins.status_plugin_openweather": {
+  //   type: Boolean, label: "AWARE: OpenWeather", optional: true
+  // },
+  // "plugins.plugin_openweather_frequency": {
+  //   type: Number, label: "Plugin openweather frequency", optional: true
+  // },
+  // "plugins.api_key_plugin_openweather": {
+  //   type: String, label: "Api key plugin openweather", optional: true
+  // },
+  // "plugins.units_plugin_openweather": {
+  //   type: String, label: "Units plugin openweather", optional: true
+  // },
+  //
+  // // Student life audio
+  // "plugins.status_plugin_studentlife_audio": {
+  //   type: Boolean, label: "AWARE: Conversations", optional: true
+  // },
+  //
+  // // Fitbit
+  // "plugins.status_plugin_fitbit": {
+  //   type: Boolean, label: "AWARE: Fitbit", optional: true
+  // },
+  // "plugins.plugin_fitbit_frequency": {
+  //   type: Number, label: "Plugin fitbit frequency", optional: true
+  // },
+  // "plugins.units_plugin_fitbit": {
+  //   type: String, label: "Units plugin fitbit", optional: true
+  // },
+  // "plugins.fitbit_granularity": {
+  //   type: String, label: "Fitbit granularity", optional: true
+  // },
+  // "plugins.fitbit_hr_granularity": {
+  //   type: String, label: "Fitbit hr granularity", optional: true
+  // },
+  // "plugins.api_key_plugin_fitbit": {
+  //   type: String, label: "Fitbit Client Key", optional: true
+  // },
+  // "plugins.api_secret_plugin_fitbit": {
+  //   type: String, label: "Fitbit Client Secret", optional: true
+  // },
+  //
+  // // Contacts
+  // "plugins.status_plugin_contacts": {
+  //   type: Boolean, label: "AWARE: Contacts", optional: true
+  // },
+  // "plugins.frequency_plugin_contacts": {
+  //   type: Number, label: "Frequency plugin contacts", optional: true, autoform: { defaultValue: 1 }
+  // },
+  //
+  // // ESM scheduler
+  // "plugins.status_plugin_esm_scheduler": {
+  //   type: Boolean, label: "AWARE: ESM Scheduler", optional: true
+  // }
 }, { tracker: Tracker });
 
 // Schema.Study.extend(Schema.Questions);

@@ -1,5 +1,5 @@
 <template name="studyOverview">
-  <h3 id="study-title">{{study.title}}</h3>
+  <h3 id="study-title">{{study.study_info.study_title}}</h3>
 
   {{> SingleQuestionnaireNav menuIdx="4"}}
 
@@ -69,39 +69,39 @@
         <div class="row">
           <label class="col-sm-4 control-label">Schedule {{getIndexWithOffset @index}}</label>
           <div class="col-sm-8">
-            {{this.scheduleType}}
+            {{this.title}}
           </div>
         </div>
 
         <div class="row">
           <label class="col-sm-4 control-label">Questions</label>
           <div class="col-sm-8">
-            {{#each this.questionSchedule}}
-            {{#let schedulerIdx=this}}
-            {{#each study.questions}}
-            {{#if equals schedulerIdx @index}}
-            {{this.question}}<br/>
-            {{/if}}
-            {{/each}}
-            {{/let}}
-            {{/each}}
+            <!--{{#each this.questions}}-->
+            <!--{{#let schedulerIdx=this}}-->
+            <!--{{#each study.questions}}-->
+            <!--{{#if equals schedulerIdx @index}}-->
+            {{this.questions}}<br/>
+            <!--{{/if}}-->
+            <!--{{/each}}-->
+            <!--{{/let}}-->
+            <!--{{/each}}-->
           </div>
         </div>
 
-        <div class="row">
-          <label class="col-sm-4 control-label">Configuration</label>
-          <div class="col-sm-8">
-            {{#each this.questionSchedule}}
-            {{#let schedulerIdx=this}}
-            {{#each study.questions}}
-            {{#if equals schedulerIdx @index}}
-            {{this.question}}<br/>
-            {{/if}}
-            {{/each}}
-            {{/let}}
-            {{/each}}
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<label class="col-sm-4 control-label">Configuration</label>-->
+          <!--<div class="col-sm-8">-->
+            <!--{{#each this.questionSchedule}}-->
+            <!--{{#let schedulerIdx=this}}-->
+            <!--{{#each study.questions}}-->
+            <!--{{#if equals schedulerIdx @index}}-->
+            <!--{{this.question}}<br/>-->
+            <!--{{/if}}-->
+            <!--{{/each}}-->
+            <!--{{/let}}-->
+            <!--{{/each}}-->
+          <!--</div>-->
+        <!--</div>-->
 
         {{#unless $last}}<hr>{{/unless}}
         {{/each}}

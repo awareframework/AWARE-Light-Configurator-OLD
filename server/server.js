@@ -1,38 +1,13 @@
-// import SlackAPI from 'node-slack';
-// const Slack = new SlackAPI(Meteor.settings.private.slack.hookUrl);
-
 import mysql from 'promise-mysql';
+import db from './db';
 
 Meteor.methods({
-    // sendFeedback: function (doc) {
-    //     // Important server-side check for security and data integrity
-    //     check(doc, FeedbackSchema);
-    //
-    //     // Build the text
-    //     var text = "Name: " + doc.name + "\n" +
-    //         "Email: " + doc.email + "\n\n" +
-    //         doc.message;
-    //
-    //     this.unblock();
-    //
-    //     Slack.send({
-    //         text: text,
-    //         channel: '#aware_create_dev',
-    //         username: 'Feedback form'
-    //     });
-    // },
-
+  checkInsertPrivileges: db.checkInsertPrivileges,
+  initDatabase: db.initDatabase,
     async testDatabase (ip, port, database, username, password) {
         console.log("Testing database connection ...");
 
         try {
-            let dbconfig = {
-              host: ip,
-              port: port,
-              user: username,
-              password: password,
-              database: database
-            }
             const connection = await mysql.createConnection({
                 host: ip,
                 port: port,
@@ -46,6 +21,7 @@ Meteor.methods({
                 result = error;
                 return result;
             });
+            return connection;
         
             const rows = await connection.query('SHOW GRANTS FOR CURRENT_USER');
 
