@@ -2,9 +2,7 @@
  * Database module for interacting with a MySQL database
  */
 
-import fs from 'fs';
 import mysql from 'promise-mysql';
-import path from 'path';
 
 const connect = async (ip, port, database, username, password) => {
   console.log("Creating database connection...");
@@ -109,6 +107,8 @@ const checkRootPrivileges = async (ip, port, database, username, password) => {
       result.success = true;
       result.msg = "Insufficient privileges for this MySQL account. Please use a root account or ask your database administrator to add 'ALL' privilege to your account.";
     }
+
+    await disconnect(connection);
     return result;
   } catch (err) {
     console.error(err);
@@ -136,7 +136,7 @@ const initDatabase = async (ip, port, database, rootUsername, rootPassword, inse
 
   // Init DB tables
   try {
-    const dbInitSql = fs.readFileSync(path.join(process.env.PWD, '/server/sql/db-init.sql'),'utf8')
+    const dbInitSql = Assets.getText('sql/db-init.sql');
     await connection.query(dbInitSql);
     console.log("Initialized database");
   } catch (e) {
@@ -164,7 +164,7 @@ const initDatabase = async (ip, port, database, rootUsername, rootPassword, inse
     return res;
   }
 
-  connection.end();
+  await disconnect(connection);
   return res;
 };
 
