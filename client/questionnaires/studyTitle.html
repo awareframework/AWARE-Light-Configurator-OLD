@@ -30,28 +30,50 @@
             </div>
             <div class="panel-body">
                 <p class="instruction">
-                    Where will the study data be stored? Please insert credentials for a user with <b>INSERT</b> only privilege to the specified database.
-                    You can also click the <b>Initialise database</b> button to setup the tables and a user for this database.
+                    Where will the study data be stored? Please insert credentials for a user with <b>INSERT</b>
+                    only privilege to the specified database to proceed.
                 </p>
                 {{> afQuickField name="database.database_host" id="database_host" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="e.g. 139.130.4.5"}}
                 {{> afQuickField name="database.database_port" id="database_port" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="e.g. 3306"}}
                 {{> afQuickField name="database.database_name" id="database_name" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Database name"}}
                 {{> afQuickField name="database.database_username" id="database_username" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Username"}}
                 {{> afQuickField name="database.database_password" id="database_password" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="password"}}
-                <!--<input type="checkbox" id="showPassword"><label for="showPassword" class="instruction">Show password</label><br>-->
 
-                <!--{{> afQuickField name="database.database_ca" id="database_ca" template="bootstrap3" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="file"}}-->
-                <!--{{> afQuickField name="database.database_client_cert" id="database_client_cert" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="file"}}-->
-                <!--{{> afQuickField name="database.database_client_key" id="database_client_key" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="file"}}-->
-
-                <button type="button" class="btn btn-primary btn-md" id="btn-init-db-modal" data-toggle="modal" data-target="#initDbModal">Initialise database</button>
                 <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
-
                 {{#if dbConnectionCorrect}}
                     <p id="connection_status" class="text-success">{{dbConnectionInfo}}</p>
                 {{else}}
                     <p id="connection_status" class="text-danger">{{dbConnectionInfo}}</p>
                 {{/if}}
+
+                <p class="instruction">
+                    If it is your first time setting up a study, please provide your database's <b>ROOT</b> credentials
+                    and click the <b>INITIALISE DATABASE</b> button to setup the tables and a user with <b>INSERT</b>
+                    only privilege for this database.
+                </p>
+
+                <div class="form-group">
+                    <label for="db_root_username" class="col-sm-3 control-label">Root username</label>
+                    <div class="col-sm-9" style="margin-bottom: 10px;">
+                        <input type="text" class="form-control" id="db_root_username" placeholder="Root username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="db_root_password" class="col-sm-3 control-label">Root password</label>
+                    <div class="col-sm-9" style="margin-bottom: 10px;">
+                        <input type="password" class="form-control" id="db_root_password" placeholder="Root password">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-md" id="btn_init_db">
+                    Initialise database
+                </button>
+                {{#if dbRootConnectionCorrect}}
+                    <p id="init_db_status" class="text-success">{{dbRootConnectionInfo}}</p>
+                {{else}}
+                    <p id="init_db_status" class="text-danger">{{dbRootConnectionInfo}}</p>
+                {{/if}}
+
             </div>
         </div>
 
@@ -59,64 +81,5 @@
             <button class="btn btn-primary btn-md pull-right" type=submit>Next step: questions</button>
         </div>
         {{/autoForm}}
-
-        <div id="initDbModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Initialise database</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p class="instruction">
-                            If an INSERT-only user with the same username has been created, the password will NOT be overwritten.
-                        </p>
-                        <form>
-                            <div class="form-group">
-                                <label for="db-init-host" class="col-form-label">Host / Server IP</label>
-                                <input type="text" class="form-control" id="db-init-host" placeholder="e.g. 139.130.4.5">
-                            </div>
-                            <div class="form-group">
-                                <label for="db-init-port" class="col-form-label">Port number</label>
-                                <input type="number" class="form-control" id="db-init-port" placeholder="e.g. 3306" value="3306">
-                            </div>
-                            <div class="form-group">
-                                <label for="db-init-name" class="col-form-label">Database name</label>
-                                <input type="text" class="form-control" id="db-init-name" placeholder="Database name">
-                            </div>
-                            <div class="form-group">
-                                <label for="db-init-root-username" class="col-form-label">Root username</label>
-                                <input type="text" class="form-control" id="db-init-root-username" placeholder="Root username">
-                            </div>
-                            <div class="form-group">
-                                <label for="db-init-root-password" class="col-form-label">Root password</label>
-                                <input type="password" class="form-control" id="db-init-root-password" placeholder="Root password">
-                            </div>
-                            <div class="form-group">
-                                <label for="db-init-insert-username" class="col-form-label">Username (INSERT-only user)</label>
-                                <input type="text" class="form-control" id="db-init-insert-username" placeholder="Username (INSERT-only user)">
-                            </div>
-                            <div class="form-group">
-                                <label for="db-init-insert-password" class="col-form-label">Password (INSERT-only user)</label>
-                                <input type="password" class="form-control" id="db-init-insert-password" placeholder="Password (INSERT-only user)">
-                            </div>
-                        </form>
-                        {{#if dbRootConnectionCorrect}}
-                            <p id="connection_status" class="text-success">{{dbRootConnectionInfo}}</p>
-                        {{else}}
-                            <p id="connection_status" class="text-danger">{{dbRootConnectionInfo}}</p>
-                        {{/if}}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-init-db" class="btn btn-primary">
-                            <span id="spinner-init-db" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Initialise
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </div>
 </template>

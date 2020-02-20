@@ -94,11 +94,11 @@ Schema.Study = new SimpleSchema({
   },
   "database.database_username": {
     type: String,
-    label: "Username"
+    label: "INSERT-only username"
   },
   "database.database_password": {
     type: String,
-    label: "Password"
+    label: "INSERT-only password"
   },
   // database_ca: {
   //   type: String,

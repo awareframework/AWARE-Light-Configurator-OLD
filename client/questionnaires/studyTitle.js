@@ -35,7 +35,7 @@ try {
     'click #btn-test-connection': async function () {
       checkInsertPrivileges();
     },
-    'click #btn-init-db': async function () {
+    'click #btn_init_db': async function () {
       if (await initDatabase()) {
         alert("Database successfully initialized.");
       }
@@ -124,36 +124,32 @@ try {
     });
   }
 
-  function createInsertUser() {
-    let insertUsername = document.getElementById("db-init-insert-username").value;
-    let insertPassword = document.getElementById("db-init-insert-password").value;
-
-
-  }
-
   function initDatabase() {
-    let host = document.getElementById("db-init-host").value;
-    let port = document.getElementById("db-init-port").value;
-    let database = document.getElementById("db-init-name").value;
-    let rootUsername = document.getElementById("db-init-root-username").value;
-    let rootPassword = document.getElementById("db-init-root-password").value;
-    let insertUsername = document.getElementById("db-init-insert-username").value;
-    let insertPassword = document.getElementById("db-init-insert-password").value;
+    let host = document.getElementById("database_host").value;
+    let port = document.getElementById("database_port").value;
+    let database = document.getElementById("database_name").value;
+    let insertUsername = document.getElementById("database_username").value;
+    let insertPassword = document.getElementById("database_password").value;
+    let rootUsername = document.getElementById("db_root_username").value;
+    let rootPassword = document.getElementById("db_root_password").value;
+
+    if (!insertUsername || !insertPassword) {
+      inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
+      inst.state.set(DB_ROOT_CONNECTION_INFO, "Please make sure username and password for INSERT-only user is not empty.");
+      return Promise.resolve(false);
+    }
 
     return new Promise(function(resolve, reject) {
       Meteor.call('initDatabase', host, port, database, rootUsername, rootPassword, insertUsername, insertPassword, function (err, response) {
         if (response) {
-          console.log(1);
           inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
           inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
           resolve(response.success);
         } else if (err) {
-          console.log(2);
           inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
           inst.state.set(DB_ROOT_CONNECTION_INFO, 'Error: ' + err.reason);
           resolve(false);
         } else {
-          console.log(3);
           inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
           inst.state.set(DB_ROOT_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
             "correct.");
