@@ -154,7 +154,6 @@ const initDatabase = async (ip, port, database, rootUsername, rootPassword, inse
       GRANT INSERT ON ${database}.* TO \'${insertUsername}\'@\'localhost\';
       GRANT INSERT ON ${database}.* TO \'${insertUsername}\'@\'%\';
       flush privileges;`;
-    console.log(createUserSql);
     await connection.query(createUserSql);
     console.log("Created INSERT-only user");
   } catch (e) {

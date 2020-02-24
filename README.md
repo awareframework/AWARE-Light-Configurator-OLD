@@ -1,6 +1,6 @@
-# AWARE Create
+# AWARE-Light
 
-AWARE Create aims to make it easy for anyone to create mobile instrumentation-based experience sampling studies. It is available to all for free at http://create.awareframework.com.
+AWARE-Light aims to make it easy for anyone to create mobile instrumentation-based experience sampling studies.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ You can also run this application using Docker.
 
 - Install Docker on your local machine, as described here: https://www.docker.com/products/docker-desktop
 - Run `docker build -t aware-app -f docker/Dockerfile .` from the root of the project.
-- Run `docker run -p 3000:3000 --name aware-app aware-app`
+- Run `docker run -p 3000:3000 --d -name aware-app aware-app`
 - Navigate to `localhost:3000`
 
 ## Questions / Discussion?
