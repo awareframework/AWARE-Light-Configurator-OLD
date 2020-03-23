@@ -131,7 +131,7 @@ Schema.Study = new SimpleSchema({
   },
 
   // QUESTIONS
-  "questions.$.title": { type: String, max: 50 },
+  "questions.$.title": { type: String },
   "questions.$.instructions": {
     type: String,
     optional: true
