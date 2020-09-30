@@ -1,5 +1,5 @@
 <template name="studyOverview">
-  <h3 id="study-title">{{study.title}}</h3>
+  <h3 id="study-title">{{study.study_info.study_title}}</h3>
 
   {{> SingleQuestionnaireNav menuIdx="4"}}
 
@@ -7,19 +7,19 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Study information</h4>
-        <a href="/study/{{study._id}}/title" class="btn btn-default align-right" role="button">Edit study information</a>
+        <a href="/study/title" class="btn btn-default align-right" role="button">Edit study information</a>
       </div>
       <div class="panel-body">
         <div class="row">
           <label class="col-sm-4 control-label">Study title</label>
           <div class="col-sm-8">
-            {{study.title}}
+            {{study.study_info.study_title}}
           </div>
         </div>
         <div class="row">
           <label class="col-sm-4 control-label">Study description</label>
           <div class="col-sm-8">
-            {{study.description}}
+            {{study.study_info.study_description}}
           </div>
         </div>
       </div>
@@ -28,14 +28,14 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Questions</h4>
-        <a href="/study/{{study._id}}/questions" class="btn btn-default align-right" role="button">Edit questions</a>
+        <a href="/study/questions" class="btn btn-default align-right" role="button">Edit questions</a>
       </div>
       <div class="panel-body">
         {{#each $ study.questions}}
         <div class="row">
           <label class="col-sm-4 control-label">Question {{getIndexWithOffset @index}}</label>
           <div class="col-sm-8">
-            {{this.question}}
+            {{this.title}}
           </div>
         </div>
 
@@ -61,7 +61,7 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Schedule configuration</h4>
-        <a href="/study/{{study._id}}/schedule" class="btn btn-default align-right" role="button">Edit schedule configuration</a>
+        <a href="/study/schedule" class="btn btn-default align-right" role="button">Edit schedule configuration</a>
       </div>
       <div class="panel-body">
         {{#each $ study.schedules}}
@@ -69,39 +69,39 @@
         <div class="row">
           <label class="col-sm-4 control-label">Schedule {{getIndexWithOffset @index}}</label>
           <div class="col-sm-8">
-            {{this.scheduleType}}
-          </div>
-        </div>
-        
-        <div class="row">
-          <label class="col-sm-4 control-label">Questions</label>
-          <div class="col-sm-8">
-            {{#each this.questionSchedule}}
-            {{#let schedulerIdx=this}}
-            {{#each study.questions}}
-            {{#if equals schedulerIdx @index}}
-            {{this.question}}<br/>
-            {{/if}}
-            {{/each}}
-            {{/let}}
-            {{/each}}
+            {{this.title}}
           </div>
         </div>
 
         <div class="row">
-          <label class="col-sm-4 control-label">Configuration</label>
+          <label class="col-sm-4 control-label">Questions</label>
           <div class="col-sm-8">
-            {{#each this.questionSchedule}}
-            {{#let schedulerIdx=this}}
-            {{#each study.questions}}
-            {{#if equals schedulerIdx @index}}
-            {{this.question}}<br/>
-            {{/if}}
-            {{/each}}
-            {{/let}}
-            {{/each}}
+            <!--{{#each this.questions}}-->
+            <!--{{#let schedulerIdx=this}}-->
+            <!--{{#each study.questions}}-->
+            <!--{{#if equals schedulerIdx @index}}-->
+            {{this.questions}}<br/>
+            <!--{{/if}}-->
+            <!--{{/each}}-->
+            <!--{{/let}}-->
+            <!--{{/each}}-->
           </div>
         </div>
+
+        <!--<div class="row">-->
+          <!--<label class="col-sm-4 control-label">Configuration</label>-->
+          <!--<div class="col-sm-8">-->
+            <!--{{#each this.questionSchedule}}-->
+            <!--{{#let schedulerIdx=this}}-->
+            <!--{{#each study.questions}}-->
+            <!--{{#if equals schedulerIdx @index}}-->
+            <!--{{this.question}}<br/>-->
+            <!--{{/if}}-->
+            <!--{{/each}}-->
+            <!--{{/let}}-->
+            <!--{{/each}}-->
+          <!--</div>-->
+        <!--</div>-->
 
         {{#unless $last}}<hr>{{/unless}}
         {{/each}}
@@ -111,34 +111,21 @@
     <div class="panel panel-info">
       <div class="panel-heading clearfix">
         <h4>Sensor data</h4>
-        <a href="/study/{{study._id}}/sensor" class="btn btn-default align-right" role="button">Edit sensor data</a>
+        <a href="/study/sensor" class="btn btn-default align-right" role="button">Edit sensor data</a>
       </div>
       <div class="panel-body">
-        {{#each $ study.sensors}}
-
-        <div class="row">
-          <label class="col-sm-4 control-label">Sensor {{getIndexWithOffset @index}}</label>
-          <div class="col-sm-8">
-            
-          </div>
-        </div>
-
-          {{#if this.sensorActive}}
-            <div class="row">
-              <label class="col-sm-8 control-label">{{this.sensorType}}</label>
-            </div>
+        {{#each getSensors.sensor}}
+          {{#if isSensorActive this}}
+            <li>{{this.sensorType}}</li>
           {{/if}}
-          {{else}}
-          <!-- TODO : currently never shows as each check does not consider active state. -->
-          <div class="row">
-            <label class="col-sm-8 control-label">No sensor(s) activated.</label>
-          </div>
         {{/each}}
+        <!-- TODO: Display informative message when no sensors are selected. -->
       </div>
     </div>
 
     <div>
-      <a href="/study/{{study._id}}/export" class="btn btn-primary btn-md pull-right" type="button">Distribute study</a>
+      <!--<a href="/study/{{study._id}}/export" class="btn btn-primary btn-md pull-right" type="button">Distribute study</a>-->
+      <a href="{{studyConfig}}" class="btn btn-primary btn-md pull-right" type="button" download="study-config.json">Download Study Config</a>
     </div>
   </div>
 

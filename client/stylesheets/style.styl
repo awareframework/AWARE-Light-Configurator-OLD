@@ -30,6 +30,7 @@ $large = 960px
 $wide = 1200px
 
 primary-text = #62676e
+primary-text-light = #abafb6
 accent-color = #1fb3df
 accent-color-text = #393d44
 accent-color-dark = #1b9abf
@@ -112,10 +113,11 @@ li.heading
 footer
     margin-top: 100px
 
-.disabled a
+a.disabled
     color: color-disabled
+    pointer-events: none
 
-.disabled a:hover
+a.disabled:hover
     text-decoration: none;
 
 .navbar
@@ -267,6 +269,8 @@ footer
 
 .panel-body
   padding: 25px
+  padding-top: 12px
+  padding-bottom: 12px
 
 .form-control
   border-radius: 0
@@ -278,9 +282,17 @@ footer
 .instruction
   font-size 0.9em
   margin-bottom: 20px
+  color: primary-text-light
 
 .panel label
   font-weight: normal
+
+label.col-sm-3.control-label
+  padding-left: 0
+  font-size: 0.9em
+
+label.col-sm-3.col-sm-offset-3.control-label
+    padding-left: 15px
 
 .remove-question
     margin-top: 16px
@@ -306,13 +318,20 @@ footer
     display: inline-block
     margin-bottom: 0
 
-
 select.form-control
     -webkit-appearance: none
     -webkit-border-radius: 0px
     background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>")
     background-position: 100% 50%
     background-repeat: no-repeat
+
+#connection_status
+    margin-top: 18px
+    margin-bottom: 0
+
+#init_db_status
+  margin-top: 18px
+  margin-bottom: 0
 
 // Feedback form
 

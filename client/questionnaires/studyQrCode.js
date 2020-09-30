@@ -1,9 +1,9 @@
 Template.studyQrCode.onCreated(function () {
   var self = this;
-  self.autorun(function () {
-    var id = FlowRouter.getParam('id');
-    self.subscribe('singleStudy', id);
-  });
+  // self.autorun(function () {
+  //   var id = FlowRouter.getParam('id');
+  //   self.subscribe('singleStudy', id);
+  // });
 
   SEO.set({
     title: "AWARE Create - Distribute study"
@@ -31,14 +31,14 @@ Template.studyQrCode.onCreated(function () {
 
 Template.studyQrCode.helpers({
   study: () => {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     return Studies.findOne({ _id: id });
   },
 
   studyQrCode() {
     //var host =  Meteor.absoluteUrl();
     var host = "http://create.awareframework.com/";
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     var route = 'study/' + id + '/json';
     return {
       text: host + route,
@@ -48,7 +48,7 @@ Template.studyQrCode.helpers({
   },
 
   emailBody: () => {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     var study = Studies.findOne({ _id: id });
     var mailto = "mailto:participant@domain.com?subject=Study participation&body="
     var body = "Dear participant,\n\n Thank you very much for your interest in joining our study on " + study.title + ". In order to enrol in our study, please install AWARE from the Google Play Store: http://play.google.com/store/apps/details?id=com.aware.phone. Then, click here to enroll: aware://" + "..." + " - or use the attached QR code.\n\n Thank you again for your participation, please don't hestitate to contact me in case you have any questions.\n\nKind regards,\n\n" + Meteor.user().profile.name;
@@ -57,7 +57,7 @@ Template.studyQrCode.helpers({
   },
 
   twitterBody: () => {
-    var id = FlowRouter.getParam('id');
+    const id = Session.get('studyId');
     var study = Studies.findOne({ _id: id });
     var body = "Sign up for our study on " + study.title + "! Install AWARE here: http://play.google.com/store/apps/details?id=com.aware.phone, and then click here to enrol: aware://" + "..." + "";
     return body;

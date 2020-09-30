@@ -1,48 +1,49 @@
-Template.studyOverview.onCreated(function() {
-  var self = this;
-  self.autorun(function() {
-    var id = FlowRouter.getParam('id');
-    self.subscribe('singleStudy', id);
-  });
+const { toStudyConfig } = require('../utils');
 
-  var id = FlowRouter.getParam('id');
-  var study = Studies.findOne({_id: id});
-  var questionnaire = Studies.findOne({_id: id});
+Template.studyOverview.onCreated(function () {
+  var self = this;
+  // self.autorun(function () {
+  //   var id = FlowRouter.getParam('id');
+  //   self.subscribe('singleStudy', id);
+  // });
+
+  const id = Session.get('studyId');
+  var study = Studies.findOne({ _id: id });
+  var questionnaire = Studies.findOne({ _id: id });
 
   SEO.set({
     title: "AWARE Create - Overview"
   });
 });
 
-Template.studyOverview.events({
-  'click .btn-primary' : function() {
-    var id = FlowRouter.getParam('id');
-    Studies.update(
-      { _id: id },
-      { $set: { "exported": true } }
-    )
-  }
-});
-
 Template.studyOverview.helpers({
-  study: ()=> {
-    var id = FlowRouter.getParam('id');
-    return Studies.findOne({_id: id});
+  study: () => {
+    const id = Session.get('studyId');
+    return Studies.findOne({ _id: id });
   },
-  updateStudyId: function() {
-    var id = FlowRouter.getParam('id');
-    return Studies.findOne({_id: id});
+  studyConfig: () => {
+    const id = Session.get('studyId');
+    let study = Studies.findOne({ _id: id }) || {};
+
+    // Update study's updatedAt field
+    study.updatedAt = new Date();
+
+    return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toStudyConfig(study)));
   },
-  getIndexWithOffset: function(value) {
+  updateStudyId: function () {
+    const id = Session.get('studyId');
+    return Studies.findOne({ _id: id });
+  },
+  getIndexWithOffset: function (value) {
     return value + 1;
   },
-  equals: function(a, b) {
+  equals: function (a, b) {
     return (a == b);
   },
-	capitalize: function(string) {
+  capitalize: function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-	},
-  getQuestionType: function(value) {
+  },
+  getQuestionType: function (value) {
     //TODO: user proper query to get the labels over hardcoding.
     if (value == 1) {
       return "Free Text";
@@ -65,5 +66,15 @@ Template.studyOverview.helpers({
     else if (value == 7) {
       return "Numeric";
     }
+  },
+
+  getSensors: function () {
+    const id = Session.get('studyId');
+    var sensors = Studies.findOne({ _id: id }, { fields: { sensor: 1 } });
+    return(sensors);
+  },
+
+  isSensorActive: function (sensor) {
+    return sensor.sensorActive;
   }
 });

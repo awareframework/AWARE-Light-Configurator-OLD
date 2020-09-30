@@ -1,10 +1,10 @@
 try {
   Template.studyQuestion.onCreated(function () {
     var self = this;
-    self.autorun(function () {
-      var id = FlowRouter.getParam('id');
-      self.subscribe('singleStudy', id);
-    });
+    // self.autorun(function () {
+    //   var id = FlowRouter.getParam('id');
+    //   self.subscribe('singleStudy', id);
+    // });
 
     SEO.set({
       title: "AWARE Create - Questions"
@@ -13,7 +13,7 @@ try {
 
   AutoForm.addHooks("updateQuestion", {
     onSuccess: function (formType, result) {
-      FlowRouter.go("/study/:id/schedule", { id: FlowRouter.getParam('id') });
+      FlowRouter.go("/study/schedule");
     }
   });
 
@@ -49,11 +49,11 @@ try {
       return string1 + '.' + string2;
     },
     study: () => {
-      var id = FlowRouter.getParam('id');
+      const id = Session.get('studyId');
       return Studies.findOne({ _id: id });
     },
     updateStudyId: function () {
-      var id = FlowRouter.getParam('id');
+      const id = Session.get('studyId');
       return Studies.findOne({ _id: id });
     }
   });

@@ -1,6 +1,6 @@
 <template name="studyQuestion">
 
-    <h3 id="study-title">{{study.title}}</h3>
+    <h3 id="study-title">{{study.study_info.study_title}}</h3>
 
     {{> SingleQuestionnaireNav menuIdx="1"}}
 
@@ -190,6 +190,10 @@
 
         <div>
             <button class="btn btn-primary btn-md autoform-add-item outside-form" data-autoform-field="questions" type="button">Add a new question</button>
+        </div>
+
+        <div>
+            <a class="btn btn-primary btn-md pull-left" href="/study/title">Back</a>
             <button class="btn btn-primary btn-md pull-right" type="submit">Next step: schedule configuration</button>
         </div>
 

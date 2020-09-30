@@ -2,16 +2,17 @@
     {{> Header}}
     <div class="container">
         <div class="jumbotron">
-            <h1>Easily create advanced Experience Sampling studies</h1>
-            <p>Smartphone based Experience Sampling using AWARE Create,<br>
-              based on the power of AWARE.</p>
+            <h1>AWARE-Light Configuration Page</h1>
+            <p>Use this page to create a study configuration for <a href="https://awareframework.com/aware-light/">AWARE-Light</a>. Here, you can define studies that use smartphones to conduct Experience Sampling, and to collect sensor data.</p>
 
             <div class="cta">
-              {{#if currentUser}}
-                <a href="/study" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
-              {{else}}
-                <a href="/register" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
-              {{/if}}
+              <!--{{#if currentUser}}-->
+                <!--<a href="/study" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>-->
+              <!--{{else}}-->
+                <!--<a href="/register" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>-->
+              <!--{{/if}}-->
+                <a href="/study" id="newStudyBtn" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
+                <a href="/study/upload" id="uploadStudyBtn" class="btn-lg btn-default" role="button"><i class="fa fa-pencil fa-lg"></i>Update an existing study</a>
             </div>
         </div>
 
@@ -39,12 +40,12 @@
 
                 <div class="col-md-4 promise">
                     <i class="fa fa-github fa-4x"></i>
-                    <p class="text-center">Source code is <a href="https://www.github.com">publicly available</a>, and we welcome your ideas and contributions.</p>
+                    <p class="text-center">Source code is <a href="https://github.com/awareframework/AWARE-Create/tree/aware-create-light">publicly available</a>, and we welcome your ideas and contributions.</p>
                 </div>
 
                 <div class="col-md-4 promise">
                     <i class="fa fa-usd fa-4x"></i>
-                    <p class="text-center">AWARE Create is completely free to use.</p>
+                    <p class="text-center">AWARE-Light is completely free to use.</p>
                 </div>
             </div>
 
@@ -58,8 +59,8 @@
                   </div>
               </div>
               <div class="col-md-6">
-                      <h3>AWARE</h3>
-                      <p>AWARE is an Android framework dedicated to instrument, infer, log, and share mobile context information. It allows for the collection of over 25 different sensors, ranging from the user's GPS location to application usage. Please visit the <a href="http://www.awareframework.com/">AWARE framework website</a> for additional information.</p>
+                      <h3>About</h3>
+                      <p>AWARE-Light is a version of the AWARE Android framework dedicated to instrument, infer, log, and share mobile context information. It allows for the collection of over 25 different sensors, ranging from the user's GPS location to application usage. Please visit the <a href="http://www.awareframework.com/aware-light">AWARE framework website</a> for additional information.</p>
               </div>
             </div>
         </div>
