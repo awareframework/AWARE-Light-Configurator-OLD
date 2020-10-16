@@ -1,10 +1,10 @@
-# AWARE-Light
+# AWARE-Light configuration page
 
 AWARE-Light aims to make it easy for anyone to create mobile instrumentation-based experience sampling studies.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the configuration page up and running on your local machine for development and testing purposes. You can access a live version of the configuration page at https://www.aware-light.org
 
 - Install Meteor on your local machine, as described here: https://www.meteor.com/install.
 - Download a copy of the GitHub project (development branch for most up-to-date codebase).
