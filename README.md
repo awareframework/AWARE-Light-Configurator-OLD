@@ -17,7 +17,7 @@ You can also run this application using Docker.
 
 - Install Docker on your local machine, as described here: https://www.docker.com/products/docker-desktop
 - Run `docker build -t aware-app -f docker/Dockerfile .` from the root of the project.
-- Run `docker run -p 3000:3000 --d -name aware-app aware-app`
+- Run `docker run -p 3000:3000 -d -name aware-app aware-app`
 - Navigate to `localhost:3000`
 
 ## Questions / Discussion?
