@@ -22,8 +22,8 @@ You can also run this application using Docker.
 
 ## Questions / Discussion?
 
-Join us on Slack! https://awareframework.slack.com/messages/aware_create/
+Join us on Slack! https://awareframework.slack.com/messages/
 
 ## License
 
-TBD
+[Open-source (Apache 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
