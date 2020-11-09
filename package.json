@@ -1,5 +1,5 @@
 {
-  "name": "aware-create",
+  "name": "aware-light-configurator",
   "private": true,
   "scripts": {
     "start": "meteor run",
