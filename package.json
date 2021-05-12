@@ -26,7 +26,7 @@
     "qs": "^6.9.1",
     "send": "^0.17.1",
     "sharer.js": "^0.3.8",
-    "simpl-schema": "^0.3.2",
+    "simpl-schema": "^1.10.2",
     "useragent": "^2.3.0",
     "webpage": "^0.3.0"
   },
