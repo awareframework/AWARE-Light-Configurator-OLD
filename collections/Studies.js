@@ -21,6 +21,8 @@ Studies.allow({
   }
 });
 
+
+
 Schema.Options = new SimpleSchema({
   option: { type: String, optional: true }
 });
@@ -100,29 +102,15 @@ Schema.Study = new SimpleSchema({
     type: String,
     label: "INSERT-only password"
   },
-  // database_ca: {
-  //   type: String,
-  //   label: "CA File (.pem)"
-  // },
-  // database_client_cert: {
-  //   type: String,
-  //   label: "Client Certificate (.pem)"
-  // },
-  // database_client_key: {
-  //   type: String,
-  //   label: "Client Private Key (.pem)"
-  // },
-
+  "database.config_without_password": {
+    type: Boolean,
+    label: "No password in JSON file",
+    optional:true,
+  },
   questions: {
     type: Array,
     optional: true
   },
-
-  // "questions.$": {
-  //   type: Schema.Questions,
-  //   minCount: 1,
-  //   optional: true
-  // },
 
   "questions.$": {
     type: Object,
@@ -391,6 +379,20 @@ Schema.Study = new SimpleSchema({
   },
   "sensors.mask_touch_text": {
     type: Boolean, optional: true, label: "Mask touch text"
+  },
+  "sensors.status_screentext": {
+    type: Boolean, optional: true, label: "Text tracker"
+  },
+
+  "sensors.package_specification": {
+    type: Number, label: "Include or exclude specific package to study", optional: false, autoform: {
+      type: 'select-radio-inline',
+      defaultValue: 0,
+      options: function() { return [{label: "Inclusive packages", value: 0}, {label: "Exclusive packages", value: 1}, {label: "Default track all packages", value: 2}]}
+    }
+  },
+  "sensors.package_names": {
+    type: String, optional: true, label: "Package names"
   },
 
   // Barometer
@@ -789,6 +791,9 @@ Schema.Study = new SimpleSchema({
   // }
 }, { tracker: Tracker });
 
+
+
+
 // Schema.Study.extend(Schema.Questions);
 Studies.attachSchema(Schema.Study);
 
@@ -798,7 +803,7 @@ Meteor.methods({
     check(id, String);
 
     // Find study to be removed
-    study = Studies.findOne({ _id: id });
+    let study = Studies.findOne({ _id: id });
     Studies.remove(id);
   }
 });

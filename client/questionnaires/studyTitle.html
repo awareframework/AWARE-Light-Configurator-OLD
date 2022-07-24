@@ -38,6 +38,11 @@
                 {{> afQuickField name="database.database_name" id="database_name" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Database name"}}
                 {{> afQuickField name="database.database_username" id="database_username" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Username"}}
                 {{> afQuickField name="database.database_password" id="database_password" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="password"}}
+                {{> afQuickField name="database.config_without_password" id="config_without_password" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+
+                <div class="col-sm-9 col-sm-offset-3">
+                    <p class="instruction">By clicking this checkbox, you are selecting to not include the MySQL INSERT-only user password in the JSON study config file used by AWARE-Light. You will instead provide the password to study users who will then input it manually into AWARE-Light when they sign up to the study.</p>
+                </div>
 
                 <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
                 {{#if dbConnectionCorrect}}

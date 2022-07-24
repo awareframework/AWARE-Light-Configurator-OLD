@@ -81,6 +81,17 @@
                             <p class="instruction">Swaps all alphanumeric characters by A, a, and 1</p>
                             {{> afQuickField name="sensors.mask_touch_text" }}
                             <p class="instruction">Swaps all alphanumeric characters by A, a, and 1</p>
+                            {{> afQuickField name="sensors.status_screentext" }}
+                            <p class="instruction">Log text on the screen. By default all information shown on the screen will be recorded.</p>
+                            {{#if afFieldValueIs name="sensors.status_screentext" value=true}}
+                                {{> afQuickField name="sensors.package_specification"}}
+                                {{> afQuickField name="sensors.package_names"}}
+                                <p class="instruction">You may leave the field blank if default is selected.Please list the package names separated by comma or space.<br>Example 1: com.phone.aware com.twitter.android <br>Example 2: com.phone.aware,com.twitter.android <br>Example 3: com.phone.aware, com.twitter.android</p>
+
+
+                            {{/if}}
+
+
                         </div>
                     {{/if}}
 

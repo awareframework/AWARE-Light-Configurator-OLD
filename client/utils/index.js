@@ -76,6 +76,13 @@ function toStudyConfig(study) {
     sensors.push({setting: key, value: config.sensors[key]})
   }
 
+  // Contain password in the json file or not
+  for (let key in config.database || []) {
+    if (key === 'config_without_password' && config.database[key] === true){
+      config.database["database_password"] = "-"
+    }
+  }
+
   // Include default required sensors
   sensors.push({setting: 'status_esm', value: true})
   sensors.push({setting: 'status_webservice', value: true})

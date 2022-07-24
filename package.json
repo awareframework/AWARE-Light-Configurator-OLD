@@ -6,7 +6,7 @@
     "reset": "meteor reset"
   },
   "dependencies": {
-    "@babel/runtime": "^7.7.4",
+    "@babel/runtime": "^7.18.0",
     "babel-runtime": "^6.26.0",
     "basic-auth-connect": "^1.0.0",
     "combined-stream2": "^1.1.2",
