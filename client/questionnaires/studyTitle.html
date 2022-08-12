@@ -1,0 +1,85 @@
+<template name="studyTitle">
+    <h3 id="study-title">
+        {{#if study and study.study_info.study_title}}
+            {{study.study_info.study_title}}
+        {{else}}
+            New study
+        {{/if}}
+    </h3>
+
+    {{> SingleQuestionnaireNav}}
+
+    <div class="col-sm-9 input-form">
+
+        {{#autoForm collection="Studies" id="studyInfo" type=formType doc=study}}
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4>Study Information</h4>
+            </div>
+            <div class="panel-body">
+                <p class="instruction">Basic information of the study. This information will be presented to participants upon joining your study.</p>
+                    {{> afQuickField name="study_info.study_title" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="The title of your study "}}
+                    {{> afQuickField name="study_info.study_description" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="A short description of your study"}}
+                    {{> afQuickField name="study_info.researcher_first" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="First name"}}
+                    {{> afQuickField name="study_info.researcher_last" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Last name"}}
+                    {{> afQuickField name="study_info.researcher_contact" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="email@example.com"}}
+            </div>
+
+            <div class="panel-heading">
+                <h4>Database Configuration</h4>
+            </div>
+            <div class="panel-body">
+                <p class="instruction">
+                    Where will the study data be stored? Please insert credentials for a user with <b>INSERT</b>
+                    only privilege to the specified database to proceed.
+                </p>
+                {{> afQuickField name="database.database_host" id="database_host" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="e.g. 139.130.4.5"}}
+                {{> afQuickField name="database.database_port" id="database_port" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="e.g. 3306"}}
+                {{> afQuickField name="database.database_name" id="database_name" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Database name"}}
+                {{> afQuickField name="database.database_username" id="database_username" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Username"}}
+                {{> afQuickField name="database.database_password" id="database_password" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Password" type="password"}}
+
+                <button type="button" class="btn btn-primary btn-md" id="btn-test-connection">Test connection</button>
+                {{#if dbConnectionCorrect}}
+                    <p id="connection_status" class="text-success">{{dbConnectionInfo}}</p>
+                {{else}}
+                    <p id="connection_status" class="text-danger">{{dbConnectionInfo}}</p>
+                {{/if}}
+
+                <p class="instruction">
+                    If it is your first time setting up a study, please provide your database's <b>ROOT</b> credentials
+                    and click the <b>INITIALISE DATABASE</b> button to setup the tables and a user with <b>INSERT</b>
+                    only privilege for this database.
+                </p>
+
+                <div class="form-group">
+                    <label for="db_root_username" class="col-sm-3 control-label">Root username</label>
+                    <div class="col-sm-9" style="margin-bottom: 10px;">
+                        <input type="text" class="form-control" id="db_root_username" placeholder="Root username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="db_root_password" class="col-sm-3 control-label">Root password</label>
+                    <div class="col-sm-9" style="margin-bottom: 10px;">
+                        <input type="password" class="form-control" id="db_root_password" placeholder="Root password">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-md" id="btn_init_db">
+                    Initialise database
+                </button>
+                {{#if dbRootConnectionCorrect}}
+                    <p id="init_db_status" class="text-success">{{dbRootConnectionInfo}}</p>
+                {{else}}
+                    <p id="init_db_status" class="text-danger">{{dbRootConnectionInfo}}</p>
+                {{/if}}
+
+            </div>
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-md pull-right" type=submit>Next step: questions</button>
+        </div>
+        {{/autoForm}}
+    </div>
+</template>

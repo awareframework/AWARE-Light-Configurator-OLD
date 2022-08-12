@@ -1,0 +1,6 @@
+.idea/
+.meteor/local/
+.deploy
+.DS_store
+node_modules/
+build/

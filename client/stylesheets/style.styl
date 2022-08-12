@@ -1,0 +1,397 @@
+/* CSS declarations go here */
+
+normalize-css()
+
+// Material Shadows
+shadow-level(l = 1)
+    if l == -1
+        box-shadow: inset -2px 7px 9px -7px rgba(0,0,0,0.7);
+    if l == 0
+        box-shadow: none;
+    if l == 1
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    if l == 2
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    if l == 3
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    if l == 4
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    if l == 5
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+// Common Transition
+trans($sec = 0.3s)
+    transition: all $sec ease
+// Grid
+$xsmall = 340px
+$small = 500px
+$med = 700px
+$large = 960px
+$wide = 1200px
+
+primary-text = #62676e
+primary-text-light = #abafb6
+accent-color = #1fb3df
+accent-color-text = #393d44
+accent-color-dark = #1b9abf
+accent-color-light = #c6f0fc
+color-disabled = #adadad
+
+z = {
+    neg: -7,
+    lowest: 1,
+    low: 4,
+    mid: 5,
+    video: 6,
+    header: 7,
+    nav: 8,
+    mini: 9,
+    modal: 10,
+    highest: 11
+}
+
+html
+    box-sizing: border-box
+
+*, *:before, *:after
+    box-sizing: inherit
+
+body
+    background: #ffffff
+    overflow-y: scroll
+    font-size: 1.5em
+    color: primary-text
+    font-family: 'Roboto', 'Camphor', 'Open Sans', 'Segoe UI', sans-serif
+    line-height: 1.8
+
+a
+    color: accent-color
+
+a:hover
+    color: accent-color
+
+a i
+    margin-right: 12px
+
+h1, h2, h3, h4, h5
+    color: accent-color-text
+
+#study-title
+    margin-left: 20px
+    margin-bottom: 0
+
+hr
+    border-color: accent-color
+
+ol
+    padding: 0
+    font-size: 1.2em
+    list-style-position: inside
+
+ol li
+    padding-bottom: 14px
+    padding-left: 5px
+    a
+      margin-left: 5px
+
+li.nostyle
+    list-style-type: none
+
+li.bottom
+    padding-top: 14px
+    border-top: 1px solid color-disabled
+    margin-right: 28px
+    a
+      margin-left: 0
+
+li.heading
+    padding-bottom: 4px
+    padding-left: 4px
+    p
+      margin-bottom: 0
+
+footer
+    margin-top: 100px
+
+a.disabled
+    color: color-disabled
+    pointer-events: none
+
+a.disabled:hover
+    text-decoration: none;
+
+.navbar
+    // border-bottom: 1px rgb(207, 207, 207) solid
+    // background: accent-color
+    background: #282b32
+    border-radius: 0
+    border: 0
+    .nav li a
+        font-size: 1.1em
+        padding: 20px
+        // color: rgb(106, 107, 106)
+        font-weight: 500
+        color: white
+    .nav li a:hover
+        text-decoration: none
+        background-color: accent-color
+    .nav li a:focus
+        text-decoration: none
+        background-color: accent-color-dark
+    .nav .open > a
+        background-color: accent-color
+    #login-dropdown-list .dropdown-menu a
+        background-color: none
+        color: accent-color
+        padding-top: 5px
+        padding-bottom: 0
+    #login-dropdown-list .dropdown-menu a:hover
+        background-color: transparent
+        color: accent-color-dark
+    #forgot-password-link, #signup-link
+      padding-right: 0
+    #login-buttons-open-change-password, #login-buttons-cancel-change-password, #back-to-login-link
+      margin-left: 0
+
+
+.navbar-right
+  margin-right: 0
+
+.jumbotron
+    align: left
+    background: none
+    padding-left: 0 !important
+    padding-bottom: 108px
+    h1
+        font-size: 42px
+        font-weight: 400
+        line-height: 1.6
+    .cta
+        margin-top: 50px
+        .btn:not(:first-child)
+            margin-left: 30px
+
+.additional
+    margin-top: 34px
+
+.btn, .btn-lg
+    text-transform: uppercase
+    border-radius: 0
+
+.btn-primary
+    background-color: accent-color
+    border-color: accent-color-dark
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:focus
+    text-decoration: none
+    background-color: accent-color-dark
+    border-color: accent-color-dark
+
+.btn-default
+    color: accent-color-text
+    outline: 1px solid accent-color
+    outline-offset: -1px
+    margin-left: 18px
+
+.btn-default:hover, .btn-default:active, .btn-default:active:hover, .btn-default:active:focus, .btn-default:focus
+    color: accent-color-text
+    outline: 1px solid accent-color-dark
+    outline-offset: -1px
+    text-decoration: none
+    background: none
+
+.btn-Google
+    margin-top: 13px
+
+.btn-Google:hover, .btn-Google:active, .btn-Google:active:hover, .btn-Google:active:focus, .btn-Google:focus 
+    color: white
+    background-color: #b23221
+
+.btn-share {
+    cursor: pointer
+    margin-left: 10px
+}
+
+
+.loginPage
+    .btn-block
+        width: auto
+    .navbar-form
+        padding: 0
+
+.promise
+    text-align: center
+    margin-bottom: 30px
+    i
+      padding: 20px
+    .fa
+      color: accent-color
+
+.sidenav, .input-form
+  margin-top: 40px
+
+// About
+
+.contributor
+  float: left
+  margin-right: 42px
+  margin-top: 14px
+  margin-bottom: 24px
+
+.contributor-image img
+  border-radius: 50%;
+
+.contributor-name
+  margin-top: 10px
+  text-align: center
+
+// questionnaire listing
+
+.questionnaire-overview:not(:last-child)
+  margin-bottom 15px
+  padding-bottom: 25px
+  border-bottom: 1px solid color-disabled
+
+// form
+.panel-info, .panel-warning, .panel-success
+  border: none
+  border-radius: 0
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15)
+
+.panel-info > .panel-heading, .panel-warning > .panel-heading, .panel-success > .panel-heading
+  padding-left: 25px
+  padding-top: 20px
+  padding-bottom: 0
+  // text-transform: uppercase
+  background-color: transparent
+  border: none
+  color: accent-color-dark
+
+.panel-body
+  padding: 25px
+  padding-top: 12px
+  padding-bottom: 12px
+
+.form-control
+  border-radius: 0
+
+.form-control:focus
+  border-color: accent-color-dark
+  box-shadow: none
+
+.instruction
+  font-size 0.9em
+  margin-bottom: 20px
+  color: primary-text-light
+
+.panel label
+  font-weight: normal
+
+label.col-sm-3.control-label
+  padding-left: 0
+  font-size: 0.9em
+
+label.col-sm-3.col-sm-offset-3.control-label
+    padding-left: 15px
+
+.remove-question
+    margin-top: 16px
+
+.clearfix h4
+    float: left
+
+.align-right
+    float: right
+    position: relative
+
+.autoform-remove-item
+  margin-right: 15px
+
+.autoform-add-item
+  margin-left: 15px
+  margin-bottom: 15px
+
+.outside-form
+    margin-left: 0
+
+.checkbox-left, .sensor-name
+    display: inline-block
+    margin-bottom: 0
+
+select.form-control
+    -webkit-appearance: none
+    -webkit-border-radius: 0px
+    background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='#444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>")
+    background-position: 100% 50%
+    background-repeat: no-repeat
+
+#connection_status
+    margin-top: 18px
+    margin-bottom: 0
+
+#init_db_status
+  margin-top: 18px
+  margin-bottom: 0
+
+// Feedback form
+
+#FeedbackSidebar-outer
+  position: fixed;
+  right: 36px;
+  bottom: 220px;
+
+#FeedbackSidebar-inner
+  position: absolute;
+  bottom: 100%
+  transform: rotateZ(90deg)
+  transform-origin: 0 100%
+  white-space: nowrap
+  a
+    -webkit-transform: rotate(180deg);
+
+.modal-content
+  border-radius: 0
+  padding: 15px
+
+.modal-title
+  padding-bottom: 10px
+
+.modal-header
+  border-bottom: 0
+  padding-bottom: 0
+  .instruction
+    padding-bottom: 0
+
+.modal-footer
+  border-top: 0
+
+fieldset
+  border: none
+
+// Indicate required fields
+[data-required] label:after {content: ' *'}
+
+
+
+::selection
+  background: accent-color-light
+
+
+// Login
+
+#forgot-password-link {
+  padding-left: 0
+}
+
+
+@keyframes card
+    0%
+        transform translate3d(0, 0, 0)
+    50%
+        transform translate3d(0, -135px, 0)
+    51%
+        z-index 10
+        transform translate3d(0, -135px, 0)
+    100%
+        z-index 10
+        transform translate3d(0, 0, 0)

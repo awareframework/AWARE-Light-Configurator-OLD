@@ -1,0 +1,41 @@
+<template name="studyQrCode">
+  <h3 id="study-title">{{study.title}}</h3>
+
+  {{#if Template.subscriptionsReady}} {{> SingleQuestionnaireNav menuIdx="5"}} {{/if}}
+
+  <div class="col-sm-9 input-form">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h4>Distribute study</h4>
+      </div>
+      <div class="panel panel-body">
+        <p class="instruction">Configuration of your study is now complete. You can go back and change the configuration of your study at any time.
+          Remember that the study configuration will <em>not</em> update for participants that have signed up for your study
+          <em>prior</em> to your changes. Follow the instructions below to enroll participants in your study. Then, check
+          the <a href="...">dashboard</a> to see the study data come in.</p>
+      </div>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-heading clearfix">
+        <h4>Enrol in study</h4>
+      </div>
+      <div class="panel-body">
+        <p class="instruction">Participants first need to install the AWARE application on their phone, which can be found from the <a href="https://play.google.com/store/apps/details?id=com.aware.phone">Google Play Store</a>.
+          Then, scan the QR code provided below to join a study. After installing the AWARE application, participants should
+          make sure to enable accessibility services for this application - instructions for this are provided when the application
+          is installed.</p>
+        {{> kjuaImage studyQrCode}}
+      </div>
+
+      <div class="panel-body">
+        <p class="instruction">Share with participants</p>
+
+        <a class="btn-lg btn-primary" href={{emailBody}}>Share via e-mail</a>
+        <a class="sharer btn-lg btn-primary btn-share" data-sharer="twitter" data-title={{twitterBody}}>Share on Twitter</a>
+        <a class="btn-lg btn-primary btn-share shareBtn">Share on Facebook</a>
+      </div>
+
+    </div>
+  </div>
+</template>

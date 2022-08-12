@@ -1,0 +1,69 @@
+<template name="HomeLayout">
+    {{> Header}}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>AWARE-Light Configuration Page</h1>
+            <p>Use this page to create a study configuration for AWARE-Light. Here, you can define studies that use smartphones to conduct Experience Sampling, and to collect sensor data.</p>
+
+            <div class="cta">
+              <!--{{#if currentUser}}-->
+                <!--<a href="/study" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>-->
+              <!--{{else}}-->
+                <!--<a href="/register" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>-->
+              <!--{{/if}}-->
+                <a href="/study" id="newStudyBtn" class="btn-lg btn-primary" role="button"><i class="fa fa-plus fa-lg"></i>Design your own study</a>
+                <a href="/study/upload" id="uploadStudyBtn" class="btn-lg btn-default" role="button"><i class="fa fa-pencil fa-lg"></i>Update an existing study</a>
+            </div>
+        </div>
+
+        <div class="main-layout center-block">
+            <div class="row">
+                <div class="col-md-4 promise">
+                    <i class="fa fa-magic fa-4x"></i>
+                    <p>Easy to use, no programming required!</p>
+                </div>
+                <div class="col-md-4 promise">
+                    <i class="fa fa-mobile fa-4x"></i>
+                    <p>Collect data from virtually any sensor on the phone.</p>
+                </div>
+                <div class="col-md-4 promise">
+                    <i class="fa fa-lock fa-4x"></i>
+                    <p>Your participant's data is secure,<br> thanks to SHA-256 RSA encryption.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 promise">
+                    <i class="fa fa-clock-o fa-4x"></i>
+                    <p class="text-center">Detailed scheduling configuration options.</p>
+                </div>
+
+                <div class="col-md-4 promise">
+                    <i class="fa fa-github fa-4x"></i>
+                    <p class="text-center">Source code is <a href="https://github.com/awareframework/AWARE-Create">publicly available</a>, and we welcome your ideas and contributions.</p>
+                </div>
+
+                <div class="col-md-4 promise">
+                    <i class="fa fa-usd fa-4x"></i>
+                    <p class="text-center">AWARE-Light is completely free to use.</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row additional">
+              <div class="col-md-6">
+                  <div>
+                      <h3>Experience Sampling</h3>
+                      <p>Experience Sampling is a widely applied method to measure behaviour, thoughts, and feelings of study participants throughout their daily lives. Data is collected through self-reports filled-out by the study participants. Study data is collected <em>in situ</em> data; in the participant’s actual context and close to the onset of the studied phenomenon.</p>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                      <h3>About</h3>
+                      <p>AWARE-Light is a version of the AWARE Android framework dedicated to instrument, infer, log, and share mobile context information. It allows for the collection of over 25 different sensors, ranging from the user's GPS location to application usage.</p>
+              </div>
+            </div>
+        </div>
+    </div>
+    {{> Footer}}
+</template>

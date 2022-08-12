@@ -1,0 +1,15 @@
+<template name="studyExportedOverview">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-1">
+                {{#if Template.subscriptionsReady}}
+                    {{> studyQrCode}}
+
+                    {{> studyOverview}}
+                {{else}}
+                    <p>Loading</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

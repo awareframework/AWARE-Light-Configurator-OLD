@@ -1,0 +1,37 @@
+<template name="SingleQuestionnaireNav">
+    <div class="col-sm-3 sidenav">
+
+      <nav>
+        <ol>
+          <li class="nostyle heading"><p>Design your study in 5 steps</p></li>
+        </ol>
+        <ol type="1">
+            {{#if navDisabled 0}}
+                <li><a class="disabled" href="/study/title">Study information</a></li>
+            {{else}}
+                <li><a class="active" href="/study/title">Study information</a></li>
+            {{/if}}
+            {{#if navDisabled 1}}
+                <li><a class="disabled" href="/study/questions">Questions</a></li>
+            {{else}}
+                <li><a class="active" href="/study/questions">Questions</a></li>
+            {{/if}}
+            {{#if navDisabled 2}}
+                <li><a class="disabled" href="/study/schedule">Schedule configuration</a></li>
+            {{else}}
+                <li><a class="active" href="/study/schedule">Schedule configuration</a></li>
+            {{/if}}
+            {{#if navDisabled 3}}
+                <li><a class="disabled" href="/study/sensor">Sensor data</a></li>
+            {{else}}
+                <li><a class="active" href="/study/sensor">Sensor data</a></li>
+            {{/if}}
+            {{#if navDisabled 4}}
+                <li><a class="disabled" href="/study/overview">Overview</a></li>
+            {{else}}
+                <li><a class="active" href="/study/overview">Overview</a></li>
+            {{/if}}
+        </ol>
+      </nav>
+    </div>
+</template>
