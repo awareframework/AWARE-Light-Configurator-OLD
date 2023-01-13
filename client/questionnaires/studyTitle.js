@@ -79,20 +79,23 @@ try {
 
     return new Promise(function(resolve, reject) {
       Meteor.call('checkInsertPrivileges', host, port, database, username, password, function (err, response) {
-        if (response) {
-          inst.state.set(DB_CONNECTION_CORRECT, response.success);
-          inst.state.set(DB_CONNECTION_INFO, response.msg);
-          resolve(response.success);
-        } else if (err) {
-          inst.state.set(DB_CONNECTION_CORRECT, false);
-          inst.state.set(DB_CONNECTION_INFO, 'Error: ' + err.reason);
-          resolve(false);
-        } else {
-          inst.state.set(DB_CONNECTION_CORRECT, false);
-          inst.state.set(DB_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
-            "correct.");
-          resolve(false);
-        }
+        inst.state.set(DB_CONNECTION_CORRECT, response.success);
+        inst.state.set(DB_CONNECTION_INFO, response.msg);
+        resolve(response.success);
+        // if (response) {
+        //   inst.state.set(DB_CONNECTION_CORRECT, response.success);
+        //   inst.state.set(DB_CONNECTION_INFO, response.msg);
+        //   resolve(response.success);
+        // } else if (err) {
+        //   inst.state.set(DB_CONNECTION_CORRECT, false);
+        //   inst.state.set(DB_CONNECTION_INFO, 'Error: ' + err.reason);
+        //   resolve(false);
+        // } else {
+        //   inst.state.set(DB_CONNECTION_CORRECT, false);
+        //   inst.state.set(DB_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
+        //     "correct.");
+        //   resolve(false);
+        // }
       });
     });
   }
@@ -106,20 +109,23 @@ try {
 
     return new Promise(function(resolve, reject) {
       Meteor.call('checkRootPrivileges', host, port, database, username, password, function (err, response) {
-        if (response) {
-          inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
-          inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
-          resolve(response.success);
-        } else if (err) {
-          inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
-          inst.state.set(DB_ROOT_CONNECTION_INFO, 'Error: ' + err.reason);
-          resolve(false);
-        } else {
-          inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
-          inst.state.set(DB_ROOT_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
-            "correct.");
-          resolve(false);
-        }
+        inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
+        inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
+        resolve(response.success);
+        // if (response) {
+        //   inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
+        //   inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
+        //   resolve(response.success);
+        // } else if (err) {
+        //   inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
+        //   inst.state.set(DB_ROOT_CONNECTION_INFO, 'Error: ' + err.reason);
+        //   resolve(false);
+        // } else {
+        //   inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
+        //   inst.state.set(DB_ROOT_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
+        //     "correct.");
+        //   resolve(false);
+        // }
       });
     });
   }
@@ -140,21 +146,25 @@ try {
     }
 
     return new Promise(function(resolve, reject) {
+
       Meteor.call('initDatabase', host, port, database, rootUsername, rootPassword, insertUsername, insertPassword, function (err, response) {
-        if (response) {
-          inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
-          inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
-          resolve(response.success);
-        } else if (err) {
-          inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
-          inst.state.set(DB_ROOT_CONNECTION_INFO, 'Error: ' + err.reason);
-          resolve(false);
-        } else {
-          inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
-          inst.state.set(DB_ROOT_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
-            "correct.");
-          resolve(false);
-        }
+        inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
+        inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
+        resolve(response.success);
+        // if (response) {
+        //   inst.state.set(DB_ROOT_CONNECTION_CORRECT, response.success);
+        //   inst.state.set(DB_ROOT_CONNECTION_INFO, response.msg);
+        //   resolve(response.success);
+        // } else if (err) {
+        //   inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
+        //   inst.state.set(DB_ROOT_CONNECTION_INFO, 'Error: ' + err.reason);
+        //   resolve(false);
+        // } else {
+        //   inst.state.set(DB_ROOT_CONNECTION_CORRECT, false);
+        //   inst.state.set(DB_ROOT_CONNECTION_INFO, "Failed to create connection to database, please check if credentials are " +
+        //     "correct.");
+        //   resolve(false);
+        // }
       });
     });
   }
